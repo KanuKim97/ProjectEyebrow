@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Project Eyebrow</string>
+
+    <!-- LogInActivity.xml string value -->
+    <string name="Title_Txt">Welcome!</string>
+    <string name="subTitle_txt">환영합니다!</string>
+    <string name="ID_Hint">이메일</string>
+    <string name="PW_HINT">비밀번호</string>
+    <string name="FindPassword_Btn">비밀번호 찾기</string>
+    <string name="Login_Btn">로그인하기</string>
+    <string name="SignIn_Btn">회원가입</string>
+
+    <!-- SignInActivity.xml string value -->
+    <string name="userEmail_Hint">Email Address</string>
+    <string name="userName_Hint">Nick Name</string>
+    <string name="userPassword_Hint">Password</string>
+    <string name="userPassword_confirm_Hint">Confirm Password</string>
+    <string name="signInTxt_Btn">Create Account</string>
+    <string name="toLogInTxt_Btn">To Login Page</string>
+
+    <!-- FindPasswordActivity.xml string value -->
+    <string name="userEmail">Email Address</string>
+    <string name="sendResetEmail_Btn">Send Reset Email</string>
+
+    <!-- MainActivity.xml string Value -->
+    <string name="filter_Option">Filter</string>
+    <string name="genreTxt_Btn">장르</string>
+    <string name="subjectTxt_Btn">주제</string>
+    <string name="partTxt_Btn">부위</string>
+    <string name="regionTxt_Btn">지역</string>
+</resources>
