@@ -1,9 +1,10 @@
-package com.example.projecteyebrow.di
+package com.example.projecteyebrow.di.module
 
 import android.content.Context
 import androidx.room.Room
 import com.example.projecteyebrow.database.AppDatabase
 import com.example.projecteyebrow.database.dao.UserDao
+import com.example.projecteyebrow.di.repository.RoomRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,10 +12,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/* Room Database Module */
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
-    /* -- RoomDB Module(Singleton)-- */
+object RoomModule {
     @Provides
     @Singleton
     fun createUserDBInstance(@ApplicationContext context: Context): AppDatabase =
@@ -27,6 +28,5 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAppRepos(userDao: UserDao) = AppRepository(userDao)
-
+    fun provideUserDBRepository(userDao: UserDao) = RoomRepository(userDao)
 }

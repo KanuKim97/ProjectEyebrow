@@ -1,4 +1,3 @@
 package com.example.projecteyebrow.common
 
-object Constant {
-}
+object Constant {  }
