@@ -16,11 +16,10 @@ class SignInViewModel @Inject constructor(
     private val _signInTaskResult = MutableLiveData<Task<AuthResult>>()
     val signInTaskResult: LiveData<Task<AuthResult>> get() = _signInTaskResult
 
-    fun signInAccount(userEmail: String, userPassword: String) =
+    fun signInUserAccount(userEmail: String, userPassword: String) =
         authRepo.createUserAccount(userEmail, userPassword)
             .addOnCompleteListener { task ->
                 val isNewUser: Boolean = task.result.additionalUserInfo!!.isNewUser
-
                 when {
                     task.isSuccessful && isNewUser -> _signInTaskResult.value = task
                     !task.isSuccessful -> task.exception?.printStackTrace()

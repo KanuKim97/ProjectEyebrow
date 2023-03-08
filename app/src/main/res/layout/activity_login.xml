@@ -5,13 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
     android:layout_margin="15dp"
     tools:context=".view.LoginActivity">
 
     <LinearLayout
-        android:id="@+id/TopTitle_View"
+        android:id="@+id/TopTitle_View_Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -25,9 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Title_Txt"
-            android:textSize="45sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/bungee"/>
+            android:textSize="45sp"
+            android:fontFamily="@font/bungee" />
 
         <TextView
             android:id="@+id/SubjectTitle_View"
@@ -36,8 +35,7 @@
             android:layout_marginTop="-20dp"
             android:text="@string/subTitle_txt"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:fontFamily="@font/alfa_slab_one" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -47,31 +45,47 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/TopTitle_View">
+        app:layout_constraintTop_toBottomOf="@id/TopTitle_View_Login">
 
-        <EditText
-            android:id="@+id/userName_Login"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userEmail_Login_Input_Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:autofillHints="name"
             android:hint="@string/ID_Hint"
-            android:inputType="text"
             android:textColorHint="#78909C"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:autofillHints="emailAddress">
 
-        <EditText
-            android:id="@+id/userPassword_Login"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userEmail_Login_Input_Field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/userPassword_Login_Input_Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:autofillHints="password"
-            android:hint="@string/PW_HINT"
-            android:inputType="textPassword"
+            android:hint="@string/PW_Hint"
             android:textColorHint="#78909C"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:autofillHints="password"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userPassword_Login_Input_Field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/findPassword_Btn"
@@ -97,7 +111,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/signInBtn"
+            android:id="@+id/signIn_Btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

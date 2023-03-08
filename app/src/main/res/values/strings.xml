@@ -1,26 +1,30 @@
 <resources>
     <string name="app_name">Project Eyebrow</string>
+    <!-- Common TextInputField Hint string value -->
+    <string name="userEmail_Hint">이메일</string>
+    <string name="userNickName_Hint">사용자 닉네임</string>
+    <string name="userPassword_Hint">비밀번호</string>
+    <string name="userPassword_confirm_Hint">비밀번호 확인</string>
+
 
     <!-- LogInActivity.xml string value -->
     <string name="Title_Txt">Welcome!</string>
     <string name="subTitle_txt">환영합니다!</string>
     <string name="ID_Hint">이메일</string>
-    <string name="PW_HINT">비밀번호</string>
+    <string name="PW_Hint">비밀번호</string>
     <string name="FindPassword_Btn">비밀번호 찾기</string>
-    <string name="Login_Btn">로그인하기</string>
+    <string name="Login_Btn">로그인</string>
     <string name="SignIn_Btn">회원가입</string>
 
     <!-- SignInActivity.xml string value -->
-    <string name="userEmail_Hint">Email Address</string>
-    <string name="userName_Hint">Nick Name</string>
-    <string name="userPassword_Hint">Password</string>
-    <string name="userPassword_confirm_Hint">Confirm Password</string>
-    <string name="signInTxt_Btn">Create Account</string>
-    <string name="toLogInTxt_Btn">To Login Page</string>
+    <string name="signInTxt_Btn">계정 생성하기</string>
+    <string name="toLogInTxt_Btn">로그인 페이지로 이동</string>
 
     <!-- FindPasswordActivity.xml string value -->
-    <string name="userEmail">Email Address</string>
-    <string name="sendResetEmail_Btn">Send Reset Email</string>
+    <string name="mainTitle_FindPW">Find Your Password!</string>
+    <string name="subTitle_FindPW">비밀번호를 잊어버리셨나요?</string>
+    <string name="userEmail_Hint_FindPW">이메일</string>
+    <string name="sendResetEmail_Btn">비밀번호 초기화 메일 보내기</string>
 
     <!-- MainActivity.xml string Value -->
     <string name="filter_Option">Filter</string>
