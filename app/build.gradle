@@ -39,10 +39,12 @@ android {
 kapt { correctErrorTypes = true }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
     /* -- JUnit android Test -- */
     testImplementation 'junit:junit:4.13.2'
@@ -52,22 +54,24 @@ dependencies {
     /* -- FireBase -- */
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
+    implementation 'com.google.firebase:firebase-database:20.2.1'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
 
     /* -- Kotlin Coroutine -- */
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     /* -- Android Jetpack ViewModel, LiveData, Fragment -- */
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-rc01'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.0-rc01'
-    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.7'
 
     /* -- Room Database -- */
-    implementation 'androidx.room:room-runtime:2.5.0'
-    kapt 'androidx.room:room-compiler:2.5.0'
-    implementation 'androidx.room:room-ktx:2.5.0'
+    implementation 'androidx.room:room-runtime:2.5.1'
+    kapt 'androidx.room:room-compiler:2.5.1'
+    implementation 'androidx.room:room-ktx:2.5.1'
 
     /* -- Dagger-Hilt DI(Dependency Injection) Tool-- */
     implementation 'com.google.dagger:hilt-android:2.44.2'

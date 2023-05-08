@@ -3,28 +3,41 @@ package com.example.projecteyebrow.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.projecteyebrow.di.repository.AuthRepository
+import androidx.lifecycle.viewModelScope
+import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
+import com.example.projecteyebrow.di.flow.producer.AuthProducer
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val authRepo: AuthRepository
+    private val authProducer: AuthProducer,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
-    private val _signInTaskResult = MutableLiveData<Task<AuthResult>>()
-    val signInTaskResult: LiveData<Task<AuthResult>> get() = _signInTaskResult
+    private val _signInTaskResult = MutableLiveData<Result<Unit>>()
+    val signInTaskResult: LiveData<Result<Unit>> get() = _signInTaskResult
 
-    fun signInUserAccount(userEmail: String, userPassword: String) =
-        authRepo.createUserAccount(userEmail, userPassword)
-            .addOnCompleteListener { task ->
-                val isNewUser: Boolean = task.result.additionalUserInfo!!.isNewUser
-                when {
-                    task.isSuccessful && isNewUser -> _signInTaskResult.value = task
-                    !task.isSuccessful -> task.exception?.printStackTrace()
-                    !isNewUser -> task.exception?.printStackTrace()
+    fun createUserAccount(userEmail: String, userPassword: String): Job =
+        viewModelScope.launch(ioDispatcher) {
+            authProducer.createUserAccount(userEmail, userPassword).collect { result ->
+                if (result.isSuccess) {
+                    _signInTaskResult.postValue(result)
+                } else {
+                    _signInTaskResult.postValue(result)
                 }
             }
-            .addOnFailureListener { exception -> exception.printStackTrace() }
+        }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+    }
 }

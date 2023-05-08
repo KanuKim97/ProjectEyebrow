@@ -3,19 +3,33 @@ package com.example.projecteyebrow.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.projecteyebrow.di.repository.AuthRepository
+import androidx.lifecycle.viewModelScope
+import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
+import com.example.projecteyebrow.di.flow.producer.AuthProducer
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class FindPasswordViewModel @Inject constructor(
-    private val authRepo: AuthRepository
+    private val authProducer: AuthProducer,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
-    private val _emailResetValue = MutableLiveData<Boolean>()
-    val emailResetValue: LiveData<Boolean> get() = _emailResetValue
+    private val _isSendEmailSuccess = MutableLiveData<Result<Unit>>()
+    val isSendEmailSuccess: LiveData<Result<Unit>> get() = _isSendEmailSuccess
 
-    fun sendPasswordResetEmail(userEmail: String) =
-        authRepo.resetUserAccountPassword(userEmail)
-            .addOnCompleteListener { task -> _emailResetValue.value = task.isSuccessful }
-            .addOnFailureListener { exception -> exception.printStackTrace() }
+    fun sendResetEmail(userEmail: String): Job = viewModelScope.launch(ioDispatcher) {
+        authProducer.sendPasswordResetEmail(userEmail).collect { result ->
+            _isSendEmailSuccess.postValue(result)
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+    }
 }

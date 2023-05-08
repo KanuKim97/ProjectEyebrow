@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/menuHome" >
+
+    <fragment
+        android:id="@+id/menuHome"
+        android:name="com.example.projecteyebrow.view.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/menuProfile"
+        android:name="com.example.projecteyebrow.view.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/menuCollection"
+        android:name="com.example.projecteyebrow.view.CollectionFragment"
+        android:label="CollectionFragment"
+        tools:layout="@layout/fragment_collection" />
+
+    <fragment
+        android:id="@+id/menuCommunity"
+        android:name="com.example.projecteyebrow.view.CommunityFragment"
+        android:label="CommunityFragment"
+        tools:layout="@layout/fragment_community" />
+
+</navigation>

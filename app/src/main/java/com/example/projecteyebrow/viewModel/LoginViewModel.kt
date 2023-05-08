@@ -3,27 +3,36 @@ package com.example.projecteyebrow.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.projecteyebrow.di.repository.AuthRepository
+import androidx.lifecycle.viewModelScope
+import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
+import com.example.projecteyebrow.di.flow.producer.AuthProducer
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepo: AuthRepository
+    private val authProducer: AuthProducer,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
-    private val _logInTaskResult = MutableLiveData<Task<AuthResult>>()
-    val logInTaskResult: LiveData<Task<AuthResult>> get() = _logInTaskResult
+    private val _logInTaskResult = MutableLiveData<Result<Unit>>()
+    val logInTaskResult: LiveData<Result<Unit>> get() = _logInTaskResult
 
-    fun logInUserAccount(userEmail: String, userPassword: String) =
-        authRepo.signInUserAccount(userEmail, userPassword)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    _logInTaskResult.value = task
-                } else {
-                    task.exception?.printStackTrace()
-                }
+    fun signInUserAccount(userEmail: String, userPassword: String): Job =
+        viewModelScope.launch(ioDispatcher) {
+            authProducer.signInUserAccount(userEmail, userPassword).collect { result ->
+                _logInTaskResult.postValue(result)
             }
-            .addOnFailureListener { exception -> exception.printStackTrace() }
+        }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+    }
 }

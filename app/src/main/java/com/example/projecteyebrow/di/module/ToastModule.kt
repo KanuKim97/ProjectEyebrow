@@ -1,18 +1,19 @@
 package com.example.projecteyebrow.di.module
 
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import android.content.Context
+import android.widget.Toast
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object FireBaseStoreModule {
+object ToastModule {
     @Provides
     @Singleton
-    fun providesFireBaseDBInstance():FirebaseFirestore = Firebase.firestore
+    fun providesToast(@ApplicationContext context: Context): Toast =
+        Toast.makeText(context, "", Toast.LENGTH_SHORT)
 }

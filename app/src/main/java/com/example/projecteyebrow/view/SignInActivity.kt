@@ -11,37 +11,61 @@ import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.ActivitySignInBinding
 import com.example.projecteyebrow.viewModel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignInActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var signInBinding: ActivitySignInBinding
+    @Inject lateinit var toastMessage: Toast
+
+    private val _binding by lazy { ActivitySignInBinding.inflate(layoutInflater) }
     private val signInViewModel: SignInViewModel by viewModels()
+
+    private val userEmail: String by lazy { setUserEmail() }
+    private val userNickName: String by lazy { setUserNickName() }
+    private val userPassword: String by lazy { setUserPassword() }
+    private val confPassword: String by lazy { setConfPassword() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        signInBinding = ActivitySignInBinding.inflate(layoutInflater)
-        signInBinding.toLoginPage.setOnClickListener(this)
-        signInBinding.signInBtn.setOnClickListener(this)
-        setContentView(signInBinding.root)
+
+        isCreateSuccess()
+        _binding.toLoginPage.setOnClickListener(this)
+        _binding.signInBtn.setOnClickListener(this)
+
+        setContentView(_binding.root)
     }
 
-    private fun getUserEmail(): String = signInBinding.userEmailSignInInputField.text.toString()
-    private fun getUserNickName(): String = signInBinding.nickNameSignInInputField.text.toString()
-    private fun getUserPassword(): String = signInBinding.userPasswordSignInInputField.text.toString()
-    private fun getConfPassword(): String = signInBinding.confPasswordSignInInputField.text.toString()
-
     override fun onClick(v: View?) {
-        val userEmail: String = getUserEmail()
-        val userNickName: String = getUserNickName()
-        val userPassword: String = getUserPassword()
-        val confPassword: String = getConfPassword()
-
         when(v?.id) {
             R.id.toLoginPage -> startActivity(Intent(this, LoginActivity::class.java))
             R.id.signInBtn -> validateUserInput(userEmail, userNickName, userPassword, confPassword)
         }
     }
-    
+
+    private fun setUserEmail(): String = _binding.userEmailSignInInputField.text.toString()
+    private fun setUserNickName(): String = _binding.nickNameSignInInputField.text.toString()
+    private fun setUserPassword(): String = _binding.userPasswordSignInInputField.text.toString()
+    private fun setConfPassword(): String = _binding.confPasswordSignInInputField.text.toString()
+
+    private fun createUserAccount(userEmail: String, userPassword: String): Job =
+        signInViewModel.createUserAccount(userEmail, userPassword)
+
+    private fun isCreateSuccess(): Unit =
+        signInViewModel.signInTaskResult.observe(this) { result ->
+            if (result.isSuccess) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                toastMessage.apply {
+                    duration = Toast.LENGTH_SHORT
+                }.show()
+            }
+        }
+
+    private fun isEmailPattern(userEmail: String): Boolean =
+        Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()
+
     private fun validateUserInput(
         userEmail: String,
         userNickName: String,
@@ -49,38 +73,22 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener {
         confPassword: String
     ) {
         when {
-            userEmail.isEmpty() || !(Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) -> {
-                signInBinding.userEmailSignInInputField.error = ""
-                signInBinding.userEmailSignInInputField.text?.clear()
+            userEmail.isEmpty() || isEmailPattern(userEmail) -> {
+                _binding.userEmailSignInInputField.error = ""
             }
             userNickName.isEmpty() || userNickName.length > 15 -> {
-                signInBinding.nickNameSignInInputField.error = ""
-                signInBinding.nickNameSignInInputField.text?.clear()
+                _binding.nickNameSignInInputField.error = ""
             }
             userPassword.isEmpty() -> {
-                signInBinding.userPasswordSignInInputField.error = ""
-                signInBinding.userPasswordSignInInputField.text?.clear()
+                _binding.userPasswordSignInInputField.error = ""
             }
             confPassword.isEmpty() -> {
-                signInBinding.confPasswordSignInInputField.error = ""
-                signInBinding.confPasswordSignInInputField.text?.clear()
+                _binding.confPasswordSignInInputField.error = ""
             }
             userPassword != confPassword -> {
-                signInBinding.userPasswordSignInInputField.error = ""
-                signInBinding.userPasswordSignInInputField.text?.clear()
+                _binding.userPasswordSignInInputField.error = ""
             }
-            else -> signInUserAccount(userEmail, userPassword)
-        }
-    }
-
-    private fun signInUserAccount(userEmail: String, userPassword: String) {
-        signInViewModel.signInUserAccount(userEmail, userPassword)
-
-        signInViewModel.signInTaskResult.observe(this) {
-            if (it.isSuccessful) {
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, LoginActivity::class.java))
-            } else { it.exception?.printStackTrace() }
+            else -> createUserAccount(userEmail, userPassword)
         }
     }
 

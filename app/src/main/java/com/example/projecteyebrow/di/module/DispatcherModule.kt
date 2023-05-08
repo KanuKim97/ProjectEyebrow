@@ -1,12 +1,13 @@
 package com.example.projecteyebrow.di.module
 
-import com.example.projecteyebrow.di.coroutineDispatcher.DefaultDispatcher
-import com.example.projecteyebrow.di.coroutineDispatcher.IoDispatcher
-import com.example.projecteyebrow.di.coroutineDispatcher.MainDispatcher
+import com.example.projecteyebrow.di.dispatcherQualifier.DefaultDispatcher
+import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
+import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
 /* Coroutine Dispatcher Module (Main, IO, Default) */
@@ -15,13 +16,13 @@ import kotlinx.coroutines.Dispatchers
 object DispatcherModule {
     @IoDispatcher
     @Provides
-    fun providesIoDispatcher() = Dispatchers.IO
+    fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @MainDispatcher
     @Provides
-    fun providesMainDispatcher() = Dispatchers.Main
+    fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 
     @DefaultDispatcher
     @Provides
-    fun providesDefaultDispatcher() = Dispatchers.Default
+    fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 }

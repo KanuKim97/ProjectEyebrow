@@ -17,6 +17,7 @@
     <string name="SignIn_Btn">회원가입</string>
 
     <!-- SignInActivity.xml string value -->
+    <string name="subTitle_SignIn">회원 가입을 환영합니다!</string>
     <string name="signInTxt_Btn">계정 생성하기</string>
     <string name="toLogInTxt_Btn">로그인 페이지로 이동</string>
 
@@ -32,4 +33,10 @@
     <string name="subjectTxt_Btn">주제</string>
     <string name="partTxt_Btn">부위</string>
     <string name="regionTxt_Btn">지역</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="collection">Collection</string>
+    <string name="community">Community</string>
+    <string name="profile">Profile</string>
 </resources>

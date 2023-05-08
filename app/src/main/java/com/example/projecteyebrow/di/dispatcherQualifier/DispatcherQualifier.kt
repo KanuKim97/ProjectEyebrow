@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.di.coroutineDispatcher
+package com.example.projecteyebrow.di.dispatcherQualifier
 
 import javax.inject.Qualifier
 
