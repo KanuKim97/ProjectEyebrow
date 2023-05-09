@@ -67,9 +67,15 @@ class FindPasswordActivity : AppCompatActivity(), View.OnClickListener {
     private fun validateUserEmail(userEmail: String) {
         when {
             !(isEmailPattern(userEmail)) ->
-                toastMessage.apply { duration = Toast.LENGTH_SHORT }.show()
+                toastMessage.apply {
+                    setText(R.string.IsNotEmailPattern)
+                    duration = Toast.LENGTH_SHORT
+                }.show()
             userEmail.isEmpty() ->
-                toastMessage.apply { duration = Toast.LENGTH_SHORT }.show()
+                toastMessage.apply {
+                    setText(R.string.InputUserEmail)
+                    duration = Toast.LENGTH_SHORT
+                }.show()
             else -> sendPasswordResetEmail(userEmail)
         }
     }

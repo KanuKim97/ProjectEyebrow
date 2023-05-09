@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">Project Eyebrow</string>
-    <!-- Common TextInputField Hint string value -->
+
+    <!-- TextInputField Hint string value -->
     <string name="userEmail_Hint">이메일</string>
     <string name="userNickName_Hint">사용자 닉네임</string>
     <string name="userPassword_Hint">비밀번호</string>
     <string name="userPassword_confirm_Hint">비밀번호 확인</string>
-
+    <string name="IsNotEmailPattern">이메일 형식이 아닙니다.\n다시 입력해주세요.</string>
+    <string name="InputUserEmail">이메일을 입력해주세요.</string>
+    <string name="InputUserPassword">비밀번호를 입력해주세요.</string>
+    <string name="FailedLogIn">로그인에 실패하였습니다.\n재 시도해주세요.</string>
 
     <!-- LogInActivity.xml string value -->
     <string name="Title_Txt">Welcome!</string>
@@ -33,8 +37,10 @@
     <string name="subjectTxt_Btn">주제</string>
     <string name="partTxt_Btn">부위</string>
     <string name="regionTxt_Btn">지역</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Bottom Navigation Bar -->
     <string name="home">Home</string>
     <string name="collection">Collection</string>
     <string name="community">Community</string>

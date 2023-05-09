@@ -59,12 +59,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun validateUserInput(userEmail: String, userPassword: String) {
         when {
             !(isEmailPattern(userEmail)) -> toastMessage.apply {
+                setText(R.string.IsNotEmailPattern)
                 duration = Toast.LENGTH_SHORT
             }.show()
             userEmail.isEmpty() -> toastMessage.apply {
+                setText(R.string.InputUserEmail)
                 duration = Toast.LENGTH_SHORT
             }.show()
             userPassword.isEmpty() -> toastMessage.apply {
+                setText(R.string.InputUserPassword)
                 duration = Toast.LENGTH_SHORT
             }.show()
             else -> signInUserAccount(userEmail, userPassword)
@@ -78,6 +81,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             } else {
                 toastMessage.apply {
+                    setText(R.string.FailedLogIn)
                     duration = Toast.LENGTH_SHORT
                 }.show()
             }
