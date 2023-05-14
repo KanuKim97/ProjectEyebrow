@@ -21,10 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:itemIconTint="@color/black"
+        app:itemIconTint="@color/txt_hint_color"
         app:itemTextColor="@color/txt_hint_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

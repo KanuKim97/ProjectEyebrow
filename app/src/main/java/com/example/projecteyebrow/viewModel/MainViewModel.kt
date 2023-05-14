@@ -6,29 +6,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
 import com.example.projecteyebrow.di.flow.producer.AuthProducer
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FindPasswordViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val fireAuth: AuthProducer,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
-    private val _isResetEmailSend = MutableLiveData<Result<Unit>>()
-    val isResetEmailSend: LiveData<Result<Unit>> get() = _isResetEmailSend
+    private val _isUserSessionAlive = MutableLiveData<FirebaseUser?>()
+    val isUserSessionAlive: LiveData<FirebaseUser?> get() = _isUserSessionAlive
 
-    fun sendResetPassword(userEmail: String): Job = viewModelScope.launch(ioDispatcher) {
-        fireAuth.sendPasswordResetEmail(userEmail).collect { result ->
-            _isResetEmailSend.postValue(result)
+    init { provideCurrentSession() }
+
+    private fun provideCurrentSession() = viewModelScope.launch(ioDispatcher) {
+        fireAuth.getCurrentUser().collect { userSession ->
+            _isUserSessionAlive.postValue(userSession)
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelScope.cancel()
-    }
+
 }

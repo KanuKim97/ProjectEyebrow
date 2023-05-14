@@ -45,4 +45,15 @@
     <string name="collection">Collection</string>
     <string name="community">Community</string>
     <string name="profile">Profile</string>
+    <string name="subTitle">로그인으로 다양한 컨텐츠를 만나보세요!</string>
+    <string name="introTitle">AppName 입니다.</string>
+    <string name="welcomeTitle">환영합니다!</string>
+    <string name="Password_Title">비밀번호를</string>
+    <string name="Forgot_Title">잊어버리셨나요?</string>
+    <string name="SubTitle">이메일 주소를 이용해 비밀번호를 재설정 해보세요!</string>
+    <string name="CreateAccount_Title">회원가입을</string>
+    <string name="CreateAccount_SubTitle">회원가입으로 다양한 컨텐츠를 즐겨보세요!</string>
+    <string name="toLogInFragment_Btn">로그인 화면으로 이동하기</string>
+    <string name="CreateAccount_Btn">회원가입하기</string>
+    <string name="SendOTP_Btn">인증번호 발송</string>
 </resources>

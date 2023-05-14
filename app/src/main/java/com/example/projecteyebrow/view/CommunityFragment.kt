@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.projecteyebrow.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CommunityFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

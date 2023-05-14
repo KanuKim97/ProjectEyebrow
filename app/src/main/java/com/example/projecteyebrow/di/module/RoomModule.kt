@@ -3,8 +3,6 @@ package com.example.projecteyebrow.di.module
 import android.content.Context
 import androidx.room.Room
 import com.example.projecteyebrow.database.AppDatabase
-import com.example.projecteyebrow.database.dao.UserDao
-import com.example.projecteyebrow.di.repository.RoomRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,8 +22,4 @@ object RoomModule {
     @Provides
     @Singleton
     fun provideDaoService(userDB: AppDatabase) = userDB.shopDao()
-
-    @Provides
-    @Singleton
-    fun provideUserDBRepository(userDao: UserDao) = RoomRepository(userDao)
 }

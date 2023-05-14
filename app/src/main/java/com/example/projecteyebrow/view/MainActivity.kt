@@ -3,20 +3,23 @@ package com.example.projecteyebrow.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
+import androidx.activity.viewModels
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.ActivityMainBinding
+import com.example.projecteyebrow.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
     private val _binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val mainViewModel: MainViewModel by viewModels()
 
     private val homeFragment: HomeFragment = HomeFragment()
     private val profileFragment: ProfileFragment = ProfileFragment()
     private val communityFragment: CommunityFragment = CommunityFragment()
     private val collectionFragment: CollectionFragment = CollectionFragment()
+    private val logInFragment: LogInFragment = LogInFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +55,23 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         .addToBackStack("CollectionFragment")
         .commit()
 
+    private fun toLogInFragment(): Int = supportFragmentManager.beginTransaction()
+        .replace(R.id.FragmentContainer, logInFragment)
+        .commit()
+
+    private fun isUserSessionAlive(): Unit =
+        mainViewModel.isUserSessionAlive.observe(this) { result ->
+            if (result != null) {
+                toProfileFragment()
+            } else {
+                toLogInFragment()
+            }
+        }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuHome -> toHomeFragment()
-            R.id.menuProfile -> toProfileFragment()
+            R.id.menuProfile -> isUserSessionAlive()
             R.id.menuCommunity -> toCommunityFragment()
             R.id.menuCollection -> toCollectionFragment()
         }
