@@ -15,4 +15,8 @@
     <string name="toLogInFragment_Btn">로그인 화면으로 이동하기</string>
     <string name="CreateAccount_Btn">회원가입하기</string>
     <string name="SendOTP_Btn">인증번호 발송</string>
+    <string name="brandNew">Brand New!</string>
+    <string name="hot_Title">Hot!</string>
+    <string name="tattooist">Tattooist</string>
+    <string name="tattooist_SubTitle">타투이스트들을 만나보세요!</string>
 </resources>

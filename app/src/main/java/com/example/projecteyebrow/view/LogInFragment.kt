@@ -30,10 +30,6 @@ class LogInFragment : Fragment(), View.OnClickListener {
     private val userEmail: String by lazy { setUserEmail() }
     private val userPassword: String by lazy { setUserPassword() }
 
-    private val profileFragment: ProfileFragment = ProfileFragment()
-    private val createAccountFragment: SignInFragment = SignInFragment()
-    private val findPasswordFragment: FindPasswordFragment = FindPasswordFragment()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,19 +61,19 @@ class LogInFragment : Fragment(), View.OnClickListener {
 
     private fun toProfileFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()
-        .replace(R.id.FragmentContainer, profileFragment)
+        .replace(R.id.FragmentContainer, ProfileFragment())
         .addToBackStack("ProfileFragment")
         .commit()
 
     private fun toCreateAccountFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()
-        .replace(R.id.FragmentContainer, createAccountFragment)
+        .replace(R.id.FragmentContainer, SignInFragment())
         .addToBackStack("CreateAccountFragment")
         .commit()
 
     private fun toFindPasswordFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()
-        .replace(R.id.FragmentContainer, findPasswordFragment)
+        .replace(R.id.FragmentContainer, FindPasswordFragment())
         .addToBackStack("FindPasswordFragment")
         .commit()
 

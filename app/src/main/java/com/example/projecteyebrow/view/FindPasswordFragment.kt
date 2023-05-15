@@ -23,7 +23,6 @@ class FindPasswordFragment : Fragment() {
     private val findPasswordViewModel: FindPasswordViewModel by viewModels()
 
     private val userEmail: String by lazy { setUserEmail() }
-    private val logInFragment: LogInFragment = LogInFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +49,7 @@ class FindPasswordFragment : Fragment() {
 
     private fun toLogInFragment() = requireActivity().supportFragmentManager
         .beginTransaction()
-        .replace(R.id.FragmentContainer, logInFragment)
+        .replace(R.id.FragmentContainer, LogInFragment())
         .commit()
 
     private fun sendResetEmail(userEmail: String): Job =

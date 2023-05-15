@@ -30,9 +30,6 @@ class SignInFragment : Fragment(), View.OnClickListener {
     private val userPassword: String by lazy { setUserPassword() }
     private val confirmPassword: String by lazy { setConfirmPassword() }
 
-    private val logInFragment: LogInFragment = LogInFragment()
-    private val profileFragment: ProfileFragment = ProfileFragment()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -69,12 +66,12 @@ class SignInFragment : Fragment(), View.OnClickListener {
 
     private fun toLogInFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()
-        .replace(R.id.FragmentContainer, logInFragment)
+        .replace(R.id.FragmentContainer, LogInFragment())
         .commit()
 
     private fun toProfileFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()
-        .replace(R.id.FragmentContainer, profileFragment)
+        .replace(R.id.FragmentContainer, ProfileFragment())
         .commit()
 
     private fun createUserAccount(Email: String, Password: String): Job =
