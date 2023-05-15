@@ -1,7 +1,6 @@
 package com.example.projecteyebrow.view
 
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +23,7 @@ class FindPasswordFragment : Fragment() {
     private val findPasswordViewModel: FindPasswordViewModel by viewModels()
 
     private val userEmail: String by lazy { setUserEmail() }
+    private val logInFragment: LogInFragment = LogInFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +35,7 @@ class FindPasswordFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        isResetEmailSuccess()
         binding.FindPasswordBtn.setOnClickListener { sendResetEmail(userEmail) }
     }
 
@@ -45,22 +46,24 @@ class FindPasswordFragment : Fragment() {
 
     private fun setUserEmail(): String = binding.EmailInput.text.toString()
 
+    private fun clearEmailInputField(): Unit? = binding.EmailInput.text?.clear()
+
+    private fun toLogInFragment() = requireActivity().supportFragmentManager
+        .beginTransaction()
+        .replace(R.id.FragmentContainer, logInFragment)
+        .commit()
+
     private fun sendResetEmail(userEmail: String): Job =
         findPasswordViewModel.sendResetPassword(userEmail)
 
     private fun isResetEmailSuccess(): Unit =
         findPasswordViewModel.isResetEmailSend.observe(viewLifecycleOwner) { result ->
             if (result.isSuccess) {
-                toastMessage.apply {
-                    setText("이메일 발송이 완료되었습니다.")
-                    duration = Toast.LENGTH_SHORT
-                }.show()
-
+                toastMessage.apply { setText("이메일 발송이 완료되었습니다.") }.show()
+                toLogInFragment()
             } else {
-                toastMessage.apply {
-                    setText("이메일을 다시 확인해주세요.")
-                    duration = Toast.LENGTH_SHORT
-                }.show()
-            } 
+                toastMessage.apply { setText("이메일을 다시 확인해주세요.") }.show()
+                clearEmailInputField()
+            }
         }
 }

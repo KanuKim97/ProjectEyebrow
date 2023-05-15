@@ -7,15 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentLoginBinding
+import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
 import com.example.projecteyebrow.viewModel.LogInViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class LogInFragment : Fragment(), View.OnClickListener {
+    @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
     @Inject lateinit var toastMessage: Toast
 
     private var _binding: FragmentLoginBinding? = null
@@ -54,23 +59,9 @@ class LogInFragment : Fragment(), View.OnClickListener {
 
     private fun setUserPassword(): String = binding.PasswordInput.text.toString()
 
-    private fun userLogIn(Email: String, Password: String): Job =
-        logInViewModel.logInUserAccount(Email, Password)
+    private fun clearEmailInputField(): Unit? = binding.EmailInput.text?.clear()
 
-    private fun isLogInSuccess(): Unit =
-        logInViewModel.isLogInSuccess.observe(viewLifecycleOwner) { result ->
-            if (result.isSuccess) {
-                toProfileFragment()
-            } else {
-                toastMessage.apply {
-                    setText(R.string.FailedLogIn)
-                    duration = Toast.LENGTH_SHORT
-                }.show()
-
-                binding.EmailInput.text?.clear()
-                binding.PasswordInput.text?.clear()
-            }
-        }
+    private fun clearPasswordInputField(): Unit? = binding.PasswordInput.text?.clear()
 
     private fun toProfileFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()
@@ -89,6 +80,22 @@ class LogInFragment : Fragment(), View.OnClickListener {
         .replace(R.id.FragmentContainer, findPasswordFragment)
         .addToBackStack("FindPasswordFragment")
         .commit()
+
+    private fun userLogIn(Email: String, Password: String): Job =
+        logInViewModel.logInUserAccount(Email, Password)
+
+    private fun isLogInSuccess(): Unit =
+        logInViewModel.isLogInSuccess.observe(viewLifecycleOwner) { result ->
+            lifecycleScope.launch(mainDispatcher) {
+                if (result.isSuccess) {
+                    toProfileFragment()
+                } else {
+                    toastMessage.apply { setText(R.string.FailedLogIn) }.show()
+                    clearEmailInputField()
+                    clearPasswordInputField()
+                }
+            }
+        }
 
     override fun onClick(view: View?) {
         when(view?.id) {
