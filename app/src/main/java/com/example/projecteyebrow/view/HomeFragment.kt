@@ -9,9 +9,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentHomeBinding
 import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
+import com.example.projecteyebrow.view.adapter.BrandNewAdapter
+import com.example.projecteyebrow.view.adapter.HotViewAdapter
+import com.example.projecteyebrow.view.adapter.TattooistAdapter
+import com.example.projecteyebrow.view.adapter.adapterItems.BrandNewItem
+import com.example.projecteyebrow.view.adapter.adapterItems.HotViewItem
+import com.example.projecteyebrow.view.adapter.adapterItems.TattooistItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
@@ -30,6 +35,20 @@ class HomeFragment : Fragment() {
     private val hotViewList: RecyclerView by lazy { binding.HotViewList }
     private val tattooistList: RecyclerView by lazy { binding.TattooistList }
 
+    // Recycler View Test
+    private val exampleBrandNew = ArrayList<BrandNewItem>()
+    private val exampleHotView = ArrayList<HotViewItem>()
+    private val exampleTattooistView = ArrayList<TattooistItem>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        for (element in 1..5) {
+            exampleBrandNew.add(BrandNewItem("Task $element", "$element"))
+            exampleHotView.add(HotViewItem("Task $element", "$element"))
+            exampleTattooistView.add(TattooistItem("Task $element", "$element"))
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,7 +59,13 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initBrandNewList()
+        initHotViewList()
+        initTattooistList()
 
+        setBrandNewAdapter()
+        setHotViewAdapter()
+        setTattooistAdapter()
     }
 
     override fun onDestroyView() {
@@ -78,5 +103,11 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
         }
     }
+
+    private fun setBrandNewAdapter() { brandNewList.adapter = BrandNewAdapter(exampleBrandNew) }
+
+    private fun setHotViewAdapter() { hotViewList.adapter = HotViewAdapter(exampleHotView) }
+
+    private fun setTattooistAdapter() { tattooistList.adapter = TattooistAdapter(exampleTattooistView) }
 
 }

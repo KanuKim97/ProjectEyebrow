@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentCollectionBinding
 import dagger.hilt.android.AndroidEntryPoint

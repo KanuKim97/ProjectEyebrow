@@ -62,4 +62,10 @@
     <string name="hot_subTitle">가장 많이한 타투들</string>
     <string name="tattooist">Tattooist</string>
     <string name="tattooist_SubTitle">타투이스트들을 만나보세요!</string>
+    <string name="MainBanner_imgView">MainBannerImageView</string>
+    <string name="imageview">ImageView</string>
+    <string name="writepage_btn">writePage_Btn</string>
+    <string name="communityImageView">communityImageView</string>
+    <string name="communityTitle">제목</string>
+    <string name="collectionImageView">collectionImageView</string>
 </resources>
