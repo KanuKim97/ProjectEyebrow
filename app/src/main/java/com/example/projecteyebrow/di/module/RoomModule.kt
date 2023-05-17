@@ -2,7 +2,7 @@ package com.example.projecteyebrow.di.module
 
 import android.content.Context
 import androidx.room.Room
-import com.example.projecteyebrow.database.AppDatabase
+import com.example.projecteyebrow.database.ContentDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,11 +15,11 @@ import javax.inject.Singleton
 object RoomModule {
     @Provides
     @Singleton
-    fun createUserDBInstance(@ApplicationContext context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, "DB_ver1")
+    fun createUserDBInstance(@ApplicationContext context: Context): ContentDatabase =
+        Room.databaseBuilder(context, ContentDatabase::class.java, "ContentDB")
             .build()
 
     @Provides
     @Singleton
-    fun provideDaoService(userDB: AppDatabase) = userDB.shopDao()
+    fun provideDaoService(contentDB: ContentDatabase) = contentDB.contentDAO()
 }

@@ -68,4 +68,7 @@
     <string name="communityImageView">communityImageView</string>
     <string name="communityTitle">제목</string>
     <string name="collectionImageView">collectionImageView</string>
+    <string name="TemporaryLoad_Btn">불러오기</string>
+    <string name="TemporarySave_Btn">임시 저장</string>
+    <string name="Upload_Btn">글쓰기</string>
 </resources>

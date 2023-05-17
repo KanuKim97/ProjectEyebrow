@@ -12,17 +12,73 @@
         android:layout_height="match_parent"
         android:layout_margin="15dp" >
 
+        <LinearLayout
+            android:id="@+id/TopBtn_View"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/TemporaryLoad_Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TemporaryLoad_Btn"
+                android:textSize="13sp"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/TemporarySave_Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TemporarySave_Btn"
+                android:textSize="13sp"
+                android:textAlignment="center"
+                />
+
+            <Button
+                android:id="@+id/Upload_Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Upload_Btn"
+                android:textSize="13sp"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Title_Layout"
             android:layout_width="320dp"
             android:layout_height="60dp"
             android:hint="@string/communityTitle"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TopBtn_View"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Title_Input"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"/>
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_edit_text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="320dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Title_Layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Content_Input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_edit_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
