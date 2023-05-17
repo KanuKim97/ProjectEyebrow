@@ -35,11 +35,11 @@ class WriteCommunityFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        isTemporarySaveComplete()
-
+        binding.UploadBtn.setOnClickListener(this)
         binding.TemporarySaveBtn.setOnClickListener(this)
         binding.TemporaryLoadBtn.setOnClickListener(this)
-        binding.UploadBtn.setOnClickListener(this)
+
+        isTemporarySaveComplete()
     }
 
     override fun onDestroyView() {
@@ -51,6 +51,11 @@ class WriteCommunityFragment : Fragment(), View.OnClickListener {
 
     private fun setContent(): String = binding.ContentInput.text.toString()
 
+    private fun toCommunityFragment(): Int = requireActivity().supportFragmentManager
+        .beginTransaction()
+        .replace(R.id.FragmentContainer, CommunityFragment())
+        .commit()
+
     private fun saveTemporaryContent(
         title: String,
         content: String
@@ -60,10 +65,7 @@ class WriteCommunityFragment : Fragment(), View.OnClickListener {
         writeCommunityViewModel.isSaveSuccess.observe(viewLifecycleOwner) { result ->
             if (result.isSuccess) {
                 toastMessage.apply { setText("저장이 완료되었습니다!") }.show()
-
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.FragmentContainer, CommunityFragment())
-                    .commit()
+                toCommunityFragment()
             }
         }
 

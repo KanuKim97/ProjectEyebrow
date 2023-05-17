@@ -22,6 +22,7 @@ class WriteCommunityViewModel @Inject constructor(
     private val _isSaveSuccess = MutableLiveData<Result<Unit>>()
     val isSaveSuccess: LiveData<Result<Unit>> get() = _isSaveSuccess
 
+
     fun temporarySaveContent(
         contentTitle: String,
         temporaryContent: String
@@ -37,8 +38,6 @@ class WriteCommunityViewModel @Inject constructor(
             _isSaveSuccess.postValue(result)
         }
     }
-
-
 
     override fun onCleared() {
         super.onCleared()
