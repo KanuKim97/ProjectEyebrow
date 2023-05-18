@@ -8,19 +8,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.projecteyebrow.R
-import com.example.projecteyebrow.databinding.FragmentWriteCommunityBinding
-import com.example.projecteyebrow.viewModel.WriteCommunityViewModel
+import com.example.projecteyebrow.databinding.FragmentWriteContentBinding
+import com.example.projecteyebrow.viewModel.WriteContentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class WriteCommunityFragment : Fragment(), View.OnClickListener {
+class WriteContentFragment : Fragment(), View.OnClickListener {
     @Inject lateinit var toastMessage: Toast
 
-    private var _binding: FragmentWriteCommunityBinding? = null
-    private val binding: FragmentWriteCommunityBinding get() = _binding!!
-    private val writeCommunityViewModel: WriteCommunityViewModel by viewModels()
+    private var _binding: FragmentWriteContentBinding? = null
+    private val binding: FragmentWriteContentBinding get() = _binding!!
+    private val writeCommunityViewModel: WriteContentViewModel by viewModels()
 
     private val title: String by lazy { setTitle() }
     private val content: String by lazy { setContent() }
@@ -30,7 +30,7 @@ class WriteCommunityFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentWriteCommunityBinding.inflate(inflater, container, false)
+        _binding = FragmentWriteContentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -56,23 +56,29 @@ class WriteCommunityFragment : Fragment(), View.OnClickListener {
         .replace(R.id.FragmentContainer, CommunityFragment())
         .commit()
 
+    private fun toTemporaryContentFragment(): Int = requireActivity().supportFragmentManager
+        .beginTransaction()
+        .replace(R.id.FragmentContainer, TemporaryContentFragment())
+        .commit()
+
     private fun saveTemporaryContent(
         title: String,
         content: String
     ): Job = writeCommunityViewModel.temporarySaveContent(title, content)
 
-    private fun isTemporarySaveComplete(): Unit =
+    private fun isTemporarySaveComplete() {
         writeCommunityViewModel.isSaveSuccess.observe(viewLifecycleOwner) { result ->
             if (result.isSuccess) {
                 toastMessage.apply { setText("저장이 완료되었습니다!") }.show()
                 toCommunityFragment()
             }
         }
+    }
 
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.TemporarySave_Btn -> { saveTemporaryContent(title, content) }
-            R.id.TemporaryLoad_Btn -> {  }
+            R.id.TemporaryLoad_Btn -> { toTemporaryContentFragment() }
             R.id.Upload_Btn -> {  }
         }
     }

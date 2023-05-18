@@ -71,4 +71,6 @@
     <string name="TemporaryLoad_Btn">불러오기</string>
     <string name="TemporarySave_Btn">임시 저장</string>
     <string name="Upload_Btn">글쓰기</string>
+    <string name="TemporaryReload_Btn">TemporaryReload_Btn</string>
+    <string name="TemporaryDelete_Btn">TemporaryDelete_Btn</string>
 </resources>

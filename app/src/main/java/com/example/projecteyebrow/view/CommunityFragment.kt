@@ -63,7 +63,7 @@ class CommunityFragment : Fragment() {
 
     private fun toWriteCommunityFragment() = requireActivity().supportFragmentManager
         .beginTransaction()
-        .replace(R.id.FragmentContainer, WriteCommunityFragment())
+        .replace(R.id.FragmentContainer, WriteContentFragment())
         .addToBackStack(null)
         .commit()
 

@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WriteCommunityViewModel @Inject constructor(
+class WriteContentViewModel @Inject constructor(
     private val roomDB: RoomProducer,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
