@@ -7,7 +7,7 @@ import kotlinx.coroutines.tasks.await
 import java.io.IOException
 import javax.inject.Inject
 
-class AuthProducer @Inject constructor(
+class FireAuthProducer @Inject constructor(
     private val authModule: FirebaseAuth
 ) {
     private val _isSignOutSuccess = MutableStateFlow<Result<Unit>?>(null)
@@ -83,7 +83,7 @@ class AuthProducer @Inject constructor(
         }
     }
 
-    fun signOutUserAccount(): Unit {
+    fun signOutUserAccount() {
         try {
             authModule.signOut()
             _isSignOutSuccess.value = Result.success(Unit)

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
-import com.example.projecteyebrow.di.flow.producer.AuthProducer
+import com.example.projecteyebrow.di.flow.producer.FireAuthProducer
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CommunityViewModel @Inject constructor(
-    private val fireAuth: AuthProducer,
+    private val fireAuth: FireAuthProducer,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _userCurrentSession = MutableLiveData<FirebaseUser?>()

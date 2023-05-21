@@ -73,4 +73,6 @@
     <string name="Upload_Btn">글쓰기</string>
     <string name="TemporaryReload_Btn">TemporaryReload_Btn</string>
     <string name="TemporaryDelete_Btn">TemporaryDelete_Btn</string>
+    <string name="logout">LogOut</string>
+    <string name="mod_profile">mod Profile</string>
 </resources>
