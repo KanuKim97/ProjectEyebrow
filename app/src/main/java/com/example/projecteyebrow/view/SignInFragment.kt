@@ -10,10 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentSigninBinding
-import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
 import com.example.projecteyebrow.viewModel.CreateAccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import javax.inject.Inject
 
@@ -74,8 +72,11 @@ class SignInFragment : Fragment(), View.OnClickListener {
         .replace(R.id.FragmentContainer, ProfileFragment())
         .commit()
 
-    private fun createUserAccount(Email: String, Password: String): Job =
-        createAccountViewModel.createUserAccount(Email, Password)
+    private fun createUserAccount(
+        Email: String,
+        Password: String,
+        NickName: String
+    ): Job = createAccountViewModel.createUserAccount(Email, Password, NickName)
 
     private fun isCreateAccountSuccess(): Unit =
         createAccountViewModel.isCreateSuccess.observe(viewLifecycleOwner) { result ->
@@ -89,7 +90,7 @@ class SignInFragment : Fragment(), View.OnClickListener {
         ConfirmPassword: String
     ) {
         when {
-            Patterns.EMAIL_ADDRESS.matcher(Email).matches() -> {
+            !Patterns.EMAIL_ADDRESS.matcher(Email).matches() -> {
                 toastMessage.apply { setText("이메일 형식이 아닙니다. 다시 입력해주세요.") }.show()
                 clearEmailInputField()
             }
@@ -101,7 +102,7 @@ class SignInFragment : Fragment(), View.OnClickListener {
                 toastMessage.apply { setText("비밀번호가 일치하지 않습니다.") }.show()
                 clearConfirmPasswordInputField()
             }
-            else -> createUserAccount(Email, Password)
+            else -> createUserAccount(Email, Password, NickName)
         }
     }
 

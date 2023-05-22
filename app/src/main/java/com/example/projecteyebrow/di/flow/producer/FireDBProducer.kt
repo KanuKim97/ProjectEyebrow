@@ -56,7 +56,7 @@ class FireDBProducer @Inject constructor(
         eventListener = _profileRef.child("collection")
             .addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-
+                    TODO("implement needed")
                 }
 
                 override fun onCancelled(error: DatabaseError) { _userCollection.value = null }
