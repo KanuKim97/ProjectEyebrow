@@ -19,14 +19,14 @@ import javax.inject.Inject
 class SignInFragment : Fragment(), View.OnClickListener {
     @Inject lateinit var toastMessage: Toast
 
+    private lateinit var userEmail: String
+    private lateinit var userNickName: String
+    private lateinit var userPassword: String
+    private lateinit var confirmPassword: String
+
     private var _binding: FragmentSigninBinding? = null
     private val binding get() = _binding!!
     private val createAccountViewModel: CreateAccountViewModel by viewModels()
-
-    private val userEmail: String by lazy { setUserEmail() }
-    private val userNickName: String by lazy { setUserNickName() }
-    private val userPassword: String by lazy { setUserPassword() }
-    private val confirmPassword: String by lazy { setConfirmPassword() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,8 +37,16 @@ class SignInFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        isCreateAccountSuccess()
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        createAccountViewModel.isCreateSuccess.observe(viewLifecycleOwner) { result ->
+            if (result.isSuccess) {
+                toProfileFragment()
+            }
+        }
+
         binding.CreateAccountBtn.setOnClickListener(this)
         binding.toLogInFragmentBtn.setOnClickListener(this)
     }
@@ -78,11 +86,6 @@ class SignInFragment : Fragment(), View.OnClickListener {
         NickName: String
     ): Job = createAccountViewModel.createUserAccount(Email, Password, NickName)
 
-    private fun isCreateAccountSuccess(): Unit =
-        createAccountViewModel.isCreateSuccess.observe(viewLifecycleOwner) { result ->
-            if (result.isSuccess) { toProfileFragment() }
-        }
-
     private fun validateUserInput(
         Email: String,
         NickName: String,
@@ -107,6 +110,11 @@ class SignInFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
+        userEmail = setUserEmail()
+        userNickName = setUserNickName()
+        userPassword = setUserPassword()
+        confirmPassword = setConfirmPassword()
+
         when (view?.id) {
             R.id.toLogInFragment_Btn -> toLogInFragment()
             R.id.CreateAccount_Btn ->

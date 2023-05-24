@@ -23,12 +23,12 @@ class LogInFragment : Fragment(), View.OnClickListener {
     @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
     @Inject lateinit var toastMessage: Toast
 
+    private lateinit var userEmail: String
+    private lateinit var userPassword: String
+
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val logInViewModel: LogInViewModel by viewModels()
-
-    private val userEmail: String by lazy { setUserEmail() }
-    private val userPassword: String by lazy { setUserPassword() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,11 +36,26 @@ class LogInFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        isLogInSuccess()
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        logInViewModel.isLogInSuccess.observe(viewLifecycleOwner) { result ->
+            lifecycleScope.launch(mainDispatcher) {
+                if (result.isSuccess) {
+                    toProfileFragment()
+                } else {
+                    toastMessage.apply { setText(R.string.FailedLogIn) }.show()
+                    clearEmailInputField()
+                    clearPasswordInputField()
+                }
+            }
+        }
+
         binding.LogInBtn.setOnClickListener(this)
         binding.FindPasswordBtn.setOnClickListener(this)
         binding.CreateAccountBtn.setOnClickListener(this)
@@ -80,20 +95,10 @@ class LogInFragment : Fragment(), View.OnClickListener {
     private fun userLogIn(Email: String, Password: String): Job =
         logInViewModel.logInUserAccount(Email, Password)
 
-    private fun isLogInSuccess(): Unit =
-        logInViewModel.isLogInSuccess.observe(viewLifecycleOwner) { result ->
-            lifecycleScope.launch(mainDispatcher) {
-                if (result.isSuccess) {
-                    toProfileFragment()
-                } else {
-                    toastMessage.apply { setText(R.string.FailedLogIn) }.show()
-                    clearEmailInputField()
-                    clearPasswordInputField()
-                }
-            }
-        }
-
     override fun onClick(view: View?) {
+        userEmail = setUserEmail()
+        userPassword = setUserPassword()
+
         when(view?.id) {
             R.id.LogIn_Btn -> userLogIn(userEmail, userPassword)
             R.id.CreateAccount_Btn -> toCreateAccountFragment()

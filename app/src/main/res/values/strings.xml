@@ -75,4 +75,7 @@
     <string name="TemporaryDelete_Btn">TemporaryDelete_Btn</string>
     <string name="logout">LogOut</string>
     <string name="mod_profile">mod Profile</string>
+    <string name="profile_image_view">Profile Image View</string>
+    <string name="NickName">닉네임</string>
+    <string name="Email">이메일</string>
 </resources>

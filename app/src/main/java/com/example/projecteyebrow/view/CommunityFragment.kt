@@ -40,7 +40,10 @@ class CommunityFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         initCommunityList()
 
         binding.writeBtn.setOnClickListener {

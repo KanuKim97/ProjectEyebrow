@@ -1,22 +1,23 @@
 package com.example.projecteyebrow.di.flow.producer
 
+import android.provider.ContactsContract.Data
+import com.example.projecteyebrow.view.viewItems.CommunityItems
+import com.example.projecteyebrow.view.viewItems.ProfileItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
+import java.io.IOException
 import javax.inject.Inject
 
 class FireDBProducer @Inject constructor(
     private val fireAuth: FirebaseAuth,
     private val firebaseDB: FirebaseDatabase
 ) {
-    private val _userProfileInfo = MutableStateFlow<String?>(null)
-    val userProfile: Flow<String> get() = _userProfileInfo.filterNotNull()
-    private val _userCollection = MutableStateFlow(null)
-    val userCollection get() = _userCollection.filterNotNull()
-
+    private val _userProfileInfo = MutableStateFlow<ProfileItem?>(null)
+    private val _communityItems = MutableStateFlow<ArrayList<CommunityItems>?>(null)
+    val userProfile: Flow<ProfileItem> get() = _userProfileInfo.filterNotNull()
+    val communityItems: Flow<ArrayList<CommunityItems>> = _communityItems.filterNotNull()
 
     private val _userUID: String by lazy { fireAuth.currentUser?.uid.toString() }
     private val _communityPath: String by lazy { "community" }
@@ -26,6 +27,7 @@ class FireDBProducer @Inject constructor(
 
     private var eventListener: ValueEventListener? = null
 
+    //TODO("saveUserProfile 함수 개선 필요")
     suspend fun saveUserProfile(
         userEmail: String,
         userName: String
@@ -37,30 +39,37 @@ class FireDBProducer @Inject constructor(
     fun loadUserProfile() {
         eventListener = _profileRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.child("userEmail").value
-                snapshot.child("userName").value
+                _userProfileInfo.value = ProfileItem(
+                    snapshot.child("userEmail").value.toString(),
+                    snapshot.child("userName").value.toString()
+                )
             }
 
             override fun onCancelled(error: DatabaseError) { _userProfileInfo.value = null }
         })
     }
 
-    suspend fun saveUserCollection() {
-        _profileRef.child("collection")
-            .push()
-            .setValue(null)
-            .await()
+
+    suspend fun uploadCommunityContent(
+        uploadTitle: String,
+        uploadContent: String
+    ) {
+        _communityRef.push().setValue(
+            CommunityItems(
+                uploadTitle,
+                uploadContent,
+                _userUID
+            )
+        ).await()
     }
 
-    fun loadUserCollection() {
-        eventListener = _profileRef.child("collection")
-            .addValueEventListener(object: ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    TODO("implement needed")
-                }
+    //TODO("readCommunityContent 함수 작성 필요")
+    fun readCommunityContent() {
+        eventListener = _communityRef.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {  }
 
-                override fun onCancelled(error: DatabaseError) { _userCollection.value = null }
-            })
+            override fun onCancelled(error: DatabaseError) { _communityItems.value = null }
+        })
     }
 
     fun stopEventListen() {

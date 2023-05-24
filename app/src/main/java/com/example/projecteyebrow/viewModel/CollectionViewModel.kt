@@ -16,13 +16,6 @@ class CollectionViewModel @Inject constructor(
     private val fireDB: FireDBProducer,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
-    val userCollectionInformation get() = fireDB.userCollection
-
-    init { loadUserCollection() }
-
-    private fun loadUserCollection(): Job = viewModelScope.launch(ioDispatcher) {
-        fireDB.loadUserCollection()
-    }
 
     override fun onCleared() {
         super.onCleared()

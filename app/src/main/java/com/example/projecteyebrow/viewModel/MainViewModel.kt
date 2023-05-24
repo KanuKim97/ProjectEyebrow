@@ -9,6 +9,7 @@ import com.example.projecteyebrow.di.flow.producer.FireAuthProducer
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,7 +24,7 @@ class MainViewModel @Inject constructor(
 
     init { provideCurrentSession() }
 
-    private fun provideCurrentSession() = viewModelScope.launch(ioDispatcher) {
+    private fun provideCurrentSession(): Job = viewModelScope.launch(ioDispatcher) {
         fireAuth.getCurrentUser().collect { userSession ->
             _isUserSessionAlive.postValue(userSession)
         }

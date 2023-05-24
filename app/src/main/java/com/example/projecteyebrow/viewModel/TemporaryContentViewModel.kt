@@ -7,12 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.projecteyebrow.database.tables.TemporaryContentEntity
 import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
 import com.example.projecteyebrow.di.flow.producer.RoomProducer
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class TemporaryContentViewModel @Inject constructor(
     private val tempContentDB: RoomProducer,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher

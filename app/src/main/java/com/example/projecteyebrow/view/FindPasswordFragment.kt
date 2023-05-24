@@ -18,11 +18,11 @@ import javax.inject.Inject
 class FindPasswordFragment : Fragment() {
     @Inject lateinit var toastMessage: Toast
 
+    private lateinit var userEmail: String
+
     private var _binding: FragmentFindPasswordBinding? = null
     private val binding get() = _binding!!
     private val findPasswordViewModel: FindPasswordViewModel by viewModels()
-
-    private val userEmail: String by lazy { setUserEmail() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,9 +33,24 @@ class FindPasswordFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        isResetEmailSuccess()
-        binding.FindPasswordBtn.setOnClickListener { sendResetEmail(userEmail) }
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        findPasswordViewModel.isResetEmailSend.observe(viewLifecycleOwner) { result ->
+            if (result.isSuccess) {
+                toastMessage.apply { setText("이메일 발송이 완료되었습니다.") }.show()
+                toLogInFragment()
+            } else {
+                toastMessage.apply { setText("이메일을 다시 확인해주세요.") }.show()
+                clearEmailInputField()
+            }
+        }
+
+        binding.FindPasswordBtn.setOnClickListener {
+            userEmail = setUserEmail()
+            sendResetEmail(userEmail)
+        }
     }
 
     override fun onDestroyView() {
@@ -55,14 +70,4 @@ class FindPasswordFragment : Fragment() {
     private fun sendResetEmail(userEmail: String): Job =
         findPasswordViewModel.sendResetPassword(userEmail)
 
-    private fun isResetEmailSuccess(): Unit =
-        findPasswordViewModel.isResetEmailSend.observe(viewLifecycleOwner) { result ->
-            if (result.isSuccess) {
-                toastMessage.apply { setText("이메일 발송이 완료되었습니다.") }.show()
-                toLogInFragment()
-            } else {
-                toastMessage.apply { setText("이메일을 다시 확인해주세요.") }.show()
-                clearEmailInputField()
-            }
-        }
 }

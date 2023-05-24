@@ -1,5 +1,6 @@
 package com.example.projecteyebrow.di.module
 
+import com.example.projecteyebrow.BuildConfig
 import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides
@@ -12,5 +13,6 @@ import javax.inject.Singleton
 object FireBaseDBModule {
     @Provides
     @Singleton
-    fun provideFireBaseDBInstance(): FirebaseDatabase = FirebaseDatabase.getInstance()
+    fun provideFireBaseDBInstance(): FirebaseDatabase =
+        FirebaseDatabase.getInstance(BuildConfig.Firebase_Database_URL)
 }

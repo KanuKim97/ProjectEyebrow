@@ -15,39 +15,17 @@
             android:id="@+id/TopProfile_View"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/userNickName_Txt"
+            <ImageView
+                android:id="@+id/ProfileImageView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/userEmail_Txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/userNickName_Txt"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:textSize="16sp" />
-
-            <ImageButton
-                android:id="@+id/LogOut_Btn"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:background="@color/white"
-                android:contentDescription="@string/logout"
-                android:elevation="8dp"
-                android:src="@drawable/ic_logout" />
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_blank_profile"
+                android:contentDescription="@string/profile_image_view" />
 
         </RelativeLayout>
 
@@ -61,6 +39,47 @@
             android:contentDescription="@string/mod_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/TopProfile_View" />
+
+        <TextView
+            android:id="@+id/nickname_TxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/NickName"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/mod_profile_Btn"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/nickname_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/nickname_TxtView"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/email_TxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/Email"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/nickname_Txt"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/email_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/email_TxtView"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

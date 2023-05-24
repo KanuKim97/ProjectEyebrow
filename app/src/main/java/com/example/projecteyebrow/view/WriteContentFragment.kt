@@ -18,12 +18,12 @@ import javax.inject.Inject
 class WriteContentFragment : Fragment(), View.OnClickListener {
     @Inject lateinit var toastMessage: Toast
 
+    private lateinit var title: String
+    private lateinit var content: String
+
     private var _binding: FragmentWriteContentBinding? = null
     private val binding: FragmentWriteContentBinding get() = _binding!!
     private val writeCommunityViewModel: WriteContentViewModel by viewModels()
-
-    private val title: String by lazy { setTitle() }
-    private val content: String by lazy { setContent() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,12 +34,20 @@ class WriteContentFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        writeCommunityViewModel.isSaveSuccess.observe(viewLifecycleOwner) {
+            if (it.isSuccess) {
+                toastMessage.apply { setText("저장이 완료되었습니다!") }.show()
+                toCommunityFragment()
+            }
+        }
+
         binding.UploadBtn.setOnClickListener(this)
         binding.TemporarySaveBtn.setOnClickListener(this)
         binding.TemporaryLoadBtn.setOnClickListener(this)
-
-        isTemporarySaveComplete()
     }
 
     override fun onDestroyView() {
@@ -66,20 +74,19 @@ class WriteContentFragment : Fragment(), View.OnClickListener {
         content: String
     ): Job = writeCommunityViewModel.temporarySaveContent(title, content)
 
-    private fun isTemporarySaveComplete() {
-        writeCommunityViewModel.isSaveSuccess.observe(viewLifecycleOwner) { result ->
-            if (result.isSuccess) {
-                toastMessage.apply { setText("저장이 완료되었습니다!") }.show()
-                toCommunityFragment()
-            }
-        }
-    }
+    private fun uploadCommunityContent(
+        title: String,
+        content: String
+    ): Job = writeCommunityViewModel.uploadCommunityContent(title, content)
 
     override fun onClick(view: View?) {
+        title = setTitle()
+        content = setContent()
+
         when (view?.id) {
             R.id.TemporarySave_Btn -> { saveTemporaryContent(title, content) }
             R.id.TemporaryLoad_Btn -> { toTemporaryContentFragment() }
-            R.id.Upload_Btn -> {  }
+            R.id.Upload_Btn -> { uploadCommunityContent(title, content) }
         }
     }
 

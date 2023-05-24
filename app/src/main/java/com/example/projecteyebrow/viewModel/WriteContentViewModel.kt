@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.projecteyebrow.database.tables.TemporaryContentEntity
 import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
+import com.example.projecteyebrow.di.flow.producer.FireDBProducer
 import com.example.projecteyebrow.di.flow.producer.RoomProducer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -17,11 +18,11 @@ import javax.inject.Inject
 @HiltViewModel
 class WriteContentViewModel @Inject constructor(
     private val roomDB: RoomProducer,
+    private val fireDB: FireDBProducer,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _isSaveSuccess = MutableLiveData<Result<Unit>>()
     val isSaveSuccess: LiveData<Result<Unit>> get() = _isSaveSuccess
-
 
     fun temporarySaveContent(
         contentTitle: String,
@@ -37,6 +38,13 @@ class WriteContentViewModel @Inject constructor(
         ).collect { result ->
             _isSaveSuccess.postValue(result)
         }
+    }
+
+    fun uploadCommunityContent(
+        uploadTitle: String,
+        uploadContent: String
+    ): Job = viewModelScope.launch(ioDispatcher) {
+        fireDB.uploadCommunityContent(uploadTitle, uploadContent)
     }
 
     override fun onCleared() {
