@@ -6,76 +6,59 @@
     <string name="userNickName_Hint">사용자 닉네임</string>
     <string name="userPassword_Hint">비밀번호</string>
     <string name="userPassword_confirm_Hint">비밀번호 확인</string>
-    <string name="IsNotEmailPattern">이메일 형식이 아닙니다.\n다시 입력해주세요.</string>
-    <string name="InputUserEmail">이메일을 입력해주세요.</string>
-    <string name="InputUserPassword">비밀번호를 입력해주세요.</string>
-    <string name="FailedLogIn">로그인에 실패하였습니다.\n재 시도해주세요.</string>
-
-    <!-- LogInActivity.xml string value -->
-    <string name="Title_Txt">Welcome!</string>
-    <string name="subTitle_txt">환영합니다!</string>
-    <string name="ID_Hint">이메일</string>
-    <string name="PW_Hint">비밀번호</string>
-    <string name="FindPassword_Btn">비밀번호 찾기</string>
-    <string name="Login_Btn">로그인</string>
-    <string name="SignIn_Btn">회원가입</string>
-
-    <!-- SignInActivity.xml string value -->
-    <string name="subTitle_SignIn">회원 가입을 환영합니다!</string>
-    <string name="signInTxt_Btn">계정 생성하기</string>
-    <string name="toLogInTxt_Btn">로그인 페이지로 이동</string>
-
-    <!-- FindPasswordActivity.xml string value -->
-    <string name="mainTitle_FindPW">Find Your Password!</string>
-    <string name="subTitle_FindPW">비밀번호를 잊어버리셨나요?</string>
-    <string name="userEmail_Hint_FindPW">이메일</string>
-    <string name="sendResetEmail_Btn">비밀번호 초기화 메일 보내기</string>
-
-    <!-- MainActivity.xml string Value -->
-    <string name="filter_Option">Filter</string>
-    <string name="genreTxt_Btn">장르</string>
-    <string name="subjectTxt_Btn">주제</string>
-    <string name="partTxt_Btn">부위</string>
-    <string name="regionTxt_Btn">지역</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Bottom Navigation Bar -->
     <string name="home">Home</string>
     <string name="collection">Collection</string>
     <string name="community">Community</string>
     <string name="profile">Profile</string>
-    <string name="subTitle">로그인으로 다양한 컨텐츠를 만나보세요!</string>
-    <string name="introTitle">AppName 입니다.</string>
-    <string name="welcomeTitle">환영합니다!</string>
+
+    <!-- Titles -->
+    <string name="Welcome_Title">환영합니다!</string>
+    <string name="Intro_Title">AppName 입니다.</string>
+    <string name="LogIn_SubTitle">로그인하여 다양한 컨텐츠를 만나보세요!</string>
+
     <string name="Password_Title">비밀번호를</string>
     <string name="Forgot_Title">잊어버리셨나요?</string>
-    <string name="SubTitle">이메일 주소를 이용해 비밀번호를 재설정 해보세요!</string>
+    <string name="FindPassword_SubTitle">이메일 주소를 이용해 비밀번호를 재설정 해보세요!</string>
+
     <string name="CreateAccount_Title">회원가입을</string>
     <string name="CreateAccount_SubTitle">회원가입으로 다양한 컨텐츠를 즐겨보세요!</string>
-    <string name="toLogInFragment_Btn">로그인 화면으로 이동하기</string>
+
+    <!-- Button Title -->
+    <string name="Login_Btn">로그인</string>
     <string name="CreateAccount_Btn">회원가입하기</string>
+    <string name="FindPassword_Btn">비밀번호 찾기</string>
+    <string name="toLogInFragment_Btn">로그인 화면으로 이동하기</string>
+    <string name="Upload_Btn">글쓰기</string>
+    <string name="TemporaryLoad_Btn">불러오기</string>
+    <string name="TemporarySave_Btn">임시 저장</string>
     <string name="SendOTP_Btn">인증번호 발송</string>
+
+    <!-- Home RecyclerView Title, SubTitle -->
     <string name="brandNew">Brand New!</string>
     <string name="brandNew_Kor_Txt">새로운 타투들</string>
     <string name="hot_Title">Hot!</string>
     <string name="hot_subTitle">가장 많이한 타투들</string>
     <string name="tattooist">Tattooist</string>
     <string name="tattooist_SubTitle">타투이스트들을 만나보세요!</string>
+
+    <!-- Image Button, View Content Description-->
     <string name="MainBanner_imgView">MainBannerImageView</string>
     <string name="imageview">ImageView</string>
     <string name="writepage_btn">writePage_Btn</string>
     <string name="communityImageView">communityImageView</string>
-    <string name="communityTitle">제목</string>
     <string name="collectionImageView">collectionImageView</string>
-    <string name="TemporaryLoad_Btn">불러오기</string>
-    <string name="TemporarySave_Btn">임시 저장</string>
-    <string name="Upload_Btn">글쓰기</string>
     <string name="TemporaryReload_Btn">TemporaryReload_Btn</string>
     <string name="TemporaryDelete_Btn">TemporaryDelete_Btn</string>
     <string name="logout">LogOut</string>
     <string name="mod_profile">mod Profile</string>
     <string name="profile_image_view">Profile Image View</string>
+
+    <!--TextInput-->
+    <string name="communityTitle">제목</string>
     <string name="NickName">닉네임</string>
     <string name="Email">이메일</string>
+    <string name="logOut">로그아웃</string>
+
 </resources>

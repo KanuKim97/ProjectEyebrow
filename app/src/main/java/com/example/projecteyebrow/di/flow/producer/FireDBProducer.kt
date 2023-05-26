@@ -1,13 +1,12 @@
 package com.example.projecteyebrow.di.flow.producer
 
-import android.provider.ContactsContract.Data
+import android.util.Log
 import com.example.projecteyebrow.view.viewItems.CommunityItems
 import com.example.projecteyebrow.view.viewItems.ProfileItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
-import java.io.IOException
 import javax.inject.Inject
 
 class FireDBProducer @Inject constructor(
@@ -65,14 +64,18 @@ class FireDBProducer @Inject constructor(
 
     //TODO("readCommunityContent 함수 작성 필요")
     fun readCommunityContent() {
-        eventListener = _communityRef.addValueEventListener(object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {  }
+        eventListener = _communityRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                Log.d("로그", "${snapshot.children}")
+            }
 
-            override fun onCancelled(error: DatabaseError) { _communityItems.value = null }
+            override fun onCancelled(error: DatabaseError) {
+                _communityItems.value = null
+            }
         })
     }
 
-    fun stopEventListen() {
+    fun stopEventListening() {
         eventListener?.apply {
             _profileRef.removeEventListener(this)
             _communityRef.removeEventListener(this)

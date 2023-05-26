@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-10dp"
-                android:text="@string/welcomeTitle"
+                android:text="@string/Welcome_Title"
                 android:textColor="@color/black"
                 android:textSize="35sp"
                 android:textStyle="bold" />
@@ -62,7 +62,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
                 android:layout_gravity="center_horizontal"
-                android:hint="@string/fui_email_hint" >
+                android:hint="@string/userEmail_Hint" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/EmailInput"
@@ -92,7 +92,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
                 android:layout_gravity="center_horizontal"
-                android:hint="@string/fui_password_hint"
+                android:hint="@string/userPassword_Hint"
                 app:passwordToggleEnabled="true" >
 
                 <com.google.android.material.textfield.TextInputEditText

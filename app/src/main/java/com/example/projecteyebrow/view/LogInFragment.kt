@@ -36,7 +36,6 @@ class LogInFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -49,7 +48,7 @@ class LogInFragment : Fragment(), View.OnClickListener {
                 if (result.isSuccess) {
                     toProfileFragment()
                 } else {
-                    toastMessage.apply { setText(R.string.FailedLogIn) }.show()
+                    toastMessage.apply { setText("로그인에 실패하였습니다.") }.show()
                     clearEmailInputField()
                     clearPasswordInputField()
                 }
@@ -77,19 +76,16 @@ class LogInFragment : Fragment(), View.OnClickListener {
     private fun toProfileFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()
         .replace(R.id.FragmentContainer, ProfileFragment())
-        .addToBackStack("ProfileFragment")
         .commit()
 
     private fun toCreateAccountFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()
         .replace(R.id.FragmentContainer, SignInFragment())
-        .addToBackStack("CreateAccountFragment")
         .commit()
 
     private fun toFindPasswordFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()
         .replace(R.id.FragmentContainer, FindPasswordFragment())
-        .addToBackStack("FindPasswordFragment")
         .commit()
 
     private fun userLogIn(Email: String, Password: String): Job =

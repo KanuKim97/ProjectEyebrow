@@ -4,74 +4,72 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.ActivityMainBinding
+import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
 import com.example.projecteyebrow.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
+    @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
+
     private val _binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mainViewModel: MainViewModel by viewModels()
-
-    private val homeFragment: HomeFragment = HomeFragment()
-    private val profileFragment: ProfileFragment = ProfileFragment()
-    private val communityFragment: CommunityFragment = CommunityFragment()
-    private val collectionFragment: CollectionFragment = CollectionFragment()
-    private val logInFragment: LogInFragment = LogInFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initFragmentLayout()
-        _binding.BottomNavBar.setOnItemSelectedListener(this)
 
+        _binding.BottomNavBar.setOnItemSelectedListener(this)
         setContentView(_binding.root)
     }
 
-    private fun initFragmentLayout(): Int =
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.FragmentContainer, homeFragment)
+    private fun initFragmentLayout(): Int = supportFragmentManager.beginTransaction()
+            .replace(R.id.FragmentContainer, HomeFragment())
             .commit()
 
     private fun toHomeFragment(): Int = supportFragmentManager.beginTransaction()
-        .replace(R.id.FragmentContainer, homeFragment)
-        .addToBackStack("HomeFragment")
+        .replace(R.id.FragmentContainer, HomeFragment())
         .commit()
 
     private fun toProfileFragment(): Int = supportFragmentManager.beginTransaction()
-        .replace(R.id.FragmentContainer, profileFragment)
-        .addToBackStack("ProfileFragment")
+        .replace(R.id.FragmentContainer, ProfileFragment())
         .commit()
 
     private fun toCommunityFragment(): Int = supportFragmentManager.beginTransaction()
-        .replace(R.id.FragmentContainer, communityFragment)
-        .addToBackStack("CommunityFragment")
+        .replace(R.id.FragmentContainer, CommunityFragment())
         .commit()
 
     private fun toCollectionFragment(): Int = supportFragmentManager.beginTransaction()
-        .replace(R.id.FragmentContainer, collectionFragment)
-        .addToBackStack("CollectionFragment")
+        .replace(R.id.FragmentContainer, CollectionFragment())
         .commit()
 
     private fun toLogInFragment(): Int = supportFragmentManager.beginTransaction()
-        .replace(R.id.FragmentContainer, logInFragment)
+        .replace(R.id.FragmentContainer, LogInFragment())
         .commit()
 
-    private fun isUserSessionAlive(): Unit =
-        mainViewModel.isUserSessionAlive.observe(this) { result ->
-            if (result != null) {
-                toProfileFragment()
-            } else {
+    private fun checkUserSession(): Job = lifecycleScope.launch(mainDispatcher) {
+        mainViewModel.userCurrentSession.collect {
+            if (!it) {
                 toLogInFragment()
+            } else {
+                toProfileFragment()
             }
         }
+    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuHome -> toHomeFragment()
-            R.id.menuProfile -> isUserSessionAlive()
+            R.id.menuProfile -> checkUserSession()
             R.id.menuCommunity -> toCommunityFragment()
             R.id.menuCollection -> toCollectionFragment()
         }

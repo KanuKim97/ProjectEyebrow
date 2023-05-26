@@ -7,17 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentCommunityBinding
+import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
 import com.example.projecteyebrow.viewModel.CommunityViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class CommunityFragment : Fragment() {
+    @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
     @Inject lateinit var toastMessage: Toast
 
     private var _binding: FragmentCommunityBinding? = null
@@ -25,11 +29,6 @@ class CommunityFragment : Fragment() {
     private val communityViewModel: CommunityViewModel by viewModels()
 
     private val communityList: RecyclerView by lazy { binding.communityView }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        checkCurrentSession()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,22 +46,23 @@ class CommunityFragment : Fragment() {
         initCommunityList()
 
         binding.writeBtn.setOnClickListener {
-            communityViewModel.userCurrentSession.observe(viewLifecycleOwner) { currentSession ->
-                if (currentSession != null) {
-                    toWriteCommunityFragment()
-                } else {
-                    toastMessage.apply { setText("로그인을 먼저 수행해주세요!") }.show()
+            lifecycleScope.launch(mainDispatcher) {
+                communityViewModel.userCurrentSession.collect {
+                    if (it) {
+                        toWriteCommunityFragment()
+                    } else {
+                        toastMessage.apply { setText("로그인을 먼저 수행해 주세요") }.show()
+                    }
                 }
             }
         }
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-    private fun checkCurrentSession(): Job = communityViewModel.checkUserSession()
 
     private fun toWriteCommunityFragment() = requireActivity().supportFragmentManager
         .beginTransaction()
