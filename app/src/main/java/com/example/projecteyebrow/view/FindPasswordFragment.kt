@@ -21,7 +21,7 @@ class FindPasswordFragment : Fragment() {
     private lateinit var userEmail: String
 
     private var _binding: FragmentFindPasswordBinding? = null
-    private val binding get() = _binding!!
+    private val binding: FragmentFindPasswordBinding get() = _binding!!
     private val findPasswordViewModel: FindPasswordViewModel by viewModels()
 
     override fun onCreateView(

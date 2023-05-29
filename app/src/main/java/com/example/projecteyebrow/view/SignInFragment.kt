@@ -25,7 +25,7 @@ class SignInFragment : Fragment(), View.OnClickListener {
     private lateinit var confirmPassword: String
 
     private var _binding: FragmentSigninBinding? = null
-    private val binding get() = _binding!!
+    private val binding: FragmentSigninBinding get() = _binding!!
     private val createAccountViewModel: CreateAccountViewModel by viewModels()
 
     override fun onCreateView(

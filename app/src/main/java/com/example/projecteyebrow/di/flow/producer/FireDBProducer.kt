@@ -1,6 +1,5 @@
 package com.example.projecteyebrow.di.flow.producer
 
-import android.util.Log
 import com.example.projecteyebrow.view.viewItems.CommunityItems
 import com.example.projecteyebrow.view.viewItems.ProfileItem
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +23,7 @@ class FireDBProducer @Inject constructor(
     private val _profileRef: DatabaseReference by lazy { firebaseDB.reference.child(_userUID) }
     private val _communityRef: DatabaseReference by lazy { firebaseDB.reference.child(_communityPath) }
 
+    private var communityArrayList = ArrayList<CommunityItems>()
     private var eventListener: ValueEventListener? = null
 
     //TODO("saveUserProfile 함수 개선 필요")
@@ -66,12 +66,13 @@ class FireDBProducer @Inject constructor(
     fun readCommunityContent() {
         eventListener = _communityRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d("로그", "${snapshot.children}")
+                snapshot.children.forEach {
+                    communityArrayList.add(it.getValue(CommunityItems::class.java) as CommunityItems)
+                }
+                _communityItems.value = communityArrayList
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                _communityItems.value = null
-            }
+            override fun onCancelled(error: DatabaseError) { _communityItems.value = null }
         })
     }
 

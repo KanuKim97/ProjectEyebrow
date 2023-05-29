@@ -43,9 +43,9 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         for (element in 1..5) {
-            exampleBrandNew.add(BrandNewItem("Task $element", "$element"))
-            exampleHotView.add(HotViewItem("Task $element", "$element"))
-            exampleTattooistView.add(TattooistItem("Task $element", "$element"))
+            exampleBrandNew.add(BrandNewItem("제목 $element", "내용 $element"))
+            exampleHotView.add(HotViewItem("제목 $element", "내용 $element"))
+            exampleTattooistView.add(TattooistItem("제목 $element", "내용 $element"))
         }
     }
 

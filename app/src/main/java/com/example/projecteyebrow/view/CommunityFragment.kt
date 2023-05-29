@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentCommunityBinding
 import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
+import com.example.projecteyebrow.view.adapter.CommunityAdapter
 import com.example.projecteyebrow.viewModel.CommunityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -44,6 +46,7 @@ class CommunityFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
         initCommunityList()
+        setCommunityList()
 
         binding.writeBtn.setOnClickListener {
             lifecycleScope.launch(mainDispatcher) {
@@ -73,6 +76,12 @@ class CommunityFragment : Fragment() {
     private fun initCommunityList(): RecyclerView = communityList.apply {
         layoutManager = LinearLayoutManager(requireContext())
         setHasFixedSize(true)
+    }
+
+    private fun setCommunityList(): Job = lifecycleScope.launch(mainDispatcher) {
+        communityViewModel.communityList.collect{
+            communityList.adapter = CommunityAdapter(it)
+        }
     }
 
 }

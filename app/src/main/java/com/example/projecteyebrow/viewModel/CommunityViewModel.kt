@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
 import com.example.projecteyebrow.di.flow.producer.FireAuthProducer
 import com.example.projecteyebrow.di.flow.producer.FireDBProducer
+import com.example.projecteyebrow.view.viewItems.CommunityItems
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.cancel
@@ -19,10 +20,14 @@ class CommunityViewModel @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     val userCurrentSession: Flow<Boolean> get() = fireAuth.currentSession
+    val communityList: Flow<ArrayList<CommunityItems>> get() = fireDB.communityItems
 
-    init { viewModelScope.launch(ioDispatcher) { fireAuth.getUserCurrentSession() } }
-
-    //TODO("Implement Read Community Docs")
+    init {
+        viewModelScope.launch(ioDispatcher) {
+            launch { fireAuth.getUserCurrentSession() }.join()
+            launch { fireDB.readCommunityContent() }
+        }
+    }
 
     override fun onCleared() {
         super.onCleared()

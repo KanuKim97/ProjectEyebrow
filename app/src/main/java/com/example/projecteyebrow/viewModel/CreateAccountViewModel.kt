@@ -41,7 +41,10 @@ class CreateAccountViewModel @Inject constructor(
     private fun saveUserInformation(
         userEmail: String,
         userNickName: String
-    ): Job = viewModelScope.launch(ioDispatcher) { fireDB.saveUserProfile(userEmail, userNickName) }
+    ): Job = viewModelScope.launch(ioDispatcher) {
+        fireDB.saveUserProfile(userEmail, userNickName)
+
+    }
 
     override fun onCleared() {
         super.onCleared()

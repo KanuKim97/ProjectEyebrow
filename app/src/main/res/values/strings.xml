@@ -60,5 +60,10 @@
     <string name="NickName">닉네임</string>
     <string name="Email">이메일</string>
     <string name="logOut">로그아웃</string>
+    <string name="photoNotice">사진은 최대 3장까지 등록할 수 있습니다.</string>
+    <string name="item1">Item1</string>
+    <string name="item2">Item2</string>
+    <string name="item3">Item3</string>
+    <string name="InputContent_Hint">내용을 입력해주세요.</string>
 
 </resources>
