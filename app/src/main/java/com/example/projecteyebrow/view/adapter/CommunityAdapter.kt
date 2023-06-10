@@ -3,16 +3,16 @@ package com.example.projecteyebrow.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.entity.CommunityItem
 import com.example.projecteyebrow.databinding.CommunityItemBinding
-import com.example.projecteyebrow.view.viewItems.CommunityItems
 
 class CommunityAdapter(
-    private val communityItems: ArrayList<CommunityItems>
+    private val communityItems: ArrayList<CommunityItem>
 ): RecyclerView.Adapter<CommunityAdapter.CommunityItemViewHolder>() {
     inner class CommunityItemViewHolder(
         private val binding: CommunityItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(communityItem: CommunityItems) {
+        fun bind(communityItem: CommunityItem) {
             binding.communityTitle.text = communityItem.title
             binding.communityContent.text = communityItem.content
         }

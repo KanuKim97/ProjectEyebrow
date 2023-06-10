@@ -1,14 +1,14 @@
 package com.example.projecteyebrow.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.entity.ProfileItem
+import com.example.domain.usecase.auth.LogOutUserAccountUseCase
+import com.example.domain.usecase.fireDB.LoadUserProfileUseCase
+import com.example.domain.usecase.fireDB.StopEventListenUseCase
 import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
-import com.example.projecteyebrow.di.flow.producer.FireAuthProducer
-import com.example.projecteyebrow.di.flow.producer.FireDBProducer
-import com.example.projecteyebrow.view.viewItems.ProfileItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
@@ -19,19 +19,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val fireDB: FireDBProducer,
-    private val fireAuth: FireAuthProducer,
+    private val logOutUserAccountUseCase: LogOutUserAccountUseCase,
+    private val loadUserProfileUseCase: LoadUserProfileUseCase,
+    private val stopEventListenUseCase: StopEventListenUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _isLogOutSuccess = MutableLiveData<Boolean>()
     val isLogOutSuccess: LiveData<Boolean> get() = _isLogOutSuccess
+    val userProfile: Flow<ProfileItem> get() = loadUserProfileUseCase.userProfile
 
-    val userProfile: Flow<ProfileItem> get() = fireDB.userProfile
-
-    init { viewModelScope.launch(ioDispatcher) { fireDB.loadUserProfile() } }
+    init { viewModelScope.launch(ioDispatcher) { loadUserProfileUseCase() } }
 
     fun userAccountLogOut(): Job = viewModelScope.launch(ioDispatcher) {
-        fireAuth.logOutUserAccount().collect { result ->
+        logOutUserAccountUseCase().collect { result ->
             if (result) {
                 _isLogOutSuccess.postValue(true)
             } else {
@@ -42,7 +42,7 @@ class ProfileViewModel @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
-        fireDB.stopEventListening()
+        stopEventListenUseCase()
         viewModelScope.cancel()
     }
 }
