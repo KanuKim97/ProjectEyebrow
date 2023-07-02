@@ -1,22 +1,21 @@
 package com.example.projecteyebrow.view.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.projecteyebrow.database.tables.TemporaryContentEntity
+import com.example.domain.entity.TemporaryCommunityItem
 import com.example.projecteyebrow.databinding.TemporaryContentItemBinding
 
 class TempContentAdapter(
-    private val tempContentList: List<TemporaryContentEntity>
+    private val tempContentList: List<TemporaryCommunityItem>
 ): RecyclerView.Adapter<TempContentAdapter.TempContentViewHolder>() {
 
     inner class TempContentViewHolder(
         private val binding: TemporaryContentItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(tempContent: TemporaryContentEntity) {
-            binding.TemporaryContentTitle.text = tempContent.contentTitle
-            binding.TemporaryContentTxt.text = tempContent.TemporaryContent
+        fun bind(tempContent: TemporaryCommunityItem) {
+            binding.TemporaryContentTitle.text = tempContent.title
+            binding.TemporaryContentTxt.text = tempContent.content
         }
     }
 

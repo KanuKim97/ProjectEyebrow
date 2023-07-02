@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.projecteyebrow.database.tables.TemporaryContentEntity
+import com.example.domain.entity.TemporaryCommunityItem
+import com.example.domain.usecase.fireDB.UploadCommunityContentUseCase
+import com.example.domain.usecase.roomDB.SaveTempCommunityItemUseCase
 import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
-import com.example.projecteyebrow.di.flow.producer.FireDBProducer
-import com.example.projecteyebrow.di.flow.producer.RoomProducer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
@@ -17,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WriteContentViewModel @Inject constructor(
-    private val roomDB: RoomProducer,
-    private val fireDB: FireDBProducer,
+    private val uploadCommunityContentUseCase: UploadCommunityContentUseCase,
+    private val saveTempCommunityItemUseCase: SaveTempCommunityItemUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _isSaveSuccess = MutableLiveData<Result<Unit>>()
@@ -28,23 +28,22 @@ class WriteContentViewModel @Inject constructor(
         contentTitle: String,
         temporaryContent: String
     ): Job = viewModelScope.launch(ioDispatcher) {
-        roomDB.saveTemporaryContent(
-            TemporaryContentEntity(
+        saveTempCommunityItemUseCase(
+            TemporaryCommunityItem(
                 contentID = 0,
-                contentTitle = contentTitle,
-                TemporaryContent = temporaryContent,
-                contentTime = System.currentTimeMillis().toString()
+                title = contentTitle,
+                content = temporaryContent,
+                contentImage = null,
+                contentTimeStamp = System.currentTimeMillis().toString()
             )
-        ).collect { result ->
-            _isSaveSuccess.postValue(result)
-        }
+        ).collect { _isSaveSuccess.postValue(it) }
     }
 
     fun uploadCommunityContent(
         uploadTitle: String,
         uploadContent: String
     ): Job = viewModelScope.launch(ioDispatcher) {
-        fireDB.uploadCommunityContent(uploadTitle, uploadContent)
+        uploadCommunityContentUseCase(uploadTitle, uploadContent)
     }
 
     override fun onCleared() {
