@@ -5,6 +5,16 @@ pluginManagement {
         mavenCentral()
     }
 }
+
+plugins {
+    id 'com.android.settings' version '8.0.2'
+}
+
+android {
+    compileSdk 33
+    minSdk 26
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,6 +22,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "Project Eyebrow"
 include ':app'
 include ':data'

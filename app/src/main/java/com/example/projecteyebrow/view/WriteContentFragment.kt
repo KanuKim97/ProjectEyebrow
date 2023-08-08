@@ -40,7 +40,7 @@ class WriteContentFragment : Fragment(), View.OnClickListener {
     ) {
         writeCommunityViewModel.isSaveSuccess.observe(viewLifecycleOwner) {
             if (it.isSuccess) {
-                toastMessage.apply { setText("저장이 완료되었습니다!") }.show()
+                toastMessage.apply { setText(getString(R.string.SaveSuccess_MSG)) }.show()
                 toCommunityFragment()
             }
         }

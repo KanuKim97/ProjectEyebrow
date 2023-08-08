@@ -66,4 +66,7 @@
     <string name="item3">Item3</string>
     <string name="InputContent_Hint">내용을 입력해주세요.</string>
 
+    <!--Toast Message-->
+    <string name="SaveSuccess_MSG">저장이 완료되었습니다!</string>
+
 </resources>
