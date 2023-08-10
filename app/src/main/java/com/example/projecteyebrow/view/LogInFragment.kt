@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.compose.material3.MaterialTheme
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentLoginBinding
 import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
+import com.example.projecteyebrow.view.logIn.LogInTitleSection
 import com.example.projecteyebrow.viewModel.LogInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
@@ -43,6 +45,12 @@ class LogInFragment : Fragment(), View.OnClickListener {
         view: View,
         savedInstanceState: Bundle?
     ) {
+        binding.TitleSection.setContent {
+            MaterialTheme {
+                LogInTitleSection()
+            }
+        }
+
         logInViewModel.isLogInSuccess.observe(viewLifecycleOwner) { result ->
             lifecycleScope.launch(mainDispatcher) {
                 if (result.isSuccess) {

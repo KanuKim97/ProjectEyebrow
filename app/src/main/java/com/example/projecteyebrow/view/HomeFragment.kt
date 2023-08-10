@@ -5,18 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.projecteyebrow.databinding.FragmentHomeBinding
 import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
-import com.example.projecteyebrow.view.adapter.BrandNewAdapter
-import com.example.projecteyebrow.view.adapter.HotViewAdapter
-import com.example.projecteyebrow.view.adapter.TattooistAdapter
 import com.example.projecteyebrow.view.adapter.adapterItems.BrandNewItem
 import com.example.projecteyebrow.view.adapter.adapterItems.HotViewItem
 import com.example.projecteyebrow.view.adapter.adapterItems.TattooistItem
+import com.example.projecteyebrow.view.home.BrandNewSection
+import com.example.projecteyebrow.view.home.HotViewSection
+import com.example.projecteyebrow.view.home.TattooistSection
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
@@ -31,9 +31,6 @@ class HomeFragment : Fragment() {
     private val binding: FragmentHomeBinding get() = _binding!!
 
     private val mainBanner: ViewPager2 by lazy { binding.mainBanner }
-    private val brandNewList: RecyclerView by lazy { binding.BrandNewList }
-    private val hotViewList: RecyclerView by lazy { binding.HotViewList }
-    private val tattooistList: RecyclerView by lazy { binding.TattooistList }
 
     // Recycler View Test
     private val exampleBrandNew = ArrayList<BrandNewItem>()
@@ -63,13 +60,15 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
         initMainBanner()
-        initBrandNewList()
-        initHotViewList()
-        initTattooistList()
-
-        setBrandNewAdapter()
-        setHotViewAdapter()
-        setTattooistAdapter()
+        binding.BrandNewSection.setContent { 
+            MaterialTheme {
+                Column {
+                    BrandNewSection(brandNewItemList = exampleBrandNew)
+                    HotViewSection(hotViewItemList = exampleHotView)
+                    TattooistSection(tattooistItemList = exampleTattooistView)
+                }
+            } 
+        }
     }
 
     override fun onDestroyView() {
@@ -83,35 +82,5 @@ class HomeFragment : Fragment() {
             scrollIndicators = ViewPager2.SCROLL_INDICATOR_END
         }
     }
-
-    private fun initBrandNewList(): Job = lifecycleScope.launch(mainDispatcher) {
-        brandNewList.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-            setHasFixedSize(true)
-        }
-    }
-
-    private fun initHotViewList(): Job = lifecycleScope.launch(mainDispatcher) {
-        hotViewList.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-            setHasFixedSize(true)
-        }
-    }
-
-    private fun initTattooistList(): Job = lifecycleScope.launch(mainDispatcher) {
-        tattooistList.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-            setHasFixedSize(true)
-        }
-    }
-
-    private fun setBrandNewAdapter() { brandNewList.adapter = BrandNewAdapter(exampleBrandNew) }
-
-    private fun setHotViewAdapter() { hotViewList.adapter = HotViewAdapter(exampleHotView) }
-
-    private fun setTattooistAdapter() { tattooistList.adapter = TattooistAdapter(exampleTattooistView) }
 
 }

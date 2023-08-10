@@ -11,40 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/Title_Layout"
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/Title_Section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Welcome_Title"
-                android:textSize="30sp"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-10dp"
-                android:text="@string/Intro_Title"
-                android:textSize="35sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/LogIn_SubTitle"
-                android:textSize="13sp" />
-
-        </LinearLayout>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
             android:id="@+id/UserInput_Layout"
@@ -52,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/Title_Layout"
+            app:layout_constraintTop_toBottomOf="@id/Title_Section"
             app:layout_constraintBottom_toTopOf="@id/Button_Layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
