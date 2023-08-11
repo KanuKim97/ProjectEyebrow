@@ -29,13 +29,16 @@ import com.example.projecteyebrow.view.adapter.adapterItems.BrandNewItem
 
 @Composable
 fun BrandNewSection(brandNewItemList: ArrayList<BrandNewItem>) {
-    Surface(modifier = Modifier.padding(start = 10.dp, top = 20.dp)) {
-        Column {
-            BrandNewTitle()
-            BrandNewSubTitle()
-            BrandNewList(modifier = Modifier, itemList = brandNewItemList)
+    Surface(
+        modifier = Modifier.padding(start = 10.dp, top = 20.dp),
+        content = {
+            Column {
+                BrandNewTitle()
+                BrandNewSubTitle()
+                BrandNewList(modifier = Modifier, itemList = brandNewItemList)
+            }
         }
-    }
+    )
 }
 
 @Composable

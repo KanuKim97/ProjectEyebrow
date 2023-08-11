@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.view.logIn
+package com.example.projecteyebrow.view.signIn
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -12,20 +12,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun LogInTitleSection() {
+fun SignInTitleSection() {
     Surface(modifier = Modifier.padding(15.dp)) {
         Column {
-            LogInWelcomeTitle()
-            LogInAppTitle()
-            LogInSubTitle()
+            SignInWelcomeTitle()
+            SignInAppTitle()
+            SignInSubTitle()
         }
     }
 }
 
 @Composable
-fun LogInWelcomeTitle() {
+fun SignInWelcomeTitle() {
     Text(
-        text = "환영합니다!",
+        text = "회원가입을",
         color = Color.DarkGray,
         fontSize = 30.sp,
         fontWeight = FontWeight.Medium
@@ -33,9 +33,9 @@ fun LogInWelcomeTitle() {
 }
 
 @Composable
-fun LogInAppTitle() {
+fun SignInAppTitle() {
     Text(
-        text = "내일 입니다!",
+        text = "환영합니다!",
         color = Color.DarkGray,
         fontSize = 35.sp,
         fontWeight = FontWeight.Bold
@@ -43,9 +43,9 @@ fun LogInAppTitle() {
 }
 
 @Composable
-fun LogInSubTitle() {
+fun SignInSubTitle() {
     Text(
-        text = "로그인하여 다양한 컨텐츠들을 사용하세요!",
+        text = "회원가입으로 다양한 컨텐츠들을 사용하세요!",
         color = Color.DarkGray,
         fontSize = 13.sp,
         fontWeight = FontWeight.Light

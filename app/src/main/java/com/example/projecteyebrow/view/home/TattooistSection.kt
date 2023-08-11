@@ -26,13 +26,16 @@ import com.example.projecteyebrow.view.adapter.adapterItems.TattooistItem
 
 @Composable
 fun TattooistSection(tattooistItemList: ArrayList<TattooistItem>) {
-    Surface(modifier = Modifier.padding(start = 10.dp, top = 20.dp)) {
-        Column {
-            TattooistTitle()
-            TattooistSubTitle()
-            TattooistViewList(modifier = Modifier, itemList = tattooistItemList)
+    Surface(
+        modifier = Modifier.padding(start = 10.dp, top = 20.dp),
+        content = {
+            Column {
+                TattooistTitle()
+                TattooistSubTitle()
+                TattooistViewList(modifier = Modifier, itemList = tattooistItemList)
+            }
         }
-    }
+    )
 }
 
 @Composable

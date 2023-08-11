@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
         initMainBanner()
-        binding.BrandNewSection.setContent { 
+        binding.ListSection.setContent {
             MaterialTheme {
                 Column {
                     BrandNewSection(brandNewItemList = exampleBrandNew)

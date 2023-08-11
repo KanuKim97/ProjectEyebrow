@@ -26,13 +26,16 @@ import com.example.projecteyebrow.view.adapter.adapterItems.HotViewItem
 
 @Composable
 fun HotViewSection(hotViewItemList: ArrayList<HotViewItem>) {
-    Surface(modifier = Modifier.padding(start = 10.dp, top = 20.dp)) {
-        Column {
-            HotViewTitle()
-            HotViewSubTitle()
-            HotViewList(modifier = Modifier, itemList = hotViewItemList)
+    Surface(
+        modifier = Modifier.padding(start = 10.dp, top = 20.dp),
+        content = {
+            Column {
+                HotViewTitle()
+                HotViewSubTitle()
+                HotViewList(modifier = Modifier, itemList = hotViewItemList)
+            }
         }
-    }
+    )
 }
 
 @Composable

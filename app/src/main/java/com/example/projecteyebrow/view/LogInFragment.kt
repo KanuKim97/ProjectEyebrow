@@ -12,21 +12,21 @@ import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentLoginBinding
 import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
+import com.example.projecteyebrow.view.logIn.LogInBtnSection
 import com.example.projecteyebrow.view.logIn.LogInTitleSection
 import com.example.projecteyebrow.viewModel.LogInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LogInFragment : Fragment(), View.OnClickListener {
+class LogInFragment : Fragment() {
     @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
     @Inject lateinit var toastMessage: Toast
 
-    private lateinit var userEmail: String
-    private lateinit var userPassword: String
+    private val userEmail: String by lazy { setUserEmail() }
+    private val userPassword: String by lazy { setUserPassword() }
 
     private var _binding: FragmentLoginBinding? = null
     private val binding: FragmentLoginBinding get() = _binding!!
@@ -51,6 +51,28 @@ class LogInFragment : Fragment(), View.OnClickListener {
             }
         }
 
+        binding.BtnSection.setContent {
+            MaterialTheme {
+                LogInBtnSection(
+                    toFindPasswordBtnClick = {
+                        requireActivity().supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.FragmentContainer, FindPasswordFragment())
+                            .commit()
+                    },
+                    userLogInBtnClick = {
+                        logInViewModel.logInUserAccount(userEmail, userPassword)
+                    },
+                    toCreateAccountBtnClick = {
+                        requireActivity().supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.FragmentContainer, SignInFragment())
+                            .commit()
+                    }
+                )
+            }
+        }
+
         logInViewModel.isLogInSuccess.observe(viewLifecycleOwner) { result ->
             lifecycleScope.launch(mainDispatcher) {
                 if (result.isSuccess) {
@@ -62,10 +84,6 @@ class LogInFragment : Fragment(), View.OnClickListener {
                 }
             }
         }
-
-        binding.LogInBtn.setOnClickListener(this)
-        binding.FindPasswordBtn.setOnClickListener(this)
-        binding.CreateAccountBtn.setOnClickListener(this)
     }
 
     override fun onDestroyView() {
@@ -85,29 +103,4 @@ class LogInFragment : Fragment(), View.OnClickListener {
         .beginTransaction()
         .replace(R.id.FragmentContainer, ProfileFragment())
         .commit()
-
-    private fun toCreateAccountFragment(): Int = requireActivity().supportFragmentManager
-        .beginTransaction()
-        .replace(R.id.FragmentContainer, SignInFragment())
-        .commit()
-
-    private fun toFindPasswordFragment(): Int = requireActivity().supportFragmentManager
-        .beginTransaction()
-        .replace(R.id.FragmentContainer, FindPasswordFragment())
-        .commit()
-
-    private fun userLogIn(Email: String, Password: String): Job =
-        logInViewModel.logInUserAccount(Email, Password)
-
-    override fun onClick(view: View?) {
-        userEmail = setUserEmail()
-        userPassword = setUserPassword()
-
-        when(view?.id) {
-            R.id.LogIn_Btn -> userLogIn(userEmail, userPassword)
-            R.id.CreateAccount_Btn -> toCreateAccountFragment()
-            R.id.FindPassword_Btn -> toFindPasswordFragment()
-        }
-    }
-
 }
