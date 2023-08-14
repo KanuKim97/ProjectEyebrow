@@ -12,8 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentLoginBinding
 import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
-import com.example.projecteyebrow.view.logIn.LogInBtnSection
 import com.example.projecteyebrow.view.logIn.LogInTitleSection
+import com.example.projecteyebrow.view.logIn.UserLogInSection
 import com.example.projecteyebrow.viewModel.LogInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
@@ -24,9 +24,6 @@ import javax.inject.Inject
 class LogInFragment : Fragment() {
     @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
     @Inject lateinit var toastMessage: Toast
-
-    private val userEmail: String by lazy { setUserEmail() }
-    private val userPassword: String by lazy { setUserPassword() }
 
     private var _binding: FragmentLoginBinding? = null
     private val binding: FragmentLoginBinding get() = _binding!!
@@ -45,25 +42,17 @@ class LogInFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-        binding.TitleSection.setContent {
+        binding.TitleSection.setContent { MaterialTheme { LogInTitleSection() } }
+        binding.LogInSection.setContent {
             MaterialTheme {
-                LogInTitleSection()
-            }
-        }
-
-        binding.BtnSection.setContent {
-            MaterialTheme {
-                LogInBtnSection(
-                    toFindPasswordBtnClick = {
+                UserLogInSection(
+                    toFindPWDBtnClick = {
                         requireActivity().supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.FragmentContainer, FindPasswordFragment())
                             .commit()
                     },
-                    userLogInBtnClick = {
-                        logInViewModel.logInUserAccount(userEmail, userPassword)
-                    },
-                    toCreateAccountBtnClick = {
+                    toSignInAccountBtnClick = {
                         requireActivity().supportFragmentManager
                             .beginTransaction()
                             .replace(R.id.FragmentContainer, SignInFragment())
@@ -79,8 +68,6 @@ class LogInFragment : Fragment() {
                     toProfileFragment()
                 } else {
                     toastMessage.apply { setText("로그인에 실패하였습니다.") }.show()
-                    clearEmailInputField()
-                    clearPasswordInputField()
                 }
             }
         }
@@ -90,14 +77,6 @@ class LogInFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    private fun setUserEmail(): String = binding.EmailInput.text.toString()
-
-    private fun setUserPassword(): String = binding.PasswordInput.text.toString()
-
-    private fun clearEmailInputField(): Unit? = binding.EmailInput.text?.clear()
-
-    private fun clearPasswordInputField(): Unit? = binding.PasswordInput.text?.clear()
 
     private fun toProfileFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()

@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FindPasswordViewModel @Inject constructor(
+class FindPWDViewModel @Inject constructor(
     private val sendPasswordResetEmailUseCase: SendPasswordResetEmailUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
@@ -22,9 +22,7 @@ class FindPasswordViewModel @Inject constructor(
     val isResetEmailSend: LiveData<Result<Unit>> get() = _isResetEmailSend
 
     fun sendResetPassword(userEmail: String): Job = viewModelScope.launch(ioDispatcher) {
-        sendPasswordResetEmailUseCase(userEmail).collect { result ->
-            _isResetEmailSend.postValue(result)
-        }
+        sendPasswordResetEmailUseCase(userEmail).collect { _isResetEmailSend.postValue(it) }
     }
 
     override fun onCleared() {

@@ -6,23 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.compose.material3.MaterialTheme
 import androidx.fragment.app.viewModels
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentFindPasswordBinding
-import com.example.projecteyebrow.viewModel.FindPasswordViewModel
+import com.example.projecteyebrow.view.findPassword.FindPWDSection
+import com.example.projecteyebrow.view.findPassword.FindPWDTitleSection
+import com.example.projecteyebrow.viewModel.FindPWDViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class FindPasswordFragment : Fragment() {
     @Inject lateinit var toastMessage: Toast
-
-    private lateinit var userEmail: String
-
     private var _binding: FragmentFindPasswordBinding? = null
     private val binding: FragmentFindPasswordBinding get() = _binding!!
-    private val findPasswordViewModel: FindPasswordViewModel by viewModels()
+    private val findPasswordViewModel: FindPWDViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,19 +36,16 @@ class FindPasswordFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
+        binding.FindPasswordTitleSection.setContent { MaterialTheme { FindPWDTitleSection() } }
+        binding.FindPasswordSection.setContent { MaterialTheme { FindPWDSection() } }
+
         findPasswordViewModel.isResetEmailSend.observe(viewLifecycleOwner) { result ->
             if (result.isSuccess) {
                 toastMessage.apply { setText("이메일 발송이 완료되었습니다.") }.show()
                 toLogInFragment()
             } else {
                 toastMessage.apply { setText("이메일을 다시 확인해주세요.") }.show()
-                clearEmailInputField()
             }
-        }
-
-        binding.FindPasswordBtn.setOnClickListener {
-            userEmail = setUserEmail()
-            sendResetEmail(userEmail)
         }
     }
 
@@ -58,16 +54,8 @@ class FindPasswordFragment : Fragment() {
         _binding = null
     }
 
-    private fun setUserEmail(): String = binding.EmailInput.text.toString()
-
-    private fun clearEmailInputField(): Unit? = binding.EmailInput.text?.clear()
-
     private fun toLogInFragment() = requireActivity().supportFragmentManager
         .beginTransaction()
         .replace(R.id.FragmentContainer, LogInFragment())
         .commit()
-
-    private fun sendResetEmail(userEmail: String): Job =
-        findPasswordViewModel.sendResetPassword(userEmail)
-
 }

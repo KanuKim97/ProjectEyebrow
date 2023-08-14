@@ -19,58 +19,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/UserInput_Layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/Title_Section"
-            app:layout_constraintBottom_toTopOf="@id/Btn_Section"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="320dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/userEmail_Hint" >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/EmailInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="51dp"
-                    android:inputType="textEmailAddress" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="320dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/userPassword_Hint"
-                app:passwordToggleEnabled="true" >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/PasswordInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="51dp"
-                    android:inputType="textPassword" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
-
         <androidx.compose.ui.platform.ComposeView
-            android:id="@+id/Btn_Section"
-            android:layout_width="wrap_content"
+            android:id="@+id/LogIn_Section"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/UserInput_Layout" />
+            app:layout_constraintTop_toBottomOf="@id/Title_Section" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

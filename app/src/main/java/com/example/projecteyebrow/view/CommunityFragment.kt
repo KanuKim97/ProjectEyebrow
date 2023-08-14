@@ -6,18 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.compose.material3.MaterialTheme
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentCommunityBinding
 import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
-import com.example.projecteyebrow.view.adapter.CommunityAdapter
+import com.example.projecteyebrow.view.community.CommunityContentList
 import com.example.projecteyebrow.viewModel.CommunityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,7 +28,6 @@ class CommunityFragment : Fragment() {
     private val binding: FragmentCommunityBinding get() = _binding!!
     private val communityViewModel: CommunityViewModel by viewModels()
 
-    private val communityList: RecyclerView by lazy { binding.communityView }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,9 +42,7 @@ class CommunityFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-        initCommunityList()
-        setCommunityList()
-
+        binding.CommunityList.setContent { MaterialTheme { CommunityContentList() } }
         binding.writeBtn.setOnClickListener {
             lifecycleScope.launch(mainDispatcher) {
                 communityViewModel.userCurrentSession.collect {
@@ -72,16 +67,4 @@ class CommunityFragment : Fragment() {
         .replace(R.id.FragmentContainer, WriteContentFragment())
         .addToBackStack(null)
         .commit()
-
-    private fun initCommunityList(): RecyclerView = communityList.apply {
-        layoutManager = LinearLayoutManager(requireContext())
-        setHasFixedSize(true)
-    }
-
-    private fun setCommunityList(): Job = lifecycleScope.launch(mainDispatcher) {
-        communityViewModel.communityList.collect{
-            communityList.adapter = CommunityAdapter(it)
-        }
-    }
-
 }

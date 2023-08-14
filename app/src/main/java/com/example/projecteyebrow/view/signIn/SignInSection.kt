@@ -1,5 +1,6 @@
 package com.example.projecteyebrow.view.signIn
 
+import android.util.Patterns
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,12 +24,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.projecteyebrow.R
+import com.example.projecteyebrow.viewModel.SignUpViewModel
 
 @Composable
 fun SignInSection(
-    createAccountClicked: () -> Unit,
-    toLogInPageClicked: () -> Unit
+    toLogInPageClicked: () -> Unit,
+    signUpViewModel: SignUpViewModel = hiltViewModel()
 ) {
     var userEmail by remember { mutableStateOf("") }
     var userNickName by remember { mutableStateOf("") }
@@ -87,7 +90,18 @@ fun SignInSection(
             shape = ShapeDefaults.Medium
         )
         Spacer(modifier = Modifier.size(5.dp))
-        CreateUserAccountBtn(modifier = Modifier, toCreateAccountBtnClick = createAccountClicked)
+        CreateUserAccountBtn(
+            modifier = Modifier,
+            toCreateAccountBtnClick = {
+                /* TODO("Input Exception Handling")*/
+                when {
+                    !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches() -> { }
+                    userNickName.length >= 15 -> { }
+                    userPassword != confirmPassword -> {  }
+                    else -> signUpViewModel.createUserAccount(userEmail, userPassword, userNickName)
+                }
+            }
+        )
         Spacer(modifier = Modifier.size(5.dp))
         ToLogInPageBtn(modifier = Modifier, toLogInPageBtnClick = toLogInPageClicked)
     }

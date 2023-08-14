@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateAccountViewModel @Inject constructor(
+class SignUpViewModel @Inject constructor(
     private val createUserAccountUseCase: CreateUserAccountUseCase,
     private val saveUserProfileUseCase: SaveUserProfileUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
