@@ -25,8 +25,8 @@ class LogInViewModel @Inject constructor(
         userEmail: String,
         userPassword: String
     ): Job = viewModelScope.launch(ioDispatcher) {
-        signInUserAccountUseCase(userEmail, userPassword).collect { result ->
-            _isLogInSuccess.postValue(result)
+        signInUserAccountUseCase(userEmail, userPassword).collect {
+            _isLogInSuccess.postValue(it)
         }
     }
 

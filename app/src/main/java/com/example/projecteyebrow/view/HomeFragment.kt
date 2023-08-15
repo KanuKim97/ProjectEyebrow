@@ -11,9 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.projecteyebrow.databinding.FragmentHomeBinding
 import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
-import com.example.projecteyebrow.view.adapter.adapterItems.BrandNewItem
-import com.example.projecteyebrow.view.adapter.adapterItems.HotViewItem
-import com.example.projecteyebrow.view.adapter.adapterItems.TattooistItem
+import com.example.projecteyebrow.view.util.items.BrandNewItem
+import com.example.projecteyebrow.view.util.items.HotViewItem
+import com.example.projecteyebrow.view.util.items.TattooistItem
 import com.example.projecteyebrow.view.home.BrandNewSection
 import com.example.projecteyebrow.view.home.HotViewSection
 import com.example.projecteyebrow.view.home.TattooistSection

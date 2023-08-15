@@ -11,14 +11,14 @@ import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentSigninBinding
 import com.example.projecteyebrow.view.signIn.SignInSection
 import com.example.projecteyebrow.view.signIn.SignInTitleSection
-import com.example.projecteyebrow.viewModel.SignUpViewModel
+import com.example.projecteyebrow.viewModel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignInFragment : Fragment() {
     private var _binding: FragmentSigninBinding? = null
     private val binding: FragmentSigninBinding get() = _binding!!
-    private val createAccountViewModel: SignUpViewModel by viewModels()
+    private val createAccountViewModel: SignInViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

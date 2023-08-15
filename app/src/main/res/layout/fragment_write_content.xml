@@ -1,143 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.WriteContentFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/writeContent_Section"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp" >
-
-        <LinearLayout
-            android:id="@+id/TopBtn_View"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <Button
-                android:id="@+id/TemporaryLoad_Btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:text="@string/TemporaryLoad_Btn"
-                android:textSize="13sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                style="?android:attr/buttonBarButtonStyle"/>
-
-            <Button
-                android:id="@+id/TemporarySave_Btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:text="@string/TemporarySave_Btn"
-                android:textSize="13sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                style="?android:attr/buttonBarButtonStyle" />
-
-            <Button
-                android:id="@+id/Upload_Btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:text="@string/Upload_Btn"
-                android:textSize="13sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                style="?android:attr/buttonBarButtonStyle" />
-
-        </LinearLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/Title_Layout"
-            android:layout_width="320dp"
-            android:layout_height="60dp"
-            android:hint="@string/communityTitle"
-            app:layout_constraintTop_toBottomOf="@id/TopBtn_View"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Title_Input"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/photoNotice"
-            android:textSize="11sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Title_Layout" />
-
-        <LinearLayout
-            android:id="@+id/PhotoUploadLayout"
-            android:layout_width="320dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-                android:id="@+id/photoUploadItem1"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:scaleType="centerCrop"
-                android:background="#d9d9d9"
-                android:contentDescription="@string/item1" />
-
-            <ImageView
-                android:id="@+id/photoUploadItem2"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:scaleType="centerCrop"
-                android:background="#d9d9d9"
-                android:contentDescription="@string/item2" />
-
-            <ImageView
-                android:id="@+id/photoUploadItem3"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:background="#d9d9d9"
-                android:contentDescription="@string/item3" />
-
-        </LinearLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="320dp"
-            android:layout_height="0dp"
-            android:hint="@string/InputContent_Hint"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/PhotoUploadLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Content_Input"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projecteyebrow.databinding.FragmentTemporaryContentBinding
-import com.example.projecteyebrow.view.adapter.TempContentAdapter
+import com.example.projecteyebrow.view.util.adapter.TempContentAdapter
 import com.example.projecteyebrow.viewModel.TemporaryContentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job

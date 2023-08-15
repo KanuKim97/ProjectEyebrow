@@ -62,6 +62,7 @@ class LogInFragment : Fragment() {
             }
         }
 
+
         logInViewModel.isLogInSuccess.observe(viewLifecycleOwner) { result ->
             lifecycleScope.launch(mainDispatcher) {
                 if (result.isSuccess) {

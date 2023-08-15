@@ -26,12 +26,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.projecteyebrow.R
-import com.example.projecteyebrow.viewModel.SignUpViewModel
+import com.example.projecteyebrow.viewModel.SignInViewModel
 
 @Composable
 fun SignInSection(
     toLogInPageClicked: () -> Unit,
-    signUpViewModel: SignUpViewModel = hiltViewModel()
+    signUpViewModel: SignInViewModel = hiltViewModel()
 ) {
     var userEmail by remember { mutableStateOf("") }
     var userNickName by remember { mutableStateOf("") }

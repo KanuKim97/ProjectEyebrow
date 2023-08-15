@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.view.adapter.adapterItems
+package com.example.projecteyebrow.view.util.items
 
 data class TattooistItem(
     val tattooistName: String,

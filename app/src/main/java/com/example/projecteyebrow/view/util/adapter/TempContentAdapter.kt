@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.view.adapter
+package com.example.projecteyebrow.view.util.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

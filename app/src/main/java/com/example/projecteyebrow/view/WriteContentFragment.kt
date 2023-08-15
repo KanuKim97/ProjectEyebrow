@@ -6,20 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.compose.material3.MaterialTheme
 import androidx.fragment.app.viewModels
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentWriteContentBinding
+import com.example.projecteyebrow.view.community.WriteCommunityContentSection
 import com.example.projecteyebrow.viewModel.WriteContentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class WriteContentFragment : Fragment(), View.OnClickListener {
+class WriteContentFragment : Fragment() {
     @Inject lateinit var toastMessage: Toast
-
-    private lateinit var title: String
-    private lateinit var content: String
 
     private var _binding: FragmentWriteContentBinding? = null
     private val binding: FragmentWriteContentBinding get() = _binding!!
@@ -38,26 +36,24 @@ class WriteContentFragment : Fragment(), View.OnClickListener {
         view: View,
         savedInstanceState: Bundle?
     ) {
+        binding.writeContentSection.setContent {
+            MaterialTheme {
+                WriteCommunityContentSection(loadTempContent = { toTemporaryContentFragment() })
+            }
+        }
+
         writeCommunityViewModel.isSaveSuccess.observe(viewLifecycleOwner) {
             if (it.isSuccess) {
                 toastMessage.apply { setText(getString(R.string.SaveSuccess_MSG)) }.show()
                 toCommunityFragment()
             }
         }
-
-        binding.UploadBtn.setOnClickListener(this)
-        binding.TemporarySaveBtn.setOnClickListener(this)
-        binding.TemporaryLoadBtn.setOnClickListener(this)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-    private fun setTitle(): String = binding.TitleInput.text.toString()
-
-    private fun setContent(): String = binding.ContentInput.text.toString()
 
     private fun toCommunityFragment(): Int = requireActivity().supportFragmentManager
         .beginTransaction()
@@ -68,26 +64,5 @@ class WriteContentFragment : Fragment(), View.OnClickListener {
         .beginTransaction()
         .replace(R.id.FragmentContainer, TemporaryContentFragment())
         .commit()
-
-    private fun saveTemporaryContent(
-        title: String,
-        content: String
-    ): Job = writeCommunityViewModel.temporarySaveContent(title, content)
-
-    private fun uploadCommunityContent(
-        title: String,
-        content: String
-    ): Job = writeCommunityViewModel.uploadCommunityContent(title, content)
-
-    override fun onClick(view: View?) {
-        title = setTitle()
-        content = setContent()
-
-        when (view?.id) {
-            R.id.TemporarySave_Btn -> { saveTemporaryContent(title, content) }
-            R.id.TemporaryLoad_Btn -> { toTemporaryContentFragment() }
-            R.id.Upload_Btn -> { uploadCommunityContent(title, content) }
-        }
-    }
 
 }
