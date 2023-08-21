@@ -1,9 +1,10 @@
-package com.example.projecteyebrow.view.community
+package com.example.projecteyebrow.view.tempContent
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,61 +15,63 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.domain.entity.CommunityItem
-import com.example.projecteyebrow.viewModel.CommunityViewModel
+import com.example.domain.entity.TemporaryCommunityItem
+import com.example.projecteyebrow.viewModel.TemporaryContentViewModel
 
 @Composable
-fun CommunityContentList(communityViewModel: CommunityViewModel = hiltViewModel()) {
-    val itemList = communityViewModel.communityList.collectAsState(initial = arrayListOf()).value
+fun TempContentListSection(tempContentViewModel: TemporaryContentViewModel = hiltViewModel()) {
+    tempContentViewModel.loadAllTempContent()
+
+    val itemList = tempContentViewModel.tempContent.value
 
     LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(5.dp),
         content = {
-            items(itemList.size) { communityItem ->
-                CommunityContentItem(modifier = Modifier, communityItem = itemList[communityItem])
-                Spacer(modifier = Modifier.size(5.dp))
+            itemList?.let {
+                items(it.size) { tempItem ->
+                    TempContentListItem(modifier = Modifier, tempContent = itemList[tempItem])
+                    Spacer(modifier = Modifier.size(5.dp))
+                }
             }
         }
     )
 }
 
 @Composable
-fun CommunityContentItem(
+fun TempContentListItem(
     modifier: Modifier,
-    communityItem: CommunityItem
+    tempContent: TemporaryCommunityItem
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .height(150.dp)
             .padding(10.dp)
-            .clickable { /* TODO */ },
+            .clickable { },
         shape = ShapeDefaults.Small,
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column(
             modifier = modifier,
-            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.SpaceBetween,
             content = {
                 Text(
-                    text = communityItem.title.toString(),
-                    fontSize = 25.sp,
-                    fontWeight = FontWeight.SemiBold
+                    text = tempContent.title.toString(),
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = communityItem.content.toString(),
-                    modifier = modifier
-                        .fillMaxWidth()
-                        .height(50.dp),
-                    fontSize = 15.sp,
+                    text = tempContent.content.toString(),
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Medium
                 )
             }

@@ -22,15 +22,13 @@ class TemporaryContentViewModel @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _tempContent = MutableLiveData<List<TemporaryCommunityItem>>()
-    val tempContent: LiveData<List<TemporaryCommunityItem>> get() = _tempContent
-
     private val _isDeleteSuccess = MutableLiveData<Result<Unit>>()
+
+    val tempContent: LiveData<List<TemporaryCommunityItem>> get() = _tempContent
     val isDeleteSuccess: LiveData<Result<Unit>> get() = _isDeleteSuccess
 
     fun loadAllTempContent(): Job = viewModelScope.launch(ioDispatcher) {
-        readTempCommunityItemUseCase().collect { result ->
-            _tempContent.postValue(result)
-        }
+        readTempCommunityItemUseCase().collect { result -> _tempContent.postValue(result) }
     }
 
     fun deleteTempContent(
