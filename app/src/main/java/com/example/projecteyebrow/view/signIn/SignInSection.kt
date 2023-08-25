@@ -9,7 +9,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Visibility
+import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
@@ -17,12 +22,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.projecteyebrow.R
@@ -37,6 +47,7 @@ fun SignInSection(
     var userNickName by remember { mutableStateOf("") }
     var userPassword by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+    var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -73,6 +84,23 @@ fun SignInSection(
                 .width(320.dp)
                 .height(60.dp),
             label = { Text(text = stringResource(id = R.string.userPassword_Hint)) },
+            trailingIcon = {
+                val iconImage: ImageVector = if(passwordVisible) {
+                    Icons.Outlined.Visibility
+                } else {
+                    Icons.Outlined.VisibilityOff
+                }
+
+                IconButton(
+                    onClick = { passwordVisible = !passwordVisible },
+                    content = { Icon(imageVector = iconImage, contentDescription = "passwordToggle") }
+                )
+            },
+            visualTransformation = if (passwordVisible) {
+                VisualTransformation.None
+            } else {
+                PasswordVisualTransformation()
+            },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             singleLine = true,
             shape = ShapeDefaults.Medium
@@ -85,11 +113,12 @@ fun SignInSection(
                 .width(320.dp)
                 .height(60.dp),
             label = { Text(text = stringResource(id = R.string.userPassword_confirm_Hint)) },
+            visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             singleLine = true,
             shape = ShapeDefaults.Medium
         )
-        Spacer(modifier = Modifier.size(5.dp))
+        Spacer(modifier = Modifier.size(50.dp))
         CreateUserAccountBtn(
             modifier = Modifier,
             toCreateAccountBtnClick = {
@@ -135,4 +164,10 @@ fun ToLogInPageBtn(
         shape = ShapeDefaults.Medium,
         content = { Text(text = stringResource(id = R.string.toLogInFragment_Btn)) }
     )
+}
+
+@Preview
+@Composable
+fun PreviewSignInSection() {
+    SignInSection(toLogInPageClicked = { /*TODO*/ })
 }
