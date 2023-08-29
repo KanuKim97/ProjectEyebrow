@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentProfileBinding
-import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
+import com.example.projecteyebrow.Qualifier.MainDispatcher
 import com.example.projecteyebrow.viewModel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
@@ -21,7 +21,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ProfileFragment : Fragment(), View.OnClickListener {
     @Inject lateinit var toastMessage: Toast
-    @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
+    @Inject @MainDispatcher
+    lateinit var mainDispatcher: CoroutineDispatcher
 
     private var _binding: FragmentProfileBinding? = null
     private val binding: FragmentProfileBinding get() = _binding!!

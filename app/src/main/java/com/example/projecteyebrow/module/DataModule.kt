@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.di.module
+package com.example.projecteyebrow.module
 
 import com.example.data.repositoryImpl.FireAuthRepositoryImpl
 import com.example.data.repositoryImpl.FireDBRepositoryImpl

@@ -1,7 +1,7 @@
-package com.example.projecteyebrow.di.module
+package com.example.projecteyebrow.module
 
-import com.example.projecteyebrow.di.dispatcherQualifier.IoDispatcher
-import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
+import com.example.projecteyebrow.Qualifier.IoDispatcher
+import com.example.projecteyebrow.Qualifier.MainDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

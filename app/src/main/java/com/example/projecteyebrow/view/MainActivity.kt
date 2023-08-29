@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.ActivityMainBinding
-import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
+import com.example.projecteyebrow.Qualifier.MainDispatcher
 import com.example.projecteyebrow.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +18,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
-    @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
+    @Inject @MainDispatcher
+    lateinit var mainDispatcher: CoroutineDispatcher
 
     private val _binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mainViewModel: MainViewModel by viewModels()

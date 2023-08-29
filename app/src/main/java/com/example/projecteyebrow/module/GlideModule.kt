@@ -1,7 +1,8 @@
-package com.example.projecteyebrow.di.module
+package com.example.projecteyebrow.module
 
 import android.content.Context
-import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,11 +10,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/* Glide ImageLoader Module */
 @Module
 @InstallIn(SingletonComponent::class)
-object ToastModule {
+object GlideModule {
     @Provides
     @Singleton
-    fun providesToast(@ApplicationContext context: Context): Toast =
-        Toast.makeText(context, "", Toast.LENGTH_SHORT)
+    fun providesGlideModule(@ApplicationContext context: Context):RequestManager = Glide.with(context)
 }

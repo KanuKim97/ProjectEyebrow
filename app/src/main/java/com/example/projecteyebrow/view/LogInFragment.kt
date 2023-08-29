@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentLoginBinding
-import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
+import com.example.projecteyebrow.Qualifier.MainDispatcher
 import com.example.projecteyebrow.view.logIn.LogInTitleSection
 import com.example.projecteyebrow.view.logIn.UserLogInSection
 import com.example.projecteyebrow.viewModel.LogInViewModel
@@ -22,7 +22,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LogInFragment : Fragment() {
-    @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
+    @Inject @MainDispatcher
+    lateinit var mainDispatcher: CoroutineDispatcher
     @Inject lateinit var toastMessage: Toast
 
     private var _binding: FragmentLoginBinding? = null

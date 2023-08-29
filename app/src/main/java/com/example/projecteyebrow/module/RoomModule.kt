@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.di.module
+package com.example.projecteyebrow.module
 
 import android.content.Context
 import androidx.room.Room

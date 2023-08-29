@@ -10,7 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.projecteyebrow.databinding.FragmentHomeBinding
-import com.example.projecteyebrow.di.dispatcherQualifier.MainDispatcher
+import com.example.projecteyebrow.Qualifier.MainDispatcher
 import com.example.projecteyebrow.view.util.items.BrandNewItem
 import com.example.projecteyebrow.view.util.items.HotViewItem
 import com.example.projecteyebrow.view.util.items.TattooistItem
@@ -25,7 +25,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-    @MainDispatcher @Inject lateinit var mainDispatcher: CoroutineDispatcher
+    @MainDispatcher
+    @Inject lateinit var mainDispatcher: CoroutineDispatcher
 
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = _binding!!

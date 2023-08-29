@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.di.dispatcherQualifier
+package com.example.projecteyebrow.Qualifier
 
 import javax.inject.Qualifier
 
@@ -9,7 +9,3 @@ annotation class IoDispatcher
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
 annotation class MainDispatcher
-
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class DefaultDispatcher
