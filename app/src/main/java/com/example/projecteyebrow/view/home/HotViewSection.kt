@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.projecteyebrow.R
-import com.example.projecteyebrow.view.util.items.HotViewItem
+import com.example.projecteyebrow.view.util.HotViewItem
 
 @Composable
 fun HotViewSection(hotViewItemList: ArrayList<HotViewItem>) {

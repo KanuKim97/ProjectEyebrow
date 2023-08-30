@@ -10,8 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.fragment.app.viewModels
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentFindPasswordBinding
-import com.example.projecteyebrow.view.findPassword.FindPWDSection
-import com.example.projecteyebrow.view.findPassword.FindPWDTitleSection
+import com.example.projecteyebrow.view.findPassword.FindPWDPage
 import com.example.projecteyebrow.viewModel.FindPWDViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -36,8 +35,7 @@ class FindPasswordFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-        binding.FindPasswordTitleSection.setContent { MaterialTheme { FindPWDTitleSection() } }
-        binding.FindPasswordSection.setContent { MaterialTheme { FindPWDSection() } }
+        binding.FindPWDPage.setContent { MaterialTheme { FindPWDPage() } }
 
         findPasswordViewModel.isResetEmailSend.observe(viewLifecycleOwner) { result ->
             if (result.isSuccess) {

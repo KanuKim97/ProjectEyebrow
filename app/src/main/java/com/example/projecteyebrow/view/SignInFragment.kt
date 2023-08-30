@@ -9,8 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentSigninBinding
-import com.example.projecteyebrow.view.signIn.SignInSection
-import com.example.projecteyebrow.view.signIn.SignInTitleSection
+import com.example.projecteyebrow.view.signIn.SignInPage
 import com.example.projecteyebrow.viewModel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,9 +32,10 @@ class SignInFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-        binding.CreateAccountTitleSection.setContent { MaterialTheme { SignInTitleSection() } }
-        binding.CreateAccountSection.setContent {
-            MaterialTheme { SignInSection(toLogInPageClicked = { toLoginFragment() }) }
+        binding.SignInPage.setContent {
+            MaterialTheme {
+                SignInPage(toLogInPageClicked = { toLoginFragment() })
+            }
         }
 
         createAccountViewModel.isCreateSuccess.observe(viewLifecycleOwner) {

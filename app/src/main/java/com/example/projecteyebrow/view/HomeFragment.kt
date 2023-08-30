@@ -5,22 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
-import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
 import com.example.projecteyebrow.databinding.FragmentHomeBinding
 import com.example.projecteyebrow.Qualifier.MainDispatcher
-import com.example.projecteyebrow.view.util.items.BrandNewItem
-import com.example.projecteyebrow.view.util.items.HotViewItem
-import com.example.projecteyebrow.view.util.items.TattooistItem
-import com.example.projecteyebrow.view.home.BrandNewSection
-import com.example.projecteyebrow.view.home.HotViewSection
-import com.example.projecteyebrow.view.home.TattooistSection
+import com.example.projecteyebrow.view.util.BrandNewItem
+import com.example.projecteyebrow.view.util.HotViewItem
+import com.example.projecteyebrow.view.util.TattooistItem
+import com.example.projecteyebrow.view.home.HomePage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,8 +23,6 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = _binding!!
-
-    private val mainBanner: ViewPager2 by lazy { binding.mainBanner }
 
     // Recycler View Test
     private val exampleBrandNew = ArrayList<BrandNewItem>()
@@ -60,15 +51,15 @@ class HomeFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-        initMainBanner()
-        binding.ListSection.setContent {
+        binding.HomePage.setContent {
             MaterialTheme {
-                Column {
-                    BrandNewSection(brandNewItemList = exampleBrandNew)
-                    HotViewSection(hotViewItemList = exampleHotView)
-                    TattooistSection(tattooistItemList = exampleTattooistView)
-                }
-            } 
+                HomePage(
+                    count = 5,
+                    brandNewList = exampleBrandNew,
+                    hotViewList = exampleHotView,
+                    tattooistList =exampleTattooistView
+                )
+            }
         }
     }
 
@@ -76,12 +67,4 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    private fun initMainBanner(): Job = lifecycleScope.launch(mainDispatcher) {
-        mainBanner.apply {
-            orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            scrollIndicators = ViewPager2.SCROLL_INDICATOR_END
-        }
-    }
-
 }

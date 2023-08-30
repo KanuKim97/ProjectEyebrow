@@ -21,8 +21,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class CommunityFragment : Fragment() {
-    @Inject @MainDispatcher
-    lateinit var mainDispatcher: CoroutineDispatcher
+    @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
     @Inject lateinit var toastMessage: Toast
 
     private var _binding: FragmentCommunityBinding? = null

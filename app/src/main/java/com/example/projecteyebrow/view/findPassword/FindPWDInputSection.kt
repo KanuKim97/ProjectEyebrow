@@ -25,7 +25,7 @@ import com.example.projecteyebrow.R
 import com.example.projecteyebrow.viewModel.FindPWDViewModel
 
 @Composable
-fun FindPWDSection(
+fun FindPWDInputSection(
     findPWDViewModel: FindPWDViewModel = hiltViewModel()
 ) {
     var userEmail by remember { mutableStateOf("") }

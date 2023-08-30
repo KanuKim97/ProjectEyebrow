@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.projecteyebrow.R
-import com.example.projecteyebrow.view.util.items.TattooistItem
+import com.example.projecteyebrow.view.util.TattooistItem
 
 @Composable
 fun TattooistSection(tattooistItemList: ArrayList<TattooistItem>) {

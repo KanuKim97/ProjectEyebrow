@@ -25,15 +25,21 @@ import com.example.domain.entity.CommunityItem
 import com.example.projecteyebrow.viewModel.CommunityViewModel
 
 @Composable
-fun CommunityContentList(communityViewModel: CommunityViewModel = hiltViewModel()) {
+fun CommunityContentList(
+    modifier: Modifier = Modifier,
+    communityViewModel: CommunityViewModel = hiltViewModel()
+) {
     val itemList = communityViewModel.communityList.collectAsState(initial = arrayListOf()).value
 
     LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         content = {
             items(itemList.size) { communityItem ->
-                CommunityContentItem(modifier = Modifier, communityItem = itemList[communityItem])
-                Spacer(modifier = Modifier.size(5.dp))
+                CommunityContentItem(
+                    modifier = modifier,
+                    communityItem = itemList[communityItem]
+                )
+                Spacer(modifier = modifier.size(5.dp))
             }
         }
     )
@@ -49,7 +55,7 @@ fun CommunityContentItem(
             .fillMaxWidth()
             .height(150.dp)
             .padding(10.dp)
-            .clickable { /* TODO */ },
+            .clickable {  },
         shape = ShapeDefaults.Small,
         elevation = CardDefaults.cardElevation(8.dp)
     ) {

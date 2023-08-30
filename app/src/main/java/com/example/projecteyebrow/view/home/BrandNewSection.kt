@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.projecteyebrow.R
-import com.example.projecteyebrow.view.util.items.BrandNewItem
+import com.example.projecteyebrow.view.util.BrandNewItem
 
 
 
@@ -85,7 +85,7 @@ fun BrandNewListItem(
         modifier = modifier
             .size(150.dp)
             .aspectRatio(1f)
-            .clickable { /* TODO */ },
+            .clickable {  },
         contentAlignment = Alignment.Center,
         content = {
             Column {

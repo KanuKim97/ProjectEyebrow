@@ -12,8 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentLoginBinding
 import com.example.projecteyebrow.Qualifier.MainDispatcher
-import com.example.projecteyebrow.view.logIn.LogInTitleSection
-import com.example.projecteyebrow.view.logIn.UserLogInSection
+import com.example.projecteyebrow.view.logIn.LogInPage
 import com.example.projecteyebrow.viewModel.LogInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,8 +21,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LogInFragment : Fragment() {
-    @Inject @MainDispatcher
-    lateinit var mainDispatcher: CoroutineDispatcher
+    @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
     @Inject lateinit var toastMessage: Toast
 
     private var _binding: FragmentLoginBinding? = null
@@ -43,10 +41,9 @@ class LogInFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-        binding.TitleSection.setContent { MaterialTheme { LogInTitleSection() } }
-        binding.LogInSection.setContent {
+        binding.LogInPage.setContent {
             MaterialTheme {
-                UserLogInSection(
+                LogInPage(
                     toFindPWDBtnClick = {
                         requireActivity().supportFragmentManager
                             .beginTransaction()
@@ -62,7 +59,6 @@ class LogInFragment : Fragment() {
                 )
             }
         }
-
 
         logInViewModel.isLogInSuccess.observe(viewLifecycleOwner) { result ->
             lifecycleScope.launch(mainDispatcher) {

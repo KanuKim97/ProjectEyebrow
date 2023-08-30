@@ -1,10 +1,14 @@
 package com.example.projecteyebrow.view.logIn
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -13,13 +17,22 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun LogInTitleSection() {
-    Surface(modifier = Modifier.padding(15.dp)) {
-        Column {
-            LogInWelcomeTitle()
-            LogInAppTitle()
-            LogInSubTitle()
+    Surface(
+        modifier = Modifier.padding(15.dp),
+        content = {
+            Column(
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .wrapContentWidth(),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.Start
+            ) {
+                LogInWelcomeTitle()
+                LogInAppTitle()
+                LogInSubTitle()
+            }
         }
-    }
+    )
 }
 
 @Composable

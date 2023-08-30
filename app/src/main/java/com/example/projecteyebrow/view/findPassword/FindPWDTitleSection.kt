@@ -1,10 +1,14 @@
 package com.example.projecteyebrow.view.findPassword
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -15,17 +19,26 @@ import com.example.projecteyebrow.R
 
 @Composable
 fun FindPWDTitleSection() {
-    Surface(modifier = Modifier.padding(15.dp)) {
-        Column {
-            FindPasswordTitle()
-            FindLostPasswordTitle()
-            FindPasswordSubTitle()
+    Surface(
+        modifier = Modifier.padding(15.dp),
+        content = {
+            Column(
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .wrapContentHeight(),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.Start
+            ) {
+                FindPWDTitle()
+                FindPWDTitle2()
+                FindPWDSubTitle()
+            }
         }
-    }
+    )
 }
 
 @Composable
-fun FindPasswordTitle() {
+fun FindPWDTitle() {
     Text(
         text = stringResource(id = R.string.Password_Title),
         color = Color.DarkGray,
@@ -35,7 +48,7 @@ fun FindPasswordTitle() {
 }
 
 @Composable
-fun FindLostPasswordTitle() {
+fun FindPWDTitle2() {
     Text(
         text = stringResource(id = R.string.Forgot_Title),
         color = Color.DarkGray,
@@ -45,7 +58,7 @@ fun FindLostPasswordTitle() {
 }
 
 @Composable
-fun FindPasswordSubTitle() {
+fun FindPWDSubTitle() {
     Text(
         text = stringResource(id = R.string.FindPassword_SubTitle),
         color = Color.DarkGray,

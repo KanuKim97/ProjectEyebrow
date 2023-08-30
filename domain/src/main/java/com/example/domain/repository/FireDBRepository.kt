@@ -5,16 +5,23 @@ import com.example.domain.entity.ProfileItem
 import kotlinx.coroutines.flow.Flow
 
 interface FireDBRepository {
+    /* UserProfile Function */
     val userProfile: Flow<ProfileItem>
-    val communityItems: Flow<ArrayList<CommunityItem>>
 
     suspend fun saveUserProfile(userEmail: String, userName: String)
 
     fun loadUserProfile()
 
+    /* Community Function */
+    val communityItems: Flow<ArrayList<CommunityItem>>
+
     fun readAllCommunityContent()
 
     suspend fun uploadCommunityContent(uploadTitle: String, uploadContent: String)
 
+    /* Collection Function */
+
+
+    /* FireBase DataBase EventListener Function */
     fun stopEventListener()
 }

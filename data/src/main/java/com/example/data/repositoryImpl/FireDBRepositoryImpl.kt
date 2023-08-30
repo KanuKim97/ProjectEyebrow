@@ -22,10 +22,8 @@ class FireDBRepositoryImpl @Inject constructor(
     private val _userProfile = MutableStateFlow<ProfileItem?>(null)
     private val _communityItems = MutableStateFlow<ArrayList<CommunityItem>?>(null)
 
-    override val userProfile: Flow<ProfileItem>
-        get() = _userProfile.filterNotNull()
-    override val communityItems: Flow<ArrayList<CommunityItem>>
-        get() = _communityItems.filterNotNull()
+    override val userProfile: Flow<ProfileItem> get() = _userProfile.filterNotNull()
+    override val communityItems: Flow<ArrayList<CommunityItem>> get() = _communityItems.filterNotNull()
 
     private val _userUID: String by lazy { fireAuth.currentUser?.uid.toString() }
     private val _community: String = "community"

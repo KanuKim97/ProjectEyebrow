@@ -23,7 +23,7 @@ import com.example.projecteyebrow.R
 import com.example.projecteyebrow.viewModel.WriteContentViewModel
 
 @Composable
-fun WriteCommunityContentSection(
+fun WriteCommunityContentPage(
     loadTempContent: () -> Unit,
     writeContentViewModel: WriteContentViewModel = hiltViewModel()
 ) {

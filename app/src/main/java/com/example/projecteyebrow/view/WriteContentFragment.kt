@@ -10,7 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.fragment.app.viewModels
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentWriteContentBinding
-import com.example.projecteyebrow.view.community.WriteCommunityContentSection
+import com.example.projecteyebrow.view.community.WriteCommunityContentPage
 import com.example.projecteyebrow.viewModel.WriteContentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -38,7 +38,7 @@ class WriteContentFragment : Fragment() {
     ) {
         binding.writeContentSection.setContent {
             MaterialTheme {
-                WriteCommunityContentSection(loadTempContent = { toTemporaryContentFragment() })
+                WriteCommunityContentPage(loadTempContent = { toTemporaryContentFragment() })
             }
         }
 

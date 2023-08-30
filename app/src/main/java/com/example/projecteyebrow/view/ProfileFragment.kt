@@ -68,14 +68,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         .replace(R.id.FragmentContainer, LogInFragment())
         .commit()
 
-    private fun toUpdateProfileFragment(): Int = requireActivity().supportFragmentManager
-        .beginTransaction()
-        .replace(R.id.FragmentContainer, ModProfileFragment())
-        .commit()
-
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.mod_profile_Btn -> toUpdateProfileFragment()
+            R.id.mod_profile_Btn -> {  }
             R.id.LogOut_Btn -> userAccountLogOut()
         }
     }

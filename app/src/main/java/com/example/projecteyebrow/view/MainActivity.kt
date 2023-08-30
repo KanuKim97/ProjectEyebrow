@@ -18,8 +18,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
-    @Inject @MainDispatcher
-    lateinit var mainDispatcher: CoroutineDispatcher
+    @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
 
     private val _binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mainViewModel: MainViewModel by viewModels()
