@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.usecase.auth.CreateUserAccountUseCase
 import com.example.domain.usecase.fireDB.SaveUserProfileUseCase
-import com.example.projecteyebrow.Qualifier.IoDispatcher
+import com.example.projecteyebrow.qualifier.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job

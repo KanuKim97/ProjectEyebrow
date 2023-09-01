@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentProfileBinding
-import com.example.projecteyebrow.Qualifier.MainDispatcher
+import com.example.projecteyebrow.qualifier.MainDispatcher
 import com.example.projecteyebrow.viewModel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher

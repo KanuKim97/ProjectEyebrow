@@ -1,5 +1,6 @@
 package com.example.projecteyebrow.view.community
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -11,17 +12,24 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 
 @Composable
-fun ContentPage(
-    onClickBtn: () -> Unit
+fun CommunityContentPage(
+    onClickBtn: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        floatingActionButton = { WriteContentFabBtn(modifier = Modifier, onClickBtn = onClickBtn)},
+        floatingActionButton = {
+            WriteContentFabBtn(
+                modifier = Modifier,
+                onClickBtn = onClickBtn
+            )
+        },
         floatingActionButtonPosition = FabPosition.End
     ) { contentPadding ->
         Column(
@@ -40,13 +48,15 @@ fun WriteContentFabBtn(
         onClick = onClickBtn,
         modifier = modifier
             .wrapContentHeight()
-            .wrapContentWidth(),
-        content = { Icon(imageVector = Icons.Outlined.Add, contentDescription = "") }
+            .wrapContentWidth()
+            .clip(ShapeDefaults.ExtraLarge)
+            .background(Color.Cyan),
+        content = {
+            Icon(
+                imageVector = Icons.Outlined.Add,
+                contentDescription = "",
+                tint = Color.White
+            )
+        }
     )
-}
-
-@Composable
-@Preview(showBackground = true)
-fun PreviewContentPage() {
-    ContentPage {}
 }

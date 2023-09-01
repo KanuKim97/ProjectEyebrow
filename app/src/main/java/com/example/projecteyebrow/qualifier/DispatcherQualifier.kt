@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.Qualifier
+package com.example.projecteyebrow.qualifier
 
 import javax.inject.Qualifier
 

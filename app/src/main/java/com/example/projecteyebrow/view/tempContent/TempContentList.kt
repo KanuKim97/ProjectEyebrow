@@ -25,9 +25,9 @@ import com.example.domain.entity.TemporaryCommunityItem
 import com.example.projecteyebrow.viewModel.TemporaryContentViewModel
 
 @Composable
-fun TempContentListSection(tempContentViewModel: TemporaryContentViewModel = hiltViewModel()) {
-    tempContentViewModel.loadAllTempContent()
-
+fun TempContentListSection(
+    tempContentViewModel: TemporaryContentViewModel = hiltViewModel()
+) {
     val itemList = tempContentViewModel.tempContent.value
 
     LazyColumn(
@@ -37,7 +37,7 @@ fun TempContentListSection(tempContentViewModel: TemporaryContentViewModel = hil
         content = {
             itemList?.let {
                 items(it.size) { tempItem ->
-                    TempContentListItem(modifier = Modifier, tempContent = itemList[tempItem])
+                    TempContentListItem(tempContent = itemList[tempItem])
                     Spacer(modifier = Modifier.size(5.dp))
                 }
             }
@@ -47,7 +47,7 @@ fun TempContentListSection(tempContentViewModel: TemporaryContentViewModel = hil
 
 @Composable
 fun TempContentListItem(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     tempContent: TemporaryCommunityItem
 ) {
     Card(

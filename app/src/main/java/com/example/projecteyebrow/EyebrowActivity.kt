@@ -1,13 +1,17 @@
-package com.example.projecteyebrow.view
+package com.example.projecteyebrow
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.ActivityMainBinding
-import com.example.projecteyebrow.Qualifier.MainDispatcher
+import com.example.projecteyebrow.qualifier.MainDispatcher
+import com.example.projecteyebrow.view.CollectionFragment
+import com.example.projecteyebrow.view.CommunityFragment
+import com.example.projecteyebrow.view.HomeFragment
+import com.example.projecteyebrow.view.LogInFragment
+import com.example.projecteyebrow.view.ProfileFragment
 import com.example.projecteyebrow.viewModel.MainViewModel
 import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +21,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
+class EyebrowActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
     @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
 
     private val _binding by lazy { ActivityMainBinding.inflate(layoutInflater) }

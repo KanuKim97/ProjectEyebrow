@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.entity.TemporaryCommunityItem
 import com.example.domain.usecase.fireDB.UploadCommunityContentUseCase
 import com.example.domain.usecase.roomDB.SaveTempCommunityItemUseCase
-import com.example.projecteyebrow.Qualifier.IoDispatcher
+import com.example.projecteyebrow.qualifier.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job

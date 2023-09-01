@@ -11,11 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentCommunityBinding
-import com.example.projecteyebrow.Qualifier.MainDispatcher
-import com.example.projecteyebrow.view.community.CommunityContentList
+import com.example.projecteyebrow.qualifier.MainDispatcher
+import com.example.projecteyebrow.view.community.CommunityContentPage
 import com.example.projecteyebrow.viewModel.CommunityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -41,19 +42,11 @@ class CommunityFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-        binding.CommunityList.setContent { MaterialTheme { CommunityContentList() } }
-        binding.writeBtn.setOnClickListener {
-            lifecycleScope.launch(mainDispatcher) {
-                communityViewModel.userCurrentSession.collect {
-                    if (it) {
-                        toWriteCommunityFragment()
-                    } else {
-                        toastMessage.apply { setText("로그인을 먼저 수행해 주세요") }.show()
-                    }
-                }
+        binding.CommunityList.setContent {
+            MaterialTheme {
+                CommunityContentPage(onClickBtn = { isSessionAlive() })
             }
         }
-
     }
 
     override fun onDestroyView() {
@@ -61,9 +54,21 @@ class CommunityFragment : Fragment() {
         _binding = null
     }
 
-    private fun toWriteCommunityFragment() = requireActivity().supportFragmentManager
-        .beginTransaction()
-        .replace(R.id.FragmentContainer, WriteContentFragment())
-        .addToBackStack(null)
-        .commit()
+
+    private fun isSessionAlive(): Job = lifecycleScope.launch(mainDispatcher) {
+        communityViewModel.userCurrentSession.collect {
+            if (it) {
+                toWriteCommunityFragment()
+            } else {
+                toastMessage.apply { setText("로그인을 먼저 수행해 주세요") }.show()
+            }
+        }
+    }
+
+    private fun toWriteCommunityFragment(): Int =
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.FragmentContainer, WriteContentFragment())
+            .addToBackStack(null)
+            .commit()
 }

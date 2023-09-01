@@ -14,7 +14,6 @@ import com.example.projecteyebrow.view.util.TattooistItem
 
 @Composable
 fun HomePage(
-    count: Int,
     brandNewList: ArrayList<BrandNewItem>,
     hotViewList: ArrayList<HotViewItem>,
     tattooistList: ArrayList<TattooistItem>
@@ -23,7 +22,7 @@ fun HomePage(
         modifier = Modifier.fillMaxSize(),
         content = {
             Column {
-                MainBannerSection(count = count)
+                MainBannerSection(count = 5)
                 Spacer(modifier = Modifier.size(20.dp))
                 BrandNewSection(brandNewItemList = brandNewList)
                 HotViewSection(hotViewItemList = hotViewList)

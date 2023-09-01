@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material3.MaterialTheme
 import com.example.projecteyebrow.databinding.FragmentHomeBinding
-import com.example.projecteyebrow.Qualifier.MainDispatcher
+import com.example.projecteyebrow.qualifier.MainDispatcher
 import com.example.projecteyebrow.view.util.BrandNewItem
 import com.example.projecteyebrow.view.util.HotViewItem
 import com.example.projecteyebrow.view.util.TattooistItem
@@ -54,7 +54,6 @@ class HomeFragment : Fragment() {
         binding.HomePage.setContent {
             MaterialTheme {
                 HomePage(
-                    count = 5,
                     brandNewList = exampleBrandNew,
                     hotViewList = exampleHotView,
                     tattooistList =exampleTattooistView

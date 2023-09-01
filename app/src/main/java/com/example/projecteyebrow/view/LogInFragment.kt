@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.databinding.FragmentLoginBinding
-import com.example.projecteyebrow.Qualifier.MainDispatcher
+import com.example.projecteyebrow.qualifier.MainDispatcher
 import com.example.projecteyebrow.view.logIn.LogInPage
 import com.example.projecteyebrow.viewModel.LogInViewModel
 import dagger.hilt.android.AndroidEntryPoint
