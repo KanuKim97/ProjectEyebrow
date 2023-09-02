@@ -48,7 +48,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         profileViewModel.isLogOutSuccess.observe(viewLifecycleOwner) { result ->
             if (result == true) {
                 toastMessage.apply { setText("로그아웃 되었습니다.") }.show()
-                toLogInFragment()
+                //toLogInFragment()
             }
         }
 
@@ -62,11 +62,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     private fun userAccountLogOut(): Job = profileViewModel.userAccountLogOut()
-
-    private fun toLogInFragment(): Int = requireActivity().supportFragmentManager
-        .beginTransaction()
-        .replace(R.id.FragmentContainer, LogInFragment())
-        .commit()
 
     override fun onClick(view: View?) {
         when (view?.id) {

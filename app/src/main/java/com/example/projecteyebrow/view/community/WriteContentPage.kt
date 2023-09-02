@@ -19,12 +19,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.viewModel.WriteContentViewModel
 
 @Composable
 fun WriteCommunityContentPage(
-    loadTempContent: () -> Unit,
+    navController: NavController,
     writeContentViewModel: WriteContentViewModel = hiltViewModel()
 ) {
     var title by remember { mutableStateOf("") }
@@ -36,7 +38,7 @@ fun WriteCommunityContentPage(
             .padding(15.dp),
         topBar = {
             WriteCommunityContentTopBar(
-                loadTempContent = loadTempContent,
+                loadTempContent = {  },
                 saveTempContent = {
                     writeContentViewModel.temporarySaveContent(title, content)
                 },

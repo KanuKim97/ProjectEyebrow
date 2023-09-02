@@ -20,26 +20,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun EyeBrowMainActivity() {
+    val navController = rememberNavController()
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        bottomBar = { ActivityBottomNavigationBar() }
+        bottomBar = { ActivityBottomNavigationBar(navController = navController) }
     ) { contentPadding ->
         Surface(
             modifier = Modifier
                 .padding(contentPadding)
                 .fillMaxSize(),
             content = {
-
+                EyebrowNavHost(navHostController = navController)
             }
         )
     }
 }
 
 @Composable
-fun ActivityBottomNavigationBar(modifier: Modifier = Modifier) {
+fun ActivityBottomNavigationBar(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     BottomAppBar(
         modifier = modifier
             .fillMaxWidth()
@@ -53,7 +60,7 @@ fun ActivityBottomNavigationBar(modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(HomePage.route) },
                     content = {
                         Icon(
                             imageVector = Icons.Outlined.Home,
@@ -71,7 +78,7 @@ fun ActivityBottomNavigationBar(modifier: Modifier = Modifier) {
                     }
                 )
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(CommunityPage.route) },
                     content = {
                         Icon(
                             imageVector = Icons.Outlined.ModeComment,
@@ -80,7 +87,7 @@ fun ActivityBottomNavigationBar(modifier: Modifier = Modifier) {
                     }
                 )
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(LogInPage.route) },
                     content = {
                         Icon(
                             imageVector = Icons.Outlined.People,

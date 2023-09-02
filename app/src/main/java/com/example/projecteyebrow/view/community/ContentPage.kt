@@ -17,17 +17,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
 
 @Composable
-fun CommunityContentPage(
-    onClickBtn: () -> Unit,
-) {
+fun CommunityContentPage(navController: NavController) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
             WriteContentFabBtn(
                 modifier = Modifier,
-                onClickBtn = onClickBtn
+                onClickBtn = {  }
             )
         },
         floatingActionButtonPosition = FabPosition.End

@@ -21,11 +21,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.viewModel.FindPWDViewModel
 
 @Composable
 fun FindPWDInputSection(
+    navController: NavController,
     findPWDViewModel: FindPWDViewModel = hiltViewModel()
 ) {
     var userEmail by remember { mutableStateOf("") }

@@ -11,9 +11,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 
 @Composable
-fun FindPWDPage() {
+fun FindPWDPage(navController: NavController) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         content = {
@@ -33,7 +34,7 @@ fun FindPWDPage() {
                         .fillMaxHeight(),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
-                    content = { FindPWDInputSection() }
+                    content = { FindPWDInputSection(navController) }
                 )
             }
         }

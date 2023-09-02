@@ -11,9 +11,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
+import com.example.projecteyebrow.view.activity.LogInPage
 
 @Composable
-fun SignInPage(toLogInPageClicked: () -> Unit) {
+fun SignInPage(navController: NavController) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         content = {
@@ -33,7 +35,11 @@ fun SignInPage(toLogInPageClicked: () -> Unit) {
                         .fillMaxHeight(),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
-                    content = { SignInSection(toLogInPageClicked = toLogInPageClicked) }
+                    content = {
+                        SignInSection(
+                            toLogInPageClicked = { navController.navigate(LogInPage.route) }
+                        )
+                    }
                 )
             }
         }

@@ -1,5 +1,7 @@
 package com.example.projecteyebrow.view.logIn
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,6 +20,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -34,7 +38,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.projecteyebrow.R
+import com.example.projecteyebrow.view.util.state.LogInState
 import com.example.projecteyebrow.viewModel.LogInViewModel
+import com.google.android.material.progressindicator.CircularProgressIndicator
 
 @Composable
 fun UserLogInSection(
@@ -45,7 +51,10 @@ fun UserLogInSection(
     var userEmailInput by remember { mutableStateOf("") }
     var userPasswordInput by remember { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
-    
+
+    val localContext: Context = LocalContext.current
+    val userLogInSate by logInViewModel.logInState.collectAsState()
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -100,10 +109,30 @@ fun UserLogInSection(
                     toFindPWDBtnClick = toFindPWDBtnClick
                 )
                 Spacer(modifier = Modifier.size(5.dp))
-                LogInBtn(
-                    modifier = Modifier,
-                    toLogInBtnClick = { logInViewModel.logInUserAccount(userEmailInput, userPasswordInput) }
-                )
+                when (userLogInSate) {
+                    is LogInState.Idle -> LogInBtn(
+                        modifier = Modifier,
+                        toLogInBtnClick = {
+                            logInViewModel.logInUserAccount(userEmailInput, userPasswordInput)
+                        }
+                    )
+                    is LogInState.IsLoading -> CircularProgressIndicator(localContext)
+                    is LogInState.IsSuccess -> {  }
+                    is LogInState.IsFailed -> {
+                        Toast.makeText(
+                            localContext,
+                            "로그인에 실패했습니다.",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        LogInBtn(
+                            modifier = Modifier,
+                            toLogInBtnClick = {
+                                logInViewModel.logInUserAccount(userEmailInput, userPasswordInput)
+                            }
+                        )
+                    }
+                }
                 Spacer(modifier = Modifier.size(5.dp))
                 SignInAccountBtn(
                     modifier = Modifier,

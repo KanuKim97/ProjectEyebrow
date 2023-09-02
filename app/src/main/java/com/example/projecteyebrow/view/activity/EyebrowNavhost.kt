@@ -4,11 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.projecteyebrow.view.ProfileFragment
 import com.example.projecteyebrow.view.community.CommunityContentPage
 import com.example.projecteyebrow.view.community.WriteCommunityContentPage
+import com.example.projecteyebrow.view.findPassword.FindPWDPage
 import com.example.projecteyebrow.view.home.HomePage
 import com.example.projecteyebrow.view.logIn.LogInPage
+import com.example.projecteyebrow.view.signIn.SignInPage
 
 @Composable
 fun EyebrowNavHost(navHostController: NavHostController) {
@@ -24,17 +25,19 @@ fun EyebrowNavHost(navHostController: NavHostController) {
             )
         }
         composable(route = CommunityPage.route) {
-            CommunityContentPage (onClickBtn = { /*TODO*/ })
+            CommunityContentPage (navController = navHostController)
         }
         composable(route = WriteContentPage.route) {
-            WriteCommunityContentPage(loadTempContent = { /*TODO*/ })
+            WriteCommunityContentPage(navController = navHostController)
         }
-
         composable(route = LogInPage.route) {
-            LogInPage(
-                toFindPWDBtnClick = { /*TODO*/ },
-                toSignInAccountBtnClick = { /*TODO*/ }
-            )
+            LogInPage(navController = navHostController)
+        }
+        composable(route = SignInPage.route) {
+            SignInPage(navController = navHostController)
+        }
+        composable(route = FindPWDPage.route) {
+            FindPWDPage(navController = navHostController)
         }
     }
 }

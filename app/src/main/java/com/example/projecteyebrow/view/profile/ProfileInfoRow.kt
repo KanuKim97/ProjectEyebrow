@@ -21,7 +21,6 @@ fun ProfileInfoRow() {
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.Top
     ) {
-
         Image(painter = painterResource(id = R.drawable.ic_blank_profile), contentDescription = "")
     }
 }
