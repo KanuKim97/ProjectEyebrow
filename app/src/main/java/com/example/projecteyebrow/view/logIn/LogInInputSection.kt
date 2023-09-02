@@ -38,7 +38,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.projecteyebrow.R
-import com.example.projecteyebrow.view.util.state.LogInState
+import com.example.projecteyebrow.view.util.States
 import com.example.projecteyebrow.viewModel.LogInViewModel
 import com.google.android.material.progressindicator.CircularProgressIndicator
 
@@ -110,15 +110,15 @@ fun UserLogInSection(
                 )
                 Spacer(modifier = Modifier.size(5.dp))
                 when (userLogInSate) {
-                    is LogInState.Idle -> LogInBtn(
+                    is States.Idle -> LogInBtn(
                         modifier = Modifier,
                         toLogInBtnClick = {
                             logInViewModel.logInUserAccount(userEmailInput, userPasswordInput)
                         }
                     )
-                    is LogInState.IsLoading -> CircularProgressIndicator(localContext)
-                    is LogInState.IsSuccess -> {  }
-                    is LogInState.IsFailed -> {
+                    is States.IsLoading -> CircularProgressIndicator(localContext)
+                    is States.IsSuccess -> {  }
+                    is States.IsFailed -> {
                         Toast.makeText(
                             localContext,
                             "로그인에 실패했습니다.",
