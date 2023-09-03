@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.view.findPassword
+package com.example.projecteyebrow.view.findPWD
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

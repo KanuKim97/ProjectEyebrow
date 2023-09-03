@@ -1,4 +1,4 @@
-package com.example.domain.usecase.fireDB
+package com.example.domain.usecase.fireDB.community
 
 import com.example.domain.entity.CommunityItem
 import com.example.domain.repository.FireDBRepository

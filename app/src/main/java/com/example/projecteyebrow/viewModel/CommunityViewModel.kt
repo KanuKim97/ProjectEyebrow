@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.entity.CommunityItem
 import com.example.domain.usecase.auth.GetCurrentUserSessionUseCase
-import com.example.domain.usecase.fireDB.ReadAllCommunityContentUseCase
+import com.example.domain.usecase.fireDB.community.ReadAllCommunityContentUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher

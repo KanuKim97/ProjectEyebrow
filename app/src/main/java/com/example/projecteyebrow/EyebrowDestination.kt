@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.view.activity
+package com.example.projecteyebrow
 
 interface EyeBrowDestination { val route: String }
 

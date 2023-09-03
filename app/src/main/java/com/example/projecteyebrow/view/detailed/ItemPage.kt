@@ -1,9 +1,8 @@
-package com.example.projecteyebrow.view.detailedItem
+package com.example.projecteyebrow.view.detailed
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -14,7 +13,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun DetailedItemPage() {
     Scaffold(
-        modifier = Modifier.padding(15.dp),
+        modifier = Modifier
+            .padding(15.dp)
+            .fillMaxSize(),
         bottomBar = {
             DetailedItemBottomBar(
                 modifier = Modifier,
@@ -26,10 +27,9 @@ fun DetailedItemPage() {
         Column(
             modifier = Modifier
                 .padding(contentPadding)
-                .fillMaxWidth()
-                .fillMaxHeight(),
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Top,
-            content = { ItemDescribeSection(modifier = Modifier) }
+            content = { ItemDescSection(modifier = Modifier) }
         )
     }
 }

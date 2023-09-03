@@ -3,7 +3,7 @@ package com.example.projecteyebrow.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.usecase.auth.CreateUserAccountUseCase
-import com.example.domain.usecase.fireDB.SaveUserProfileUseCase
+import com.example.domain.usecase.fireDB.profile.SaveUserProfileUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import com.example.projecteyebrow.view.util.States
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.projecteyebrow.view.activity.FindPWDPage
-import com.example.projecteyebrow.view.activity.SignInPage
+import com.example.projecteyebrow.FindPWDPage
+import com.example.projecteyebrow.SignInPage
 
 
 @Composable

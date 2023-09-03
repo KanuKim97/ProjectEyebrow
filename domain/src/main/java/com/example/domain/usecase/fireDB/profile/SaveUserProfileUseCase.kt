@@ -1,4 +1,4 @@
-package com.example.domain.usecase.fireDB
+package com.example.domain.usecase.fireDB.profile
 
 import com.example.domain.repository.FireDBRepository
 import javax.inject.Inject

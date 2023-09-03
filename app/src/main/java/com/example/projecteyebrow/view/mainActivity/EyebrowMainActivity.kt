@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.view.activity
+package com.example.projecteyebrow.view.mainActivity
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -22,6 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.projecteyebrow.CommunityPage
+import com.example.projecteyebrow.EyebrowNavHost
+import com.example.projecteyebrow.HomePage
+import com.example.projecteyebrow.LogInPage
 
 @Composable
 fun EyeBrowMainActivity() {
@@ -98,10 +102,4 @@ fun ActivityBottomNavigationBar(
             }
         }
     )
-}
-
-@Composable
-@Preview
-fun PreviewEyebrowActivity() {
-    EyeBrowMainActivity()
 }

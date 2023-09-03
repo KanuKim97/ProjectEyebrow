@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.entity.ProfileItem
 import com.example.domain.usecase.auth.LogOutUserAccountUseCase
-import com.example.domain.usecase.fireDB.LoadUserProfileUseCase
+import com.example.domain.usecase.fireDB.profile.LoadUserProfileUseCase
 import com.example.domain.usecase.fireDB.StopEventListenUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel

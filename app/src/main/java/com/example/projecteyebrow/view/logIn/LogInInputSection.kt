@@ -109,6 +109,7 @@ fun UserLogInSection(
                     toFindPWDBtnClick = toFindPWDBtnClick
                 )
                 Spacer(modifier = Modifier.size(5.dp))
+
                 when (userLogInSate) {
                     is States.Idle -> LogInBtn(
                         modifier = Modifier,
@@ -124,13 +125,6 @@ fun UserLogInSection(
                             "로그인에 실패했습니다.",
                             Toast.LENGTH_LONG
                         ).show()
-
-                        LogInBtn(
-                            modifier = Modifier,
-                            toLogInBtnClick = {
-                                logInViewModel.logInUserAccount(userEmailInput, userPasswordInput)
-                            }
-                        )
                     }
                 }
                 Spacer(modifier = Modifier.size(5.dp))

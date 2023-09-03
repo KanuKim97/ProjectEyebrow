@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.view.detailedItem
+package com.example.projecteyebrow.view.detailed
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

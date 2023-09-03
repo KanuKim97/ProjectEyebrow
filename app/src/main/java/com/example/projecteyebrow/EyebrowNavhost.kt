@@ -1,4 +1,4 @@
-package com.example.projecteyebrow.view.activity
+package com.example.projecteyebrow
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.projecteyebrow.view.community.CommunityContentPage
 import com.example.projecteyebrow.view.community.WriteCommunityContentPage
-import com.example.projecteyebrow.view.findPassword.FindPWDPage
+import com.example.projecteyebrow.view.findPWD.FindPWDPage
 import com.example.projecteyebrow.view.home.HomePage
 import com.example.projecteyebrow.view.logIn.LogInPage
 import com.example.projecteyebrow.view.signIn.SignInPage
