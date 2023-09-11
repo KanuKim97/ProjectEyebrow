@@ -2,16 +2,22 @@ package com.example.projecteyebrow
 
 interface EyeBrowDestination { val route: String }
 
-object HomePage: EyeBrowDestination { override val route: String = "HomePage" }
+object Home: EyeBrowDestination { override val route: String = "HomePage" }
 
-object CommunityPage: EyeBrowDestination { override val route: String = "CommunityPage" }
+object Collection: EyeBrowDestination { override val route: String = "CollectionPage" }
 
-object WriteContentPage: EyeBrowDestination { override val route: String = "WriteContentPage" }
+object Community: EyeBrowDestination { override val route: String = "CommunityPage" }
 
-object TempContentListPage: EyeBrowDestination { override val route: String = "TempContentListPage" }
+object WriteContent: EyeBrowDestination { override val route: String = "WriteContentPage" }
 
-object LogInPage: EyeBrowDestination { override val route: String = "LogInPage" }
+object TempContent: EyeBrowDestination { override val route: String = "TempContentListPage" }
 
-object SignInPage: EyeBrowDestination { override val route: String = "SignInPage" }
+object DetailedItem: EyeBrowDestination { override val route: String = "DetailedItemPage" }
 
-object FindPWDPage: EyeBrowDestination { override val route: String = "FindPWDPage" }
+object TattooistDetailed: EyeBrowDestination { override val route: String = "TattooistDetailedPage" }
+
+object LogIn: EyeBrowDestination { override val route: String = "LogInPage" }
+
+object SignIn: EyeBrowDestination { override val route: String = "SignInPage" }
+
+object FindPWD: EyeBrowDestination { override val route: String = "FindPWDPage" }

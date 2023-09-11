@@ -8,7 +8,5 @@ import javax.inject.Inject
 class LoadUserProfileUseCase @Inject constructor(
     private val fireDB: FireDBRepository
 ) {
-    val userProfile: Flow<ProfileItem> = fireDB.userProfile
-
-    operator fun invoke(): Unit = fireDB.loadUserProfile()
+    operator fun invoke(): Flow<ProfileItem> = fireDB.loadUserProfile()
 }

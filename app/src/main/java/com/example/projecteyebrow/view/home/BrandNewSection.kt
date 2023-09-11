@@ -21,20 +21,28 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.projecteyebrow.DetailedItem
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.view.util.BrandNewItem
 
 
 
 @Composable
-fun BrandNewSection(brandNewItemList: ArrayList<BrandNewItem>) {
+fun BrandNewSection(
+    navController: NavController,
+    brandNewItemList: ArrayList<BrandNewItem>
+) {
     Surface(
         modifier = Modifier.padding(start = 10.dp, top = 20.dp),
         content = {
             Column {
                 BrandNewTitle()
                 BrandNewSubTitle()
-                BrandNewList(modifier = Modifier, itemList = brandNewItemList)
+                BrandNewList(
+                    modifier = Modifier,
+                    navController = navController,
+                    itemList = brandNewItemList)
             }
         }
     )
@@ -61,6 +69,7 @@ fun BrandNewSubTitle() {
 @Composable
 fun BrandNewList(
     modifier: Modifier,
+    navController: NavController,
     itemList: List<BrandNewItem>
 ) {
     LazyRow(
@@ -69,7 +78,10 @@ fun BrandNewList(
             .height(150.dp),
         content = {
             items(itemList.size) { newItem ->
-                BrandNewListItem(modifier = modifier, brandNewItem = itemList[newItem])
+                BrandNewListItem(
+                    modifier = modifier,
+                    navController = navController,
+                    brandNewItem = itemList[newItem])
                 Spacer(modifier = modifier.size(15.dp))
             }
         }
@@ -79,13 +91,14 @@ fun BrandNewList(
 @Composable
 fun BrandNewListItem(
     modifier: Modifier,
+    navController: NavController,
     brandNewItem: BrandNewItem
 ) {
     Box(
         modifier = modifier
             .size(150.dp)
             .aspectRatio(1f)
-            .clickable {  },
+            .clickable { navController.navigate(DetailedItem.route) },
         contentAlignment = Alignment.Center,
         content = {
             Column {

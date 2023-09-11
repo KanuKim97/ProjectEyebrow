@@ -21,8 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ProfileFragment : Fragment(), View.OnClickListener {
     @Inject lateinit var toastMessage: Toast
-    @Inject @MainDispatcher
-    lateinit var mainDispatcher: CoroutineDispatcher
+    @Inject @MainDispatcher lateinit var mainDispatcher: CoroutineDispatcher
 
     private var _binding: FragmentProfileBinding? = null
     private val binding: FragmentProfileBinding get() = _binding!!
@@ -48,7 +47,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         profileViewModel.isLogOutSuccess.observe(viewLifecycleOwner) { result ->
             if (result == true) {
                 toastMessage.apply { setText("로그아웃 되었습니다.") }.show()
-                //toLogInFragment()
             }
         }
 

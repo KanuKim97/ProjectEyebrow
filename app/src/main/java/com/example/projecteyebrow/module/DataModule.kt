@@ -6,6 +6,7 @@ import com.example.domain.repository.FireAuthRepository
 import com.example.domain.repository.FireDBRepository
 import com.example.projecteyebrow.BuildConfig
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides
@@ -18,8 +19,13 @@ import javax.inject.Singleton
 object DataModule {
     @Provides
     @Singleton
-    fun provideFireDBInstance(): FirebaseDatabase =
-        FirebaseDatabase.getInstance(BuildConfig.Firebase_Database_URL)
+    fun provideUserDB(): FirebaseDatabase =
+        FirebaseDatabase.getInstance(BuildConfig.Tomorrow_UserDB_URL)
+
+    @Provides
+    @Singleton
+    fun provideCommunityDBRef(): DatabaseReference =
+        FirebaseDatabase.getInstance(BuildConfig.Tomorrow_CommunityDB_URL).reference
 
     @Provides
     @Singleton
@@ -35,6 +41,7 @@ object DataModule {
     @Singleton
     fun provideFireDBRepoImpl(
         fireAuth: FirebaseAuth,
-        fireDB: FirebaseDatabase
-    ): FireDBRepository = FireDBRepositoryImpl(fireAuth, fireDB)
+        userDB: FirebaseDatabase,
+        communityRef: DatabaseReference
+    ): FireDBRepository = FireDBRepositoryImpl(fireAuth, userDB, communityRef)
 }

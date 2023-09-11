@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.projecteyebrow.FindPWDPage
-import com.example.projecteyebrow.SignInPage
+import com.example.projecteyebrow.FindPWD
+import com.example.projecteyebrow.SignIn
 
 
 @Composable
@@ -39,8 +39,8 @@ fun LogInPage(navController: NavController) {
                     verticalAlignment = Alignment.CenterVertically,
                     content = {
                         UserLogInSection(
-                            toFindPWDBtnClick = { navController.navigate(FindPWDPage.route) },
-                            toSignInAccountBtnClick = { navController.navigate(SignInPage.route) }
+                            toFindPWDBtnClick = { navController.navigate(FindPWD.route) },
+                            toSignInAccountBtnClick = { navController.navigate(SignIn.route) }
                         )
                     }
                 )

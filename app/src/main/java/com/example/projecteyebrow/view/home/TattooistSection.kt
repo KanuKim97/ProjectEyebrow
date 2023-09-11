@@ -21,18 +21,27 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.projecteyebrow.R
+import com.example.projecteyebrow.TattooistDetailed
 import com.example.projecteyebrow.view.util.TattooistItem
 
 @Composable
-fun TattooistSection(tattooistItemList: ArrayList<TattooistItem>) {
+fun TattooistSection(
+    navController: NavController,
+    tattooistItemList: ArrayList<TattooistItem>
+) {
     Surface(
         modifier = Modifier.padding(start = 10.dp, top = 20.dp),
         content = {
             Column {
                 TattooistTitle()
                 TattooistSubTitle()
-                TattooistViewList(modifier = Modifier, itemList = tattooistItemList)
+                TattooistViewList(
+                    modifier = Modifier,
+                    navController = navController,
+                    itemList = tattooistItemList
+                )
             }
         }
     )
@@ -59,6 +68,7 @@ fun TattooistSubTitle() {
 @Composable
 fun TattooistViewList(
     modifier: Modifier,
+    navController: NavController,
     itemList: List<TattooistItem>
 ) {
     LazyRow(
@@ -67,7 +77,11 @@ fun TattooistViewList(
             .height(150.dp),
         content = {
             items(itemList.size) { tattooistItem ->
-                TattooistListItem(modifier = modifier, tattooistItem = itemList[tattooistItem])
+                TattooistListItem(
+                    modifier = modifier,
+                    navController = navController,
+                    tattooistItem = itemList[tattooistItem]
+                )
                 Spacer(modifier = modifier.size(10.dp))
             }
         }
@@ -77,13 +91,14 @@ fun TattooistViewList(
 @Composable
 fun TattooistListItem(
     modifier: Modifier,
+    navController: NavController,
     tattooistItem: TattooistItem
 ) {
     Box(
         modifier = modifier
             .size(150.dp)
             .aspectRatio(1f)
-            .clickable { /*TODO*/ },
+            .clickable { navController.navigate(TattooistDetailed.route) },
         contentAlignment = Alignment.Center,
         content = {
             Column {

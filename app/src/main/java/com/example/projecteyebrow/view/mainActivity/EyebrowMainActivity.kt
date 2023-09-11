@@ -19,13 +19,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.projecteyebrow.CommunityPage
+import com.example.projecteyebrow.Collection
+import com.example.projecteyebrow.Community
 import com.example.projecteyebrow.EyebrowNavHost
-import com.example.projecteyebrow.HomePage
-import com.example.projecteyebrow.LogInPage
+import com.example.projecteyebrow.Home
+import com.example.projecteyebrow.LogIn
 
 @Composable
 fun EyeBrowMainActivity() {
@@ -39,9 +39,7 @@ fun EyeBrowMainActivity() {
             modifier = Modifier
                 .padding(contentPadding)
                 .fillMaxSize(),
-            content = {
-                EyebrowNavHost(navHostController = navController)
-            }
+            content = { EyebrowNavHost(navHostController = navController) }
         )
     }
 }
@@ -64,7 +62,7 @@ fun ActivityBottomNavigationBar(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 IconButton(
-                    onClick = { navController.navigate(HomePage.route) },
+                    onClick = { navController.navigate(Home.route) },
                     content = {
                         Icon(
                             imageVector = Icons.Outlined.Home,
@@ -73,7 +71,7 @@ fun ActivityBottomNavigationBar(
                     }
                 )
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(Collection.route) },
                     content = {
                         Icon(
                             imageVector = Icons.Outlined.Collections,
@@ -82,7 +80,7 @@ fun ActivityBottomNavigationBar(
                     }
                 )
                 IconButton(
-                    onClick = { navController.navigate(CommunityPage.route) },
+                    onClick = { navController.navigate(Community.route) },
                     content = {
                         Icon(
                             imageVector = Icons.Outlined.ModeComment,
@@ -91,7 +89,7 @@ fun ActivityBottomNavigationBar(
                     }
                 )
                 IconButton(
-                    onClick = { navController.navigate(LogInPage.route) },
+                    onClick = { navController.navigate(LogIn.route) },
                     content = {
                         Icon(
                             imageVector = Icons.Outlined.People,

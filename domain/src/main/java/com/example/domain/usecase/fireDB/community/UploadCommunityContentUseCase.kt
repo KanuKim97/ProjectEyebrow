@@ -1,13 +1,14 @@
 package com.example.domain.usecase.fireDB.community
 
 import com.example.domain.repository.FireDBRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UploadCommunityContentUseCase @Inject constructor(
     private val fireDB: FireDBRepository
 ) {
-    suspend operator fun invoke(
+    operator fun invoke(
         uploadTitle: String,
         uploadContent: String
-    ): Unit = fireDB.uploadCommunityContent(uploadTitle, uploadContent)
+    ): Flow<Result<Unit>> = fireDB.uploadCommunityContent(uploadTitle, uploadContent)
 }

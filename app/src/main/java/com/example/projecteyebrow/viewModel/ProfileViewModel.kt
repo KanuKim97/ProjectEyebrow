@@ -14,6 +14,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,9 +30,17 @@ class ProfileViewModel @Inject constructor(
 ): ViewModel() {
     private val _isLogOutSuccess = MutableLiveData<Boolean>()
     val isLogOutSuccess: LiveData<Boolean> get() = _isLogOutSuccess
-    val userProfile: Flow<ProfileItem> get() = loadUserProfileUseCase.userProfile
 
-    init { viewModelScope.launch(ioDispatcher) { loadUserProfileUseCase() } }
+    private val _userProfile = MutableStateFlow(ProfileItem("", ""))
+    val userProfile: StateFlow<ProfileItem> = _userProfile.asStateFlow()
+
+    init {
+        viewModelScope.launch(ioDispatcher) {
+            loadUserProfileUseCase().collect {
+                _userProfile.value = ProfileItem(it.userName, it.userEmail)
+            }
+        }
+    }
 
     fun userAccountLogOut(): Job = viewModelScope.launch(ioDispatcher) {
         logOutUserAccountUseCase().collect { result ->

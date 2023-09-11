@@ -8,7 +8,5 @@ import javax.inject.Inject
 class ReadAllCommunityContentUseCase @Inject constructor(
     private val fireDB: FireDBRepository
 ) {
-    val communityItem: Flow<ArrayList<CommunityItem>> = fireDB.communityItems
-
-    operator fun invoke(): Unit = fireDB.readAllCommunityContent()
+    operator fun invoke(): Flow<ArrayList<CommunityItem>> = fireDB.readAllCommunityContent()
 }

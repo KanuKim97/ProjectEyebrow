@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.projecteyebrow.LogInPage
+import com.example.projecteyebrow.LogIn
 
 @Composable
 fun SignInPage(navController: NavController) {
@@ -37,7 +37,7 @@ fun SignInPage(navController: NavController) {
                     verticalAlignment = Alignment.CenterVertically,
                     content = {
                         SignInSection(
-                            toLogInPageClicked = { navController.navigate(LogInPage.route) }
+                            toLogInPageClicked = { navController.navigate(LogIn.route) }
                         )
                     }
                 )
