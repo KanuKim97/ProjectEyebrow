@@ -1,7 +1,5 @@
 package com.example.projecteyebrow.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.entity.ProfileItem
@@ -9,15 +7,15 @@ import com.example.domain.usecase.auth.LogOutUserAccountUseCase
 import com.example.domain.usecase.fireDB.profile.LoadUserProfileUseCase
 import com.example.domain.usecase.fireDB.StopEventListenUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
+import com.example.projecteyebrow.view.util.States
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,8 +26,8 @@ class ProfileViewModel @Inject constructor(
     private val stopEventListenUseCase: StopEventListenUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
-    private val _isLogOutSuccess = MutableLiveData<Boolean>()
-    val isLogOutSuccess: LiveData<Boolean> get() = _isLogOutSuccess
+    private val _isLogOutState = MutableStateFlow<States>(States.Idle)
+    val isLogOutState: StateFlow<States> = _isLogOutState.asStateFlow()
 
     private val _userProfile = MutableStateFlow(ProfileItem("", ""))
     val userProfile: StateFlow<ProfileItem> = _userProfile.asStateFlow()
@@ -43,11 +41,15 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun userAccountLogOut(): Job = viewModelScope.launch(ioDispatcher) {
+        _isLogOutState.value = States.IsLoading
+
         logOutUserAccountUseCase().collect { result ->
             if (result) {
-                _isLogOutSuccess.postValue(true)
+                _isLogOutState.value = States.IsSuccess(Result.success(Unit))
             } else {
-                _isLogOutSuccess.postValue(false)
+                _isLogOutState.value = States.IsFailed(Result.failure(Exception()))
+                delay(2000L)
+                _isLogOutState.value = States.Idle
             }
         }
     }

@@ -21,3 +21,5 @@ object LogIn: EyeBrowDestination { override val route: String = "LogInPage" }
 object SignIn: EyeBrowDestination { override val route: String = "SignInPage" }
 
 object FindPWD: EyeBrowDestination { override val route: String = "FindPWDPage" }
+
+object Profile: EyeBrowDestination { override val route: String = "Profile" }

@@ -15,7 +15,6 @@ import androidx.navigation.NavController
 import com.example.projecteyebrow.FindPWD
 import com.example.projecteyebrow.SignIn
 
-
 @Composable
 fun LogInPage(navController: NavController) {
     Surface(
@@ -39,6 +38,7 @@ fun LogInPage(navController: NavController) {
                     verticalAlignment = Alignment.CenterVertically,
                     content = {
                         UserLogInSection(
+                            navController = navController,
                             toFindPWDBtnClick = { navController.navigate(FindPWD.route) },
                             toSignInAccountBtnClick = { navController.navigate(SignIn.route) }
                         )

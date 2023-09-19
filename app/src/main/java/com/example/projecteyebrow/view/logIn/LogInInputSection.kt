@@ -37,6 +37,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.projecteyebrow.Profile
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.view.util.States
 import com.example.projecteyebrow.viewModel.LogInViewModel
@@ -44,6 +46,7 @@ import com.google.android.material.progressindicator.CircularProgressIndicator
 
 @Composable
 fun UserLogInSection(
+    navController: NavController,
     toFindPWDBtnClick: () -> Unit,
     toSignInAccountBtnClick: () -> Unit,
     logInViewModel: LogInViewModel = hiltViewModel()
@@ -118,7 +121,7 @@ fun UserLogInSection(
                         }
                     )
                     is States.IsLoading -> CircularProgressIndicator(localContext)
-                    is States.IsSuccess -> {  }
+                    is States.IsSuccess -> navController.navigate(Profile.route)
                     is States.IsFailed -> {
                         Toast.makeText(
                             localContext,

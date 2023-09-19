@@ -12,8 +12,8 @@ import com.example.projecteyebrow.view.detailed.DetailedTattooistPage
 import com.example.projecteyebrow.view.findPWD.FindPWDPage
 import com.example.projecteyebrow.view.home.HomePage
 import com.example.projecteyebrow.view.logIn.LogInPage
+import com.example.projecteyebrow.view.profile.ProfilePage
 import com.example.projecteyebrow.view.signIn.SignInPage
-import com.example.projecteyebrow.view.tempContent.TempContentListItem
 import com.example.projecteyebrow.view.tempContent.TempContentListSection
 
 @Composable
@@ -56,6 +56,9 @@ fun EyebrowNavHost(navHostController: NavHostController) {
         }
         composable(route = FindPWD.route) {
             FindPWDPage(navController = navHostController)
+        }
+        composable(route = Profile.route) {
+            ProfilePage(navController = navHostController)
         }
     }
 }
