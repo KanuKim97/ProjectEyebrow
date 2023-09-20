@@ -2,7 +2,7 @@ package com.example.projecteyebrow.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.entity.ProfileItem
+import com.example.domain.model.ProfileItem
 import com.example.domain.usecase.auth.LogOutUserAccountUseCase
 import com.example.domain.usecase.fireDB.profile.LoadUserProfileUseCase
 import com.example.domain.usecase.fireDB.StopEventListenUseCase
@@ -34,9 +34,7 @@ class ProfileViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(ioDispatcher) {
-            loadUserProfileUseCase().collect {
-                _userProfile.value = ProfileItem(it.userName, it.userEmail)
-            }
+            loadUserProfileUseCase().collect { _userProfile.value = it }
         }
     }
 

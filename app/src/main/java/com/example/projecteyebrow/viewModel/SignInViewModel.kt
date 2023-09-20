@@ -23,7 +23,9 @@ class SignInViewModel @Inject constructor(
     private val saveUserProfileUseCase: SaveUserProfileUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
+    private val _profileState = MutableStateFlow<States>(States.Idle)
     private val _signInState = MutableStateFlow<States>(States.Idle)
+
     val signInState: StateFlow<States> = _signInState.asStateFlow()
 
     fun createUserAccount(
@@ -33,9 +35,9 @@ class SignInViewModel @Inject constructor(
     ): Job = viewModelScope.launch(ioDispatcher) {
         createUserAccountUseCase(userEmail, userPassword).collect { result ->
             _signInState.value = States.IsLoading
+            saveUserInformation(userEmail, userNickName)
 
-            if (result.isSuccess) {
-                saveUserInformation(userEmail, userNickName)
+            if (result.isSuccess && (_profileState.value == States.IsSuccess(Result.success(Unit)))) {
                 _signInState.value = States.IsSuccess(Result.success(Unit))
             } else {
                 _signInState.value = States.IsFailed(Result.failure(Exception()))
@@ -48,7 +50,19 @@ class SignInViewModel @Inject constructor(
     private fun saveUserInformation(
         userEmail: String,
         userNickName: String
-    ): Job = viewModelScope.launch(ioDispatcher) { saveUserProfileUseCase(userEmail, userNickName) }
+    ): Job = viewModelScope.launch(ioDispatcher) {
+        saveUserProfileUseCase(userEmail, userNickName).collect { result ->
+            _profileState.value = States.IsLoading
+
+            if (result.isSuccess) {
+                _profileState.value = States.IsSuccess(Result.success(Unit))
+            } else {
+                _profileState.value = States.IsFailed(Result.failure(Exception()))
+                delay(2000L)
+                _profileState.value = States.Idle
+            }
+        }
+    }
 
     override fun onCleared() {
         super.onCleared()

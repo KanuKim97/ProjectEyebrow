@@ -13,12 +13,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,6 +37,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.projecteyebrow.R
+import com.example.projecteyebrow.view.util.States
 import com.example.projecteyebrow.viewModel.SignInViewModel
 
 @Composable
@@ -47,6 +50,7 @@ fun SignInSection(
     var userPassword by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
+    val signInState by signUpViewModel.signInState.collectAsState()
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -118,18 +122,27 @@ fun SignInSection(
             shape = ShapeDefaults.Medium
         )
         Spacer(modifier = Modifier.size(50.dp))
-        CreateUserAccountBtn(
-            modifier = Modifier,
-            toCreateAccountBtnClick = {
-                /* TODO("Input Exception Handling")*/
-                when {
-                    !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches() -> { }
-                    userNickName.length >= 15 -> { }
-                    userPassword != confirmPassword -> {  }
-                    else -> signUpViewModel.createUserAccount(userEmail, userPassword, userNickName)
-                }
+        when (signInState) {
+            is States.Idle -> {
+                CreateUserAccountBtn(
+                    modifier = Modifier,
+                    toCreateAccountBtnClick = {
+                        /* TODO("Input Exception Handling")*/
+                        when {
+                            !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches() -> { }
+                            userNickName.length >= 15 -> { }
+                            userPassword != confirmPassword -> {  }
+                            else -> signUpViewModel.createUserAccount(userEmail, userPassword, userNickName)
+                        }
+                    }
+                )
             }
-        )
+            is States.IsLoading -> CircularProgressIndicator()
+            is States.IsSuccess -> {  }
+            is States.IsFailed -> {  }
+        }
+
+
         Spacer(modifier = Modifier.size(5.dp))
         ToLogInPageBtn(modifier = Modifier, toLogInPageBtnClick = toLogInPageClicked)
     }

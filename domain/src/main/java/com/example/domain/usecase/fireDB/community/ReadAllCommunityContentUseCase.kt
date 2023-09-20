@@ -1,6 +1,6 @@
 package com.example.domain.usecase.fireDB.community
 
-import com.example.domain.entity.CommunityItem
+import com.example.domain.model.CommunityItem
 import com.example.domain.repository.FireDBRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

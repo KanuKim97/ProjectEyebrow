@@ -1,7 +1,7 @@
 package com.example.domain.repository
 
-import com.example.domain.entity.CommunityItem
-import com.example.domain.entity.ProfileItem
+import com.example.domain.model.CommunityItem
+import com.example.domain.model.ProfileItem
 import kotlinx.coroutines.flow.Flow
 
 interface FireDBRepository {

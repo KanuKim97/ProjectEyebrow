@@ -1,4 +1,4 @@
-package com.example.domain.entity
+package com.example.domain.model
 
 data class ProfileItem(
     val userName: String,

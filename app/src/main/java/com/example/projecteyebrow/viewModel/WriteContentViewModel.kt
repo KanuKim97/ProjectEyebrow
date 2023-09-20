@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.entity.TemporaryCommunityItem
+import com.example.domain.model.TemporaryCommunityItem
 import com.example.domain.usecase.fireDB.community.UploadCommunityContentUseCase
 import com.example.domain.usecase.roomDB.SaveTempCommunityItemUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher

@@ -1,8 +1,10 @@
 package com.example.data.repositoryImpl
 
-import com.example.domain.entity.CommunityItem
-import com.example.domain.entity.ProfileItem
+import com.example.data.entity.UserDataEntity
+import com.example.domain.model.CommunityItem
+import com.example.domain.model.ProfileItem
 import com.example.domain.repository.FireDBRepository
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -10,8 +12,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.tasks.await
 import java.io.IOException
 import javax.inject.Inject
 
@@ -28,10 +32,10 @@ class FireDBRepositoryImpl @Inject constructor(
         userEmail: String,
         userName: String
     ): Flow<Result<Unit>> = flow {
-        val writeNameRequest = _userRef.child("userName").setValue(userEmail)
-        val writeEmailRequest = _userRef.child("userEmail").setValue(userEmail)
+        val userData = UserDataEntity(userName, userEmail)
+        val saveUserTask: Task<Void> = _userRef.setValue(userData)
 
-        if (writeEmailRequest.isSuccessful && writeNameRequest.isSuccessful) {
+        if (saveUserTask.isSuccessful) {
             emit(Result.success(Unit))
         } else {
             emit(Result.failure(Exception()))
@@ -43,26 +47,12 @@ class FireDBRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun loadUserProfile(): Flow<ProfileItem> = flow {
-        lateinit var userProfile: ProfileItem
+    override fun loadUserProfile(): Flow<ProfileItem> = callbackFlow {
+        fireDBEventListener = _userRef.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {  }
 
-        fireDBEventListener = _userRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                userProfile = ProfileItem(
-                    snapshot.child("userEmail").value.toString(),
-                    snapshot.child("userName").value.toString()
-                )
-            }
-
-            override fun onCancelled(error: DatabaseError) { throw error.toException() }
+            override fun onCancelled(error: DatabaseError) {  }
         })
-
-        emit(userProfile)
-    }.catch { exception ->
-        when (exception) {
-            is IOException -> throw IOException()
-            else -> throw Exception()
-        }
     }
 
     override fun readAllCommunityContent(): Flow<ArrayList<CommunityItem>> = flow<ArrayList<CommunityItem>> {

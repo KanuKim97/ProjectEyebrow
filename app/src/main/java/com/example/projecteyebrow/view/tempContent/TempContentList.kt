@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.domain.entity.TemporaryCommunityItem
+import com.example.domain.model.TemporaryCommunityItem
 import com.example.projecteyebrow.viewModel.TemporaryContentViewModel
 
 @Composable

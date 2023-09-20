@@ -1,7 +1,7 @@
 package com.example.data.util
 
 import com.example.data.localDataBase.table.TemporaryItemTable
-import com.example.domain.entity.TemporaryCommunityItem
+import com.example.domain.model.TemporaryCommunityItem
 
 fun mappingToTempCommunityTable(content: TemporaryCommunityItem): TemporaryItemTable =
     TemporaryItemTable(

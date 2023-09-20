@@ -19,9 +19,7 @@ class MainViewModel @Inject constructor(
     val userCurrentSession: Flow<Boolean> get() = getCurrentUserSessionUseCase.currentSession
 
     init {
-        viewModelScope.launch(ioDispatcher) {
-            getCurrentUserSessionUseCase()
-        }
+        viewModelScope.launch(ioDispatcher) { getCurrentUserSessionUseCase() }
     }
 
     override fun onCleared() {
