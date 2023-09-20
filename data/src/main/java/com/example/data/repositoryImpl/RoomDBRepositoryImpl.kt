@@ -3,7 +3,7 @@ package com.example.data.repositoryImpl
 import com.example.data.localDataBase.dao.TempContentDao
 import com.example.data.util.mappingToListTempCommunityItem
 import com.example.data.util.mappingToTempCommunityTable
-import com.example.domain.entity.TemporaryCommunityItem
+import com.example.domain.model.TemporaryCommunityItem
 import com.example.domain.repository.RoomDBRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

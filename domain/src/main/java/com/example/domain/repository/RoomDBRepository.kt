@@ -1,6 +1,6 @@
 package com.example.domain.repository
 
-import com.example.domain.entity.TemporaryCommunityItem
+import com.example.domain.model.TemporaryCommunityItem
 import kotlinx.coroutines.flow.Flow
 
 interface RoomDBRepository {

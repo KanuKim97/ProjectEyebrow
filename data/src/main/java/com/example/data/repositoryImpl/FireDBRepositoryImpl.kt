@@ -1,8 +1,10 @@
 package com.example.data.repositoryImpl
 
-import com.example.domain.entity.CommunityItem
-import com.example.domain.entity.ProfileItem
+import com.example.data.entity.UserDataEntity
+import com.example.domain.model.CommunityItem
+import com.example.domain.model.ProfileItem
 import com.example.domain.repository.FireDBRepository
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -10,81 +12,90 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
+import java.io.IOException
 import javax.inject.Inject
 
 class FireDBRepositoryImpl @Inject constructor(
     private val fireAuth: FirebaseAuth,
-    private val fireDB: FirebaseDatabase
+    private val userDB: FirebaseDatabase,
+    private val communityDBRef: DatabaseReference
 ): FireDBRepository {
-    private val _userProfile = MutableStateFlow<ProfileItem?>(null)
-    private val _communityItems = MutableStateFlow<ArrayList<CommunityItem>?>(null)
-
-    override val userProfile: Flow<ProfileItem>
-        get() = _userProfile.filterNotNull()
-    override val communityItems: Flow<ArrayList<CommunityItem>>
-        get() = _communityItems.filterNotNull()
-
     private val _userUID: String by lazy { fireAuth.currentUser?.uid.toString() }
-    private val _community: String = "community"
-    private val _profileRef: DatabaseReference by lazy { fireDB.reference.child(_userUID) }
-    private val _communityRef: DatabaseReference by lazy { fireDB.reference.child(_community) }
-    private var communityArrayList = ArrayList<CommunityItem>()
-    private var eventListener: ValueEventListener? = null
+    private val _userRef: DatabaseReference by lazy { userDB.reference.child(_userUID) }
+    private var fireDBEventListener: ValueEventListener? = null
 
-    override suspend fun saveUserProfile(
+    override fun saveUserProfile(
         userEmail: String,
         userName: String
-    ) {
-       _profileRef.child("userEmail").setValue(userEmail).await()
-       _profileRef.child("userName").setValue(userName).await()
+    ): Flow<Result<Unit>> = flow {
+        val userData = UserDataEntity(userName, userEmail)
+        val saveUserTask: Task<Void> = _userRef.setValue(userData)
+
+        if (saveUserTask.isSuccessful) {
+            emit(Result.success(Unit))
+        } else {
+            emit(Result.failure(Exception()))
+        }
+    }.catch { exception ->
+        when (exception) {
+            is IOException -> emit(Result.failure(IOException()))
+            else -> emit(Result.failure(Exception()))
+        }
     }
 
-    override fun loadUserProfile() {
-        eventListener = _profileRef.addValueEventListener(object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                _userProfile.value = ProfileItem(
-                    userEmail = snapshot.child("userEmail").value.toString(),
-                    userName = snapshot.child("userName").value.toString()
-                )
-            }
+    override fun loadUserProfile(): Flow<ProfileItem> = callbackFlow {
+        fireDBEventListener = _userRef.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {  }
 
-            override fun onCancelled(error: DatabaseError) { _userProfile.value = null }
+            override fun onCancelled(error: DatabaseError) {  }
         })
     }
 
-    override fun readAllCommunityContent() {
-        eventListener = _communityRef.addValueEventListener(object: ValueEventListener {
+    override fun readAllCommunityContent(): Flow<ArrayList<CommunityItem>> = flow<ArrayList<CommunityItem>> {
+        lateinit var communityList: ArrayList<CommunityItem>
+
+        fireDBEventListener = communityDBRef.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
-                    communityArrayList.add(it.getValue(CommunityItem::class.java) as CommunityItem)
+                    communityList.add(it.getValue(CommunityItem::class.java) as CommunityItem)
                 }
-                _communityItems.value = communityArrayList
             }
 
-            override fun onCancelled(error: DatabaseError) { _communityItems.value = null }
+            override fun onCancelled(error: DatabaseError) { throw error.toException() }
         })
+    }.catch { exception ->
+        when (exception) {
+            is IOException -> throw IOException()
+            else -> throw Exception()
+        }
     }
 
-    override suspend fun uploadCommunityContent(
+    override fun uploadCommunityContent(
         uploadTitle: String,
         uploadContent: String
-    ) {
-        _communityRef.push().setValue(
-            CommunityItem(
-                title = uploadTitle,
-                content = uploadContent,
-                userUID = _userUID
-            )
-        ).await()
+    ): Flow<Result<Unit>> = flow {
+        val request = communityDBRef.push().setValue(CommunityItem(uploadTitle, uploadContent, _userUID))
+
+        if (request.isSuccessful) {
+            emit(Result.success(Unit))
+        } else {
+            emit(Result.failure(Exception()))
+        }
+    }.catch { exception ->
+        when (exception) {
+            is IOException -> emit(Result.failure(IOException()))
+            else -> throw exception
+        }
     }
 
     override fun stopEventListener() {
-        eventListener?.apply {
-            _profileRef.removeEventListener(this)
-            _communityRef.removeEventListener(this)
+        fireDBEventListener?.apply {
+            _userRef.removeEventListener(this)
+            communityDBRef.removeEventListener(this)
         }
     }
 }
