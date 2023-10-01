@@ -16,20 +16,21 @@ fun DetailedItemPage() {
         modifier = Modifier
             .padding(15.dp)
             .fillMaxSize(),
-        bottomBar = {
-            DetailedItemBottomBar(
-                modifier = Modifier,
-                addBookMarkBtn = { /* TODO */ },
-                contactTattooistBtn = { /* TODO */ }
-            )
-        }
     ) { contentPadding ->
         Column(
             modifier = Modifier
                 .padding(contentPadding)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Top,
-            content = { ItemDescSection(modifier = Modifier) }
+            content = {
+                ItemDescSection(
+                    modifier = Modifier,
+                    onNavigateTattooistBtnClick = {  },
+                    onTalkBtnClick = {  },
+                    addCollectionBtnClick = {  },
+                    shareBtnClick = {  }
+                )
+            }
         )
     }
 }

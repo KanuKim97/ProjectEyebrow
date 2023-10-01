@@ -15,14 +15,7 @@ fun DetailedTattooistPage() {
     Scaffold(
         modifier = Modifier
             .padding(15.dp)
-            .fillMaxSize(),
-        bottomBar = {
-            DetailedItemBottomBar(
-                modifier = Modifier,
-                addBookMarkBtn = {  },
-                contactTattooistBtn = {  }
-            )
-        }
+            .fillMaxSize()
     ) { contentPadding ->
         Column(
             modifier = Modifier

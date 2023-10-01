@@ -14,7 +14,6 @@ class EyebrowActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController: NavHostController = rememberNavController()
-
             EyeBrowMainActivity(navController = navController)
         }
     }
