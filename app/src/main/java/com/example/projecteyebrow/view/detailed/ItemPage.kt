@@ -9,9 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.projecteyebrow.TattooistDetailed
 
 @Composable
-fun DetailedItemPage() {
+fun DetailedItemPage(navController: NavController) {
     Scaffold(
         modifier = Modifier
             .padding(15.dp)
@@ -25,7 +28,7 @@ fun DetailedItemPage() {
             content = {
                 ItemDescSection(
                     modifier = Modifier,
-                    onNavigateTattooistBtnClick = {  },
+                    onNavigateTattooistBtnClick = { navController.navigate(TattooistDetailed.route) },
                     onTalkBtnClick = {  },
                     addCollectionBtnClick = {  },
                     shareBtnClick = {  }
@@ -38,5 +41,5 @@ fun DetailedItemPage() {
 @Preview
 @Composable
 fun PreviewDetailedItem() {
-    DetailedItemPage()
+    DetailedItemPage(navController = rememberNavController())
 }

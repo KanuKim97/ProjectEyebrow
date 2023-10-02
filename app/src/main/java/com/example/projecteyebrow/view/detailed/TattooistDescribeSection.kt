@@ -15,7 +15,13 @@ import androidx.compose.ui.unit.dp
 import com.example.projecteyebrow.ui.theme.Shape
 
 @Composable
-fun TattooistDescSection(modifier: Modifier) {
+fun TattooistDescSection(
+    modifier: Modifier,
+    onNavigateTattooistBtnClick: () -> Unit,
+    onTalkBtnClick: () -> Unit,
+    addCollectionBtnClick: () -> Unit,
+    shareBtnClick: () -> Unit
+) {
     Column(
         modifier = modifier.padding(10.dp),
         content = {
@@ -29,10 +35,10 @@ fun TattooistDescSection(modifier: Modifier) {
             TattooistNameDescRow(
                 modifier = modifier,
                 tattooistName = "타투이스트 홍길동",
-                onNavigateTattooistInfoBtnClick = { /*TODO*/ },
-                onTalkBtnClick = { /*TODO*/ },
-                addCollectionBtnClick = { /*TODO*/ },
-                shareBtnClick = { /*TODO*/ }
+                onNavigateTattooistInfoBtnClick = onNavigateTattooistBtnClick,
+                onTalkBtnClick = onTalkBtnClick,
+                addCollectionBtnClick = addCollectionBtnClick,
+                shareBtnClick = shareBtnClick
             )
             Spacer(modifier = modifier.size(10.dp))
             HorizontalDivider()
@@ -45,5 +51,11 @@ fun TattooistDescSection(modifier: Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewDescSection() {
-    TattooistDescSection(modifier = Modifier)
+    TattooistDescSection(
+        modifier = Modifier,
+        onNavigateTattooistBtnClick = {  },
+        onTalkBtnClick = {  },
+        addCollectionBtnClick = {  },
+        shareBtnClick = {  }
+    )
 }

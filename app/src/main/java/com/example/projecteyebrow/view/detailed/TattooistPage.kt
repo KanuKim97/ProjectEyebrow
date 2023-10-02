@@ -23,7 +23,13 @@ fun DetailedTattooistPage() {
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Top,
             content = {
-                TattooistDescSection(modifier = Modifier)
+                TattooistDescSection(
+                    modifier = Modifier,
+                    onNavigateTattooistBtnClick = {  },
+                    onTalkBtnClick = {  },
+                    addCollectionBtnClick = {  },
+                    shareBtnClick = {  }
+                )
             }
         )
     }

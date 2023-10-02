@@ -43,7 +43,7 @@ fun EyebrowNavHost(navHostController: NavHostController) {
             TempContentListSection()
         }
         composable(route = DetailedItem.route) {
-            DetailedItemPage()
+            DetailedItemPage(navController = navHostController)
         }
         composable(route = TattooistDetailed.route) {
             DetailedTattooistPage()
