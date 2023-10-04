@@ -35,7 +35,7 @@ jobs:
       run: |
         cd ./app
         touch ./google-service.json
-        echo "${{ secrets.GOOGLE_SERVICE_JSON }}" > ./google-service.json
+        echo "${{ secrets.GOOGLE_SERVICE_JSON }}" > ./google-services.json
       shell: bash
 
     - name: Grant execute permission for gradlew
