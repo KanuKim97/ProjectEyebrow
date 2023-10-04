@@ -32,7 +32,6 @@ android {
     }
     buildFeatures { compose true }
     composeOptions { kotlinCompilerExtensionVersion = "$compose_version" }
-    buildToolsVersion '34.0.0'
 }
 
 dependencies {
@@ -75,13 +74,13 @@ dependencies {
     implementation 'com.google.dagger:hilt-android:2.48'
     ksp 'com.google.dagger:hilt-android-compiler:2.48'
 
-    /* -- Glide Image Loader -- */
-    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    /* -- Landscapist Glide ImageLoader (SkyDoves) -- */
+    implementation 'com.github.skydoves:landscapist-glide:2.2.10'
 
     /*-- Jetpack Compose --*/
-    def composeBom = platform('androidx.compose:compose-bom:2023.08.00')
-    implementation('androidx.compose:compose-bom:2023.09.02')
-    androidTestImplementation('androidx.compose:compose-bom:2023.09.02')
+    def composeBom = platform('androidx.compose:compose-bom:2023.09.02')
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
 
     implementation 'androidx.navigation:navigation-compose:2.7.3'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'

@@ -1,13 +1,13 @@
 package com.example.data.util
 
-import com.example.data.localDataBase.table.TemporaryItemTable
+import com.example.data.localDataBase.table.TempContentTable
 import com.example.domain.model.TemporaryCommunityItem
 
-fun mappingToTempCommunityTable(content: TemporaryCommunityItem): TemporaryItemTable =
-    TemporaryItemTable(
-        contentID = content.contentID,
-        contentTitle = content.title,
-        TemporaryContent = content.content,
-        TemporaryContentImage = content.contentImage,
-        contentTime = content.contentTimeStamp
+fun mappingToTempCommunityTable(content: TemporaryCommunityItem): TempContentTable =
+    TempContentTable(
+        itemID = content.tempID,
+        title = content.tempTitle,
+        content = content.tempContent,
+        imageUriList = content.tempImageUriList,
+        timeStamp = content.timeStamp
     )

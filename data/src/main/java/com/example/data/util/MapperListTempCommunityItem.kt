@@ -1,16 +1,16 @@
 package com.example.data.util
 
-import com.example.data.localDataBase.table.TemporaryItemTable
+import com.example.data.localDataBase.table.TempContentTable
 import com.example.domain.model.TemporaryCommunityItem
 
 fun mappingToListTempCommunityItem(
-    tempTableList: List<TemporaryItemTable>
+    tempTableList: List<TempContentTable>
 ): List<TemporaryCommunityItem> = tempTableList.map {
     TemporaryCommunityItem(
-        it.contentID,
-        it.contentTitle,
-        it.TemporaryContent,
-        it.TemporaryContentImage,
-        it.contentTime
+        it.itemID,
+        it.title,
+        it.content,
+        it.imageUriList,
+        it.timeStamp
     )
 }

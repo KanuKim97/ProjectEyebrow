@@ -65,12 +65,12 @@ fun TempContentListItem(
             verticalArrangement = Arrangement.SpaceBetween,
             content = {
                 Text(
-                    text = tempContent.title.toString(),
+                    text = tempContent.tempTitle.toString(),
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = tempContent.content.toString(),
+                    text = tempContent.tempContent.toString(),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Medium
                 )

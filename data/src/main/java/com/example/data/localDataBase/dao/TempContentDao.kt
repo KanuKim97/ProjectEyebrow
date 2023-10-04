@@ -5,19 +5,19 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.data.localDataBase.table.TemporaryItemTable
+import com.example.data.localDataBase.table.TempContentTable
 
 @Dao
 interface TempContentDao {
-    @Query("SELECT * FROM TempItem_Table ORDER BY TimeStamp ASC")
-    fun readAllTemporaryContent(): List<TemporaryItemTable>
+    @Query("SELECT * FROM TempContent_Table ORDER BY TimeStamp ASC")
+    fun readAllTemporaryContent(): List<TempContentTable>
 
     @Insert
-    suspend fun saveTemporaryContent(content: TemporaryItemTable)
+    suspend fun saveTemporaryContent(content: TempContentTable)
 
     @Update
-    suspend fun updateTemporaryContent(content: TemporaryItemTable)
+    suspend fun updateTemporaryContent(content: TempContentTable)
 
     @Delete
-    suspend fun deleteTemporaryContent(content: TemporaryItemTable)
+    suspend fun deleteTemporaryContent(content: TempContentTable)
 }

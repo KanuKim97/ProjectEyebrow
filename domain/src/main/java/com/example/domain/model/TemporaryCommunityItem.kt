@@ -1,11 +1,11 @@
 package com.example.domain.model
 
-import android.graphics.Bitmap
+import android.net.Uri
 
 data class TemporaryCommunityItem(
-    var contentID: Int,
-    var title: String? = null,
-    var content: String? = null,
-    var contentImage: Bitmap? = null,
-    var contentTimeStamp: String
+    var tempID: Int,
+    var tempTitle: String? = null,
+    var tempContent: String? = null,
+    val tempImageUriList: List<Uri> = emptyList(),
+    var timeStamp: String
 )
