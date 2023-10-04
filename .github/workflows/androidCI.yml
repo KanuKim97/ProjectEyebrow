@@ -31,7 +31,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    - name: Make google-service.json
+    - name: Make google-services.json
       run: |
         cd ./app
         touch ./google-services.json
