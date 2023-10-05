@@ -4,9 +4,9 @@ import com.example.domain.repository.FireAuthRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class SendPasswordResetEmailUseCase @Inject constructor(
-    private val fireAuth: FireAuthRepository
+class SendPWDResetEmailUseCase @Inject constructor(
+    private val authRepo: FireAuthRepository
 ) {
     operator fun invoke(userEmail: String): Flow<Result<Unit>> =
-        fireAuth.sendPasswordResetEmail(userEmail)
+        authRepo.sendPWDResetEmail(userEmail)
 }

@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UpdateTempContentUseCase @Inject constructor(
-    private val roomDB: RoomDBRepository
+    private val roomDBRepo: RoomDBRepository
 ) {
     operator fun invoke(
         content: TempContentModel
-    ): Flow<Result<Unit>> = roomDB.updateTempContent(content)
+    ): Flow<Result<Unit>> = roomDBRepo.updateTempContent(content)
 }

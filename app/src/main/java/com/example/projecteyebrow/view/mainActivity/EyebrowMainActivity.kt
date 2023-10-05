@@ -17,36 +17,23 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.projecteyebrow.Collection
 import com.example.projecteyebrow.Community
 import com.example.projecteyebrow.EyebrowNavHost
 import com.example.projecteyebrow.Home
-import com.example.projecteyebrow.LogIn
 import com.example.projecteyebrow.Profile
-import com.example.projecteyebrow.viewModel.MainViewModel
 
 @Composable
 fun EyeBrowMainActivity(
     navController: NavHostController,
-    mainViewModel: MainViewModel = hiltViewModel()
 ) {
-    val userCurrentSession by mainViewModel.userCurrentSession.collectAsState(initial = false)
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        bottomBar = {
-            ActivityBottomNavigationBar(
-                navController = navController,
-                userCurrentSession = userCurrentSession
-            )
-        }
+        bottomBar = { ActivityBottomNavigationBar(navController = navController) }
     ) { contentPadding ->
         Surface(
             modifier = Modifier
@@ -61,7 +48,6 @@ fun EyeBrowMainActivity(
 fun ActivityBottomNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavController,
-    userCurrentSession: Boolean
 ) {
     BottomAppBar(
         modifier = modifier
@@ -103,13 +89,7 @@ fun ActivityBottomNavigationBar(
                     }
                 )
                 IconButton(
-                    onClick = {
-                        if (userCurrentSession) {
-                            navController.navigate(Profile.route)
-                        } else {
-                            navController.navigate(LogIn.route)
-                        }
-                    },
+                    onClick = { navController.navigate(Profile.route) },
                     content = {
                         Icon(
                             imageVector = Icons.Outlined.People,

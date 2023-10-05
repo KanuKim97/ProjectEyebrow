@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LoadUserProfileUseCase @Inject constructor(
-    private val fireDB: FireDBRepository
+    private val fireDBRepo: FireDBRepository
 ) {
-    operator fun invoke(): Flow<UserProfileModel> = fireDB.loadUserProfile()
+    operator fun invoke(): Flow<UserProfileModel> = fireDBRepo.loadUserProfile()
 }

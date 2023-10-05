@@ -2,7 +2,7 @@ package com.example.projecteyebrow.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.usecase.auth.CreateUserAccountUseCase
+import com.example.domain.usecase.auth.CreateAccountUseCase
 import com.example.domain.usecase.fireDB.profile.SaveUserProfileUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import com.example.projecteyebrow.view.util.States
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val createUserAccountUseCase: CreateUserAccountUseCase,
+    private val createUserAccountUseCase: CreateAccountUseCase,
     private val saveUserProfileUseCase: SaveUserProfileUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {

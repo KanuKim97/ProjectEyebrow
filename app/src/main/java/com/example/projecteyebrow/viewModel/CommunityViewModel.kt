@@ -3,7 +3,7 @@ package com.example.projecteyebrow.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.ContentModel
-import com.example.domain.usecase.auth.GetCurrentUserSessionUseCase
+import com.example.domain.usecase.auth.GetUserAuthStateUseCase
 import com.example.domain.usecase.fireDB.community.ReadAllContentUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CommunityViewModel @Inject constructor(
-    private val getCurrentUserSessionUseCase: GetCurrentUserSessionUseCase,
+    private val getCurrentUserSessionUseCase: GetUserAuthStateUseCase,
     private val readAllCommunityContentUseCase: ReadAllContentUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {

@@ -3,17 +3,15 @@ package com.example.domain.repository
 import kotlinx.coroutines.flow.Flow
 
 interface FireAuthRepository {
-    val currentSession: Flow<Boolean>
+    fun getUserAuthState(): Flow<Boolean>
 
-    fun getUserCurrentSession()
+    fun createAccount(userEmail: String, userPassword: String): Flow<Result<Unit>>
 
-    fun createUserAccount(userEmail: String, userPassword: String): Flow<Result<Unit>>
+    fun deleteAccount(): Flow<Result<Unit>>
 
-    fun logInUserAccount(userEmail: String, userPassword: String): Flow<Result<Unit>>
+    fun logIn(userEmail: String, userPassword: String): Flow<Result<Unit>>
 
-    fun logOutUserAccount(): Flow<Boolean>
+    fun logOut(): Flow<Boolean>
 
-    fun sendPasswordResetEmail(userEmail: String): Flow<Result<Unit>>
-
-    fun deleteUserAccount(): Flow<Result<Unit>>
+    fun sendPWDResetEmail(userEmail: String): Flow<Result<Unit>>
 }

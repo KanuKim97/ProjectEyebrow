@@ -2,7 +2,7 @@ package com.example.projecteyebrow.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.usecase.auth.LogInUserAccountUseCase
+import com.example.domain.usecase.auth.LogInUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import com.example.projecteyebrow.view.util.States
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LogInViewModel @Inject constructor(
-    private val signInUserAccountUseCase: LogInUserAccountUseCase,
+    private val signInUserAccountUseCase: LogInUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _logInState = MutableStateFlow<States>(States.Idle)

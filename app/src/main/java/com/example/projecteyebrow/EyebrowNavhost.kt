@@ -1,6 +1,9 @@
 package com.example.projecteyebrow
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -15,9 +18,15 @@ import com.example.projecteyebrow.view.logIn.LogInPage
 import com.example.projecteyebrow.view.profile.ProfilePage
 import com.example.projecteyebrow.view.signIn.SignInPage
 import com.example.projecteyebrow.view.tempContent.TempContentListSection
+import com.example.projecteyebrow.viewModel.MainViewModel
 
 @Composable
-fun EyebrowNavHost(navHostController: NavHostController) {
+fun EyebrowNavHost(
+    navHostController: NavHostController,
+    mainViewModel: MainViewModel = hiltViewModel()
+) {
+    val authState by mainViewModel.isAuthAlive.collectAsState(initial = false)
+
     NavHost(
         navController = navHostController,
         startDestination = Home.route
@@ -48,9 +57,6 @@ fun EyebrowNavHost(navHostController: NavHostController) {
         composable(route = TattooistDetailed.route) {
             DetailedTattooistPage()
         }
-        composable(route = LogIn.route) {
-            LogInPage(navController = navHostController)
-        }
         composable(route = SignIn.route) {
             SignInPage(navController = navHostController)
         }
@@ -58,7 +64,11 @@ fun EyebrowNavHost(navHostController: NavHostController) {
             FindPWDPage(navController = navHostController)
         }
         composable(route = Profile.route) {
-            ProfilePage(navController = navHostController)
+            if (authState) {
+                ProfilePage(navController = navHostController)
+            } else {
+                LogInPage(navController = navHostController)
+            }
         }
     }
 }

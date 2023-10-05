@@ -4,11 +4,11 @@ import com.example.domain.repository.FireAuthRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CreateUserAccountUseCase @Inject constructor(
-    private val fireAuth: FireAuthRepository
+class LogInUseCase @Inject constructor(
+    private val authRepo: FireAuthRepository
 ) {
     operator fun invoke(
         userEmail: String,
         userPassword: String
-    ): Flow<Result<Unit>> = fireAuth.createUserAccount(userEmail, userPassword)
+    ): Flow<Result<Unit>> = authRepo.logIn(userEmail, userPassword)
 }

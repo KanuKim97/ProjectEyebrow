@@ -2,7 +2,7 @@ package com.example.projecteyebrow.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.usecase.auth.SendPasswordResetEmailUseCase
+import com.example.domain.usecase.auth.SendPWDResetEmailUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import com.example.projecteyebrow.view.util.States
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FindPWDViewModel @Inject constructor(
-    private val sendPasswordResetEmailUseCase: SendPasswordResetEmailUseCase,
+    private val sendPasswordResetEmailUseCase: SendPWDResetEmailUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _resetEmailState = MutableStateFlow<States>(States.Idle)

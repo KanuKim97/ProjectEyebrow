@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.projecteyebrow.ui.theme.Typography
 
 @Composable
 fun SignInTitleSection() {
@@ -27,7 +27,7 @@ fun SignInWelcomeTitle() {
     Text(
         text = "회원가입을",
         color = Color.DarkGray,
-        fontSize = 30.sp,
+        style = Typography.headlineLarge,
         fontWeight = FontWeight.Medium
     )
 }
@@ -37,7 +37,7 @@ fun SignInAppTitle() {
     Text(
         text = "환영합니다!",
         color = Color.DarkGray,
-        fontSize = 35.sp,
+        style = Typography.displayMedium,
         fontWeight = FontWeight.Bold
     )
 }
@@ -47,7 +47,6 @@ fun SignInSubTitle() {
     Text(
         text = "회원가입으로 다양한 컨텐츠들을 사용하세요!",
         color = Color.DarkGray,
-        fontSize = 13.sp,
-        fontWeight = FontWeight.Light
+        style = Typography.labelMedium
     )
 }

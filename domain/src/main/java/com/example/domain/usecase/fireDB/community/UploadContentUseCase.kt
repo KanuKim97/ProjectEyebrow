@@ -6,11 +6,11 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UploadContentUseCase @Inject constructor(
-    private val fireDB: FireDBRepository
+    private val fireDBRepo: FireDBRepository
 ) {
     operator fun invoke(
         title: String,
         content: String,
         imageList: List<Uri>
-    ): Flow<Result<Unit>> = fireDB.uploadContent(title, content, imageList)
+    ): Flow<Result<Unit>> = fireDBRepo.uploadContent(title, content, imageList)
 }

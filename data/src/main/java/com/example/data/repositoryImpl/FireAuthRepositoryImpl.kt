@@ -3,9 +3,7 @@ package com.example.data.repositoryImpl
 import com.example.domain.repository.FireAuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.channels.awaitClose
@@ -16,14 +14,13 @@ import javax.inject.Inject
 class FireAuthRepositoryImpl @Inject constructor(
     private val fireAuth: FirebaseAuth
 ): FireAuthRepository {
-    private val _currentSession = MutableStateFlow<Boolean?>(null)
-    override val currentSession: Flow<Boolean> get() = _currentSession.filterNotNull()
 
-    override fun getUserCurrentSession() = fireAuth.addAuthStateListener { auth ->
-        _currentSession.value = (auth.currentUser != null)
+    override fun getUserAuthState(): Flow<Boolean> = callbackFlow {
+        fireAuth.addAuthStateListener { auth -> trySend(auth.currentUser != null) }
+        awaitClose()
     }
 
-    override fun createUserAccount(
+    override fun createAccount(
         userEmail: String,
         userPassword: String
     ): Flow<Result<Unit>> = flow {
@@ -41,7 +38,7 @@ class FireAuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun logInUserAccount(
+    override fun logIn(
         userEmail: String,
         userPassword: String
     ): Flow<Result<Unit>> = flow {
@@ -59,7 +56,7 @@ class FireAuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun logOutUserAccount(): Flow<Boolean> = callbackFlow {
+    override fun logOut(): Flow<Boolean> = callbackFlow {
         try {
             fireAuth.signOut()
             send(true)
@@ -76,7 +73,7 @@ class FireAuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun sendPasswordResetEmail(userEmail: String): Flow<Result<Unit>> = flow<Result<Unit>> {
+    override fun sendPWDResetEmail(userEmail: String): Flow<Result<Unit>> = flow<Result<Unit>> {
         try {
             fireAuth.sendPasswordResetEmail(userEmail)
         } catch (e: Exception) {
@@ -90,7 +87,7 @@ class FireAuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun deleteUserAccount(): Flow<Result<Unit>> = flow {
+    override fun deleteAccount(): Flow<Result<Unit>> = flow {
         try {
             fireAuth.currentUser?.delete()?.await()
             emit(Result.success(Unit))

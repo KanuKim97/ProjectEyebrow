@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ReadAllContentUseCase @Inject constructor(
-    private val fireDB: FireDBRepository
+    private val fireDBRepo: FireDBRepository
 ) {
-    operator fun invoke(): Flow<ArrayList<ContentModel>> = fireDB.readAllContent()
+    operator fun invoke(): Flow<ArrayList<ContentModel>> = fireDBRepo.readAllContent()
 }

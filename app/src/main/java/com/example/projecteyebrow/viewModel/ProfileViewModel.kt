@@ -3,7 +3,7 @@ package com.example.projecteyebrow.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.UserProfileModel
-import com.example.domain.usecase.auth.LogOutUserAccountUseCase
+import com.example.domain.usecase.auth.LogOutUseCase
 import com.example.domain.usecase.fireDB.profile.LoadUserProfileUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import com.example.projecteyebrow.view.util.States
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val logOutUserAccountUseCase: LogOutUserAccountUseCase,
+    private val logOutUserAccountUseCase: LogOutUseCase,
     private val loadUserProfileUseCase: LoadUserProfileUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {

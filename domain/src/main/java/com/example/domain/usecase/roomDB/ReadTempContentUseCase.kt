@@ -5,8 +5,8 @@ import com.example.domain.repository.RoomDBRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class ReadTempCotentUseCase @Inject constructor(
-    private val roomDB: RoomDBRepository
+class ReadTempContentUseCase @Inject constructor(
+    private val roomDBRepo: RoomDBRepository
 ) {
-    operator fun invoke(): Flow<List<TempContentModel>> = roomDB.readAllTempContent()
+    operator fun invoke(): Flow<List<TempContentModel>> = roomDBRepo.readAllTempContent()
 }

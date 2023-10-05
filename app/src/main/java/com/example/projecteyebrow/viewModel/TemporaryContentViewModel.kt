@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.TempContentModel
 import com.example.domain.usecase.roomDB.DeleteTempContentUseCase
-import com.example.domain.usecase.roomDB.ReadTempCotentUseCase
+import com.example.domain.usecase.roomDB.ReadTempContentUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TemporaryContentViewModel @Inject constructor(
-    private val readTempCommunityItemUseCase: ReadTempCotentUseCase,
+    private val readTempCommunityItemUseCase: ReadTempContentUseCase,
     private val deleteTempCommunityItemUseCase: DeleteTempContentUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
