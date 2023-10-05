@@ -1,10 +1,10 @@
 package com.example.domain.repository
 
-import com.example.domain.model.CommunityItem
+import com.example.domain.model.ContentModel
 import kotlinx.coroutines.flow.Flow
 
 interface CommunityRepository {
-    fun readAllCommunityItems(): Flow<ArrayList<CommunityItem>>
+    fun readAllContents(): Flow<ArrayList<ContentModel>>
 
-    fun uploadCommunityItem(uploadTitle: String, uploadContent: String): Flow<Result<Unit>>
+    fun uploadContent(uploadTitle: String, uploadContent: String): Flow<Result<Unit>>
 }

@@ -1,14 +1,14 @@
 package com.example.domain.repository
 
-import com.example.domain.model.TemporaryCommunityItem
+import com.example.domain.model.TempContentModel
 import kotlinx.coroutines.flow.Flow
 
 interface RoomDBRepository {
-    fun readAllTemporaryCommunityItem(): Flow<List<TemporaryCommunityItem>>
+    fun readAllTempContent(): Flow<List<TempContentModel>>
 
-    fun saveTemporaryCommunityItem(content: TemporaryCommunityItem): Flow<Result<Unit>>
+    fun saveTempContent(content: TempContentModel): Flow<Result<Unit>>
 
-    fun updateTemporaryCommunityItem(content: TemporaryCommunityItem): Flow<Result<Unit>>
+    fun updateTempContent(content: TempContentModel): Flow<Result<Unit>>
 
-    fun deleteTemporaryCommunityItem(content: TemporaryCommunityItem): Flow<Result<Unit>>
+    fun deleteTempContent(content: TempContentModel): Flow<Result<Unit>>
 }

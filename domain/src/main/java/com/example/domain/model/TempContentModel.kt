@@ -2,7 +2,7 @@ package com.example.domain.model
 
 import android.net.Uri
 
-data class TemporaryCommunityItem(
+data class TempContentModel(
     var tempID: Int,
     var tempTitle: String? = null,
     var tempContent: String? = null,

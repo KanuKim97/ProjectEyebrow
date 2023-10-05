@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.domain.model.CommunityItem
+import com.example.domain.model.ContentModel
 import com.example.projecteyebrow.viewModel.CommunityViewModel
 
 @Composable
@@ -48,7 +48,7 @@ fun CommunityContentList(
 @Composable
 fun CommunityContentItem(
     modifier: Modifier,
-    communityItem: CommunityItem
+    communityItem: ContentModel
 ) {
     Card(
         modifier = modifier

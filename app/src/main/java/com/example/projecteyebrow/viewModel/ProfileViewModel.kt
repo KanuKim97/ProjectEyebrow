@@ -2,10 +2,9 @@ package com.example.projecteyebrow.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.ProfileItem
+import com.example.domain.model.UserProfileModel
 import com.example.domain.usecase.auth.LogOutUserAccountUseCase
 import com.example.domain.usecase.fireDB.profile.LoadUserProfileUseCase
-import com.example.domain.usecase.fireDB.StopEventListenUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import com.example.projecteyebrow.view.util.States
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,14 +22,13 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val logOutUserAccountUseCase: LogOutUserAccountUseCase,
     private val loadUserProfileUseCase: LoadUserProfileUseCase,
-    private val stopEventListenUseCase: StopEventListenUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _isLogOutState = MutableStateFlow<States>(States.Idle)
     val isLogOutState: StateFlow<States> = _isLogOutState.asStateFlow()
 
-    private val _userProfile = MutableStateFlow(ProfileItem("", ""))
-    val userProfile: StateFlow<ProfileItem> = _userProfile.asStateFlow()
+    private val _userProfile = MutableStateFlow(UserProfileModel("", ""))
+    val userProfile: StateFlow<UserProfileModel> = _userProfile.asStateFlow()
 
     init {
         viewModelScope.launch(ioDispatcher) {
@@ -54,7 +52,6 @@ class ProfileViewModel @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
-        stopEventListenUseCase()
         viewModelScope.cancel()
     }
 }

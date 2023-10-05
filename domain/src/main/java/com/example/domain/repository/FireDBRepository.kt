@@ -1,20 +1,18 @@
 package com.example.domain.repository
 
-import com.example.domain.model.CommunityItem
-import com.example.domain.model.ProfileItem
+import android.net.Uri
+import com.example.domain.model.ContentModel
+import com.example.domain.model.UserProfileModel
 import kotlinx.coroutines.flow.Flow
 
 interface FireDBRepository {
 
     fun saveUserProfile(userEmail: String, userName: String): Flow<Result<Unit>>
 
-    fun loadUserProfile(): Flow<ProfileItem>
+    fun loadUserProfile(): Flow<UserProfileModel>
 
     /* Community Function */
-    fun readAllCommunityContent(): Flow<ArrayList<CommunityItem>>
+    fun readAllContent(): Flow<ArrayList<ContentModel>>
 
-    fun uploadCommunityContent(uploadTitle: String, uploadContent: String): Flow<Result<Unit>>
-
-    /* FireBase DataBase EventListener Function */
-    fun stopEventListener()
+    fun uploadContent(title: String, content: String, imageUriList: List<Uri>): Flow<Result<Unit>>
 }

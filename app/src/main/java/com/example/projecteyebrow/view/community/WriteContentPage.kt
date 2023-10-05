@@ -1,7 +1,6 @@
 package com.example.projecteyebrow.view.community
 
 import android.net.Uri
-import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,7 +19,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -37,8 +35,8 @@ fun WriteCommunityContentPage(
     navController: NavController,
     writeContentViewModel: WriteContentViewModel = hiltViewModel()
 ) {
-    val localContext = LocalContext.current
     val isSaveState by writeContentViewModel.isSaveSuccess.collectAsState()
+    val isUploadState by writeContentViewModel.isUploadSuccess.collectAsState()
 
     var title by remember { mutableStateOf("") }
     var content by remember { mutableStateOf("") }
@@ -48,6 +46,7 @@ fun WriteCommunityContentPage(
         onResult = { imageUriList = it }
     )
 
+    /* TODO("How to use StateFlow") */
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -61,21 +60,19 @@ fun WriteCommunityContentPage(
                     writeContentViewModel.temporarySaveContent(title, content, imageUriList)
 
                     when (isSaveState) {
-                        is States.IsSuccess -> Toast.makeText(
-                            localContext,
-                            "저장 성공",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        is States.IsFailed -> Toast.makeText(
-                            localContext,
-                            "저장 실패",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        is States.IsSuccess -> {  }
+                        is States.IsFailed -> {  }
                         else -> { }
                     }
                 },
                 uploadCommunityContent = {
-                    writeContentViewModel.uploadCommunityContent(title, content)
+                    writeContentViewModel.uploadCommunityContent(title, content, imageUriList)
+
+                    when (isUploadState) {
+                        is States.IsSuccess -> { }
+                        is States.IsFailed -> {  }
+                        else -> {  }
+                    }
                 }
             )
         }

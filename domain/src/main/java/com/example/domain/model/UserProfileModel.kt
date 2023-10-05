@@ -1,6 +1,6 @@
 package com.example.domain.model
 
-data class ProfileItem(
+data class UserProfileModel(
     val userName: String,
     val userEmail: String
 )

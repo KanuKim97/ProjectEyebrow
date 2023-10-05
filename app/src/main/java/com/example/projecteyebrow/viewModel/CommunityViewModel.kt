@@ -2,9 +2,9 @@ package com.example.projecteyebrow.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.CommunityItem
+import com.example.domain.model.ContentModel
 import com.example.domain.usecase.auth.GetCurrentUserSessionUseCase
-import com.example.domain.usecase.fireDB.community.ReadAllCommunityContentUseCase
+import com.example.domain.usecase.fireDB.community.ReadAllContentUseCase
 import com.example.projecteyebrow.qualifier.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -18,11 +18,11 @@ import javax.inject.Inject
 @HiltViewModel
 class CommunityViewModel @Inject constructor(
     private val getCurrentUserSessionUseCase: GetCurrentUserSessionUseCase,
-    private val readAllCommunityContentUseCase: ReadAllCommunityContentUseCase,
+    private val readAllCommunityContentUseCase: ReadAllContentUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
-    private val _communityList = MutableStateFlow<ArrayList<CommunityItem>>(arrayListOf())
-    val communityList: StateFlow<ArrayList<CommunityItem>> = _communityList.asStateFlow()
+    private val _communityList = MutableStateFlow<ArrayList<ContentModel>>(arrayListOf())
+    val communityList: StateFlow<ArrayList<ContentModel>> = _communityList.asStateFlow()
 
     init {
         viewModelScope.launch(ioDispatcher) {
