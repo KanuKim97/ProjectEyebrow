@@ -2,7 +2,7 @@ package com.example.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 
-interface FireAuthRepository {
+interface UserAuthRepository {
     fun getUserAuthState(): Flow<Boolean>
 
     fun createAccount(userEmail: String, userPassword: String): Flow<Result<Unit>>

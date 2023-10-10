@@ -1,11 +1,11 @@
 package com.example.domain.usecase.fireDB.profile
 
-import com.example.domain.repository.FireDBRepository
+import com.example.domain.repository.UserProfileRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SaveUserProfileUseCase @Inject constructor(
-    private val fireDBRepo: FireDBRepository
+    private val fireDBRepo: UserProfileRepository
 ) {
     operator fun invoke(
         userEmail: String,

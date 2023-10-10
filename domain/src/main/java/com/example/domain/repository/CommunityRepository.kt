@@ -1,10 +1,11 @@
 package com.example.domain.repository
 
+import android.net.Uri
 import com.example.domain.model.ContentModel
 import kotlinx.coroutines.flow.Flow
 
 interface CommunityRepository {
     fun readAllContents(): Flow<ArrayList<ContentModel>>
 
-    fun uploadContent(uploadTitle: String, uploadContent: String): Flow<Result<Unit>>
+    fun uploadContent(title: String, content: String, imageUrlList: List<Uri>): Flow<Result<Unit>>
 }

@@ -1,6 +1,6 @@
 package com.example.data.repositoryImpl
 
-import com.example.domain.repository.FireAuthRepository
+import com.example.domain.repository.UserAuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -11,9 +11,9 @@ import kotlinx.coroutines.flow.callbackFlow
 import java.io.IOException
 import javax.inject.Inject
 
-class FireAuthRepositoryImpl @Inject constructor(
+class UserAuthRepositoryImpl @Inject constructor(
     private val fireAuth: FirebaseAuth
-): FireAuthRepository {
+): UserAuthRepository {
 
     override fun getUserAuthState(): Flow<Boolean> = callbackFlow {
         fireAuth.addAuthStateListener { auth -> trySend(auth.currentUser != null) }

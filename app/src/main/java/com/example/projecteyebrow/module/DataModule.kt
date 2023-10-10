@@ -1,9 +1,11 @@
 package com.example.projecteyebrow.module
 
-import com.example.data.repositoryImpl.FireAuthRepositoryImpl
-import com.example.data.repositoryImpl.FireDBRepositoryImpl
-import com.example.domain.repository.FireAuthRepository
-import com.example.domain.repository.FireDBRepository
+import com.example.data.repositoryImpl.CommunityRepositoryImpl
+import com.example.data.repositoryImpl.UserAuthRepositoryImpl
+import com.example.data.repositoryImpl.UserProfileRepositoryImpl
+import com.example.domain.repository.CommunityRepository
+import com.example.domain.repository.UserAuthRepository
+import com.example.domain.repository.UserProfileRepository
 import com.example.projecteyebrow.BuildConfig
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -34,14 +36,20 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideFireAuthRepoImpl(fireAuth: FirebaseAuth): FireAuthRepository =
-        FireAuthRepositoryImpl(fireAuth)
+    fun provideFireAuthRepoImpl(fireAuth: FirebaseAuth): UserAuthRepository =
+        UserAuthRepositoryImpl(fireAuth)
 
     @Provides
     @Singleton
     fun provideFireDBRepoImpl(
         fireAuth: FirebaseAuth,
-        userDB: FirebaseDatabase,
+        userDB: FirebaseDatabase
+    ): UserProfileRepository = UserProfileRepositoryImpl(fireAuth, userDB)
+
+    @Provides
+    @Singleton
+    fun provideCommunityRepoImpl(
+        fireAuth: FirebaseAuth,
         communityRef: DatabaseReference
-    ): FireDBRepository = FireDBRepositoryImpl(fireAuth, userDB, communityRef)
+    ): CommunityRepository = CommunityRepositoryImpl(fireAuth, communityRef)
 }
