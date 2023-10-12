@@ -35,8 +35,6 @@ jobs:
       run: chmod +x gradlew
       
     - name: Build with Gradle
-      run: ./gradlew build
-
-    - name: Use google service account Key from secret
       run: |
         echo "${{ secrets.GOOGLE_SERVICE_JSON }}" > ./app/google-services.json
+        ./gradlew build
