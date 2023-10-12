@@ -1,5 +1,6 @@
-package com.example.projecteyebrow.view.tempContent
+package com.example.projecteyebrow.view.community
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,30 +16,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.domain.model.TempContentModel
+import com.example.domain.model.ContentModel
 import com.example.projecteyebrow.ui.theme.Shape
 import com.example.projecteyebrow.ui.theme.Typography
 
 @Composable
-fun TempContentListItem(
+fun CommunityContentItem(
     modifier: Modifier = Modifier,
-    tempContent: TempContentModel
+    communityItem: ContentModel
 ) {
     Card(
-        modifier = modifier
-            .fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
             .height(150.dp)
-            .padding(10.dp),
+            .padding(10.dp)
+            .clickable { /* TODO("Clickable Event") */ },
         shape = Shape.large,
         elevation = CardDefaults.cardElevation(10.dp),
         content = {
             Column(
                 modifier = modifier.padding(10.dp),
                 horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.SpaceBetween,
+                verticalArrangement = Arrangement.Center,
                 content = {
                     Text(
-                        text = tempContent.tempTitle.toString(),
+                        text = communityItem.title.toString(),
                         modifier = modifier.fillMaxWidth(),
                         fontWeight = FontWeight.Bold,
                         overflow = TextOverflow.Ellipsis,
@@ -46,7 +47,7 @@ fun TempContentListItem(
                         style = Typography.titleLarge
                     )
                     Text(
-                        text = tempContent.tempContent.toString(),
+                        text = communityItem.content.toString(),
                         modifier = modifier.fillMaxWidth().wrapContentHeight(),
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 3,

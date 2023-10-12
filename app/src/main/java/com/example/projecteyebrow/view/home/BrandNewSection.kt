@@ -27,8 +27,6 @@ import com.example.projecteyebrow.DetailedItem
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.view.util.BrandNewItem
 
-
-
 @Composable
 fun BrandNewSection(
     navController: NavController,

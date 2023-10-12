@@ -16,26 +16,23 @@ import com.example.projecteyebrow.TattooistDetailed
 @Composable
 fun DetailedItemPage(navController: NavController) {
     Scaffold(
-        modifier = Modifier
-            .padding(15.dp)
-            .fillMaxSize(),
-    ) { contentPadding ->
-        Column(
-            modifier = Modifier
-                .padding(contentPadding)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Top,
-            content = {
-                ItemDescSection(
-                    modifier = Modifier,
-                    onNavigateTattooistBtnClick = { navController.navigate(TattooistDetailed.route) },
-                    onTalkBtnClick = {  },
-                    addCollectionBtnClick = {  },
-                    shareBtnClick = {  }
-                )
-            }
-        )
-    }
+        modifier = Modifier.padding(15.dp).fillMaxSize(),
+        content = { contentPadding ->
+            Column(
+                modifier = Modifier.padding(contentPadding).fillMaxSize(),
+                verticalArrangement = Arrangement.Top,
+                content = {
+                    ItemDescSection(
+                        modifier = Modifier,
+                        onNavigateTattooistBtnClick = { navController.navigate(TattooistDetailed.route) },
+                        onTalkBtnClick = { /* TODO() */ },
+                        addCollectionBtnClick = { /* TODO() */ },
+                        shareBtnClick = { /* TODO() */ }
+                    )
+                }
+            )
+        }
+    )
 }
 
 @Preview

@@ -13,26 +13,25 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun DetailedTattooistPage() {
     Scaffold(
-        modifier = Modifier
-            .padding(15.dp)
-            .fillMaxSize()
-    ) { contentPadding ->
-        Column(
-            modifier = Modifier
-                .padding(contentPadding)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Top,
-            content = {
-                TattooistDescSection(
-                    modifier = Modifier,
-                    onNavigateTattooistBtnClick = {  },
-                    onTalkBtnClick = {  },
-                    addCollectionBtnClick = {  },
-                    shareBtnClick = {  }
-                )
-            }
-        )
-    }
+        modifier = Modifier.padding(15.dp).fillMaxSize(),
+        content = { contentPadding ->
+            Column(
+                modifier = Modifier
+                    .padding(contentPadding)
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Top,
+                content = {
+                    TattooistDescSection(
+                        modifier = Modifier,
+                        onNavigateTattooistBtnClick = { /* TODO() */ },
+                        onTalkBtnClick = { /* TODO() */ },
+                        addCollectionBtnClick = { /* TODO() */ },
+                        shareBtnClick = { /* TODO() */ }
+                    )
+                }
+            )
+        }
+    )
 }
 
 @Preview

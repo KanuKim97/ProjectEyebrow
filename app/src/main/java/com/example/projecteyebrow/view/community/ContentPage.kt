@@ -4,57 +4,52 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Mode
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.ShapeDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.example.projecteyebrow.WriteContent
+import com.example.projecteyebrow.ui.theme.Shape
 
 @Composable
 fun CommunityContentPage(navController: NavController) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
-            WriteContentFabBtn(
-                modifier = Modifier,
-                onClickBtn = { navController.navigate(WriteContent.route) }
-            )
+            WriteContentFabBtn(onClickBtn = { navController.navigate(WriteContent.route) })
         },
-        floatingActionButtonPosition = FabPosition.End
-    ) { contentPadding ->
-        Column(
-            modifier = Modifier.padding(contentPadding),
-            content = { CommunityContentList() }
-        )
-    }
+        floatingActionButtonPosition = FabPosition.End,
+        content = { contentPadding ->
+            Column(
+                modifier = Modifier.padding(contentPadding),
+                content = { CommunityContentList() }
+            )
+        }
+    )
 }
 
 @Composable
 fun WriteContentFabBtn(
-    modifier: Modifier,
-    onClickBtn: () -> Unit
+    onClickBtn: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     IconButton(
         onClick = onClickBtn,
-        modifier = modifier
-            .wrapContentHeight()
-            .wrapContentWidth()
-            .clip(ShapeDefaults.ExtraLarge)
+        modifier = modifier.wrapContentSize()
+            .clip(Shape.extraLarge)
             .background(Color.Cyan),
         content = {
             Icon(
                 imageVector = Icons.Outlined.Mode,
-                contentDescription = "",
+                contentDescription = "toWriteContentPage",
                 tint = Color.White
             )
         }
