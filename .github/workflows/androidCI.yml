@@ -31,15 +31,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    - name: Make google-services.json
-      run: |
-        cd ./app
-        touch ./google-services.json
-        echo "${{ secrets.GOOGLE_SERVICE_JSON }}" > ./google-services.json
-      shell: bash
-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       
     - name: Build with Gradle
       run: ./gradlew build
+
+    - name: Use google service account Key from secret
+      run: |
+        echo "${{ secrets.GOOGLE_SERVICE_JSON }}" > ./app/google-services.json
