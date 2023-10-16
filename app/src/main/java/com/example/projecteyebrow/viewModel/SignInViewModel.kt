@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,10 +22,10 @@ class SignInViewModel @Inject constructor(
     private val saveUserProfileUseCase: SaveUserProfileUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
-    private val _profileState = MutableStateFlow<States>(States.Idle)
     private val _signInState = MutableStateFlow<States>(States.Idle)
-
     val signInState: StateFlow<States> = _signInState.asStateFlow()
+
+    private var _dbTransactionResult: Boolean = false
 
     fun createUserAccount(
         userEmail: String,
@@ -35,16 +34,20 @@ class SignInViewModel @Inject constructor(
     ): Job = viewModelScope.launch(ioDispatcher) {
         createUserAccountUseCase(userEmail, userPassword).collect { result ->
             _signInState.value = States.IsLoading
-            saveUserInformation(userEmail, userNickName)
 
-            if (result.isSuccess && (_profileState.value == States.IsSuccess(Result.success(Unit)))) {
-                _signInState.value = States.IsSuccess(Result.success(Unit))
+            if (result.isSuccess) {
+                saveUserInformation(userEmail, userNickName)
+
+                if (_dbTransactionResult) {
+                    _signInState.value = States.IsFailed(Result.success(Unit))
+                } else {
+                    _signInState.value = States.IsFailed(Result.failure(Exception()))
+                }
             } else {
                 _signInState.value = States.IsFailed(Result.failure(Exception()))
-                delay(2000L)
-                _signInState.value = States.Idle
             }
         }
+        _signInState.value = States.Idle
     }
 
     private fun saveUserInformation(
@@ -52,15 +55,7 @@ class SignInViewModel @Inject constructor(
         userNickName: String
     ): Job = viewModelScope.launch(ioDispatcher) {
         saveUserProfileUseCase(userEmail, userNickName).collect { result ->
-            _profileState.value = States.IsLoading
-
-            if (result.isSuccess) {
-                _profileState.value = States.IsSuccess(Result.success(Unit))
-            } else {
-                _profileState.value = States.IsFailed(Result.failure(Exception()))
-                delay(2000L)
-                _profileState.value = States.Idle
-            }
+            _dbTransactionResult = result.isSuccess
         }
     }
 

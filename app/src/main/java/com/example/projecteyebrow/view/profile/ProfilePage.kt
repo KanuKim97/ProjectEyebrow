@@ -20,7 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.projecteyebrow.LogIn
+import com.example.projecteyebrow.Profile
 import com.example.projecteyebrow.view.util.States
 import com.example.projecteyebrow.viewModel.ProfileViewModel
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -43,7 +43,7 @@ fun ProfilePage(
                 when(userSession) {
                     is States.Idle -> {  }
                     is States.IsLoading -> CircularProgressIndicator(localContext)
-                    is States.IsSuccess -> navController.navigate(LogIn.route)
+                    is States.IsSuccess -> navController.navigate(Profile.route)
                     is States.IsFailed -> {
                         Toast.makeText(
                             localContext,

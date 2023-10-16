@@ -19,9 +19,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-
-        buildConfigField("String", "Tomorrow_UserDB_URL", Tomorrow_UserDB_URL)
-        buildConfigField("String", "Tomorrow_CommunityDB_URL", Tomorrow_CommunityDB_URL)
     }
 
     buildTypes {
@@ -55,6 +52,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-database:20.2.2'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.8.1'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.2.1'
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
 
     /* -- Kotlin Coroutines -- */
