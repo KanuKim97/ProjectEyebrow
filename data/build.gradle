@@ -44,13 +44,14 @@ dependencies {
     ksp 'com.google.dagger:hilt-android-compiler:2.48'
 
     /* -- FireBase -- */
-    implementation platform('com.google.firebase:firebase-bom:32.3.1')
-    implementation 'com.google.firebase:firebase-auth-ktx:22.1.2'
-    implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
-    implementation 'com.google.firebase:firebase-analytics-ktx:21.3.0'
-    implementation 'com.google.firebase:firebase-database:20.2.2'
-    implementation 'com.google.firebase:firebase-firestore:24.8.1'
-    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
+    implementation("com.firebaseui:firebase-ui-auth:8.0.2")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
+    implementation("com.google.firebase:firebase-database:20.2.2")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 
     /* -- Android Test Dependencies -- */
     testImplementation 'junit:junit:4.13.2'
