@@ -6,10 +6,11 @@ import com.example.data.repositoryImpl.UserProfileRepositoryImpl
 import com.example.domain.repository.CommunityRepository
 import com.example.domain.repository.UserAuthRepository
 import com.example.domain.repository.UserProfileRepository
-import com.example.projecteyebrow.BuildConfig
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,18 +22,15 @@ import javax.inject.Singleton
 object DataModule {
     @Provides
     @Singleton
-    fun provideUserDB(): FirebaseDatabase =
-        FirebaseDatabase.getInstance(BuildConfig.Tomorrow_UserDB_URL)
-
-    @Provides
-    @Singleton
-    fun provideCommunityDBRef(): DatabaseReference =
-        FirebaseDatabase.getInstance(BuildConfig.Tomorrow_CommunityDB_URL).reference
-
-    @Provides
-    @Singleton
     fun provideFireAuthInstance(): FirebaseAuth = FirebaseAuth.getInstance()
 
+    @Provides
+    @Singleton
+    fun provideFireStoreInstance(): FirebaseFirestore = Firebase.firestore
+
+    @Provides
+    @Singleton
+    fun provideFireStorageInstance(): FirebaseStorage = FirebaseStorage.getInstance()
 
     @Provides
     @Singleton
@@ -43,13 +41,13 @@ object DataModule {
     @Singleton
     fun provideFireDBRepoImpl(
         fireAuth: FirebaseAuth,
-        userDB: FirebaseDatabase
-    ): UserProfileRepository = UserProfileRepositoryImpl(fireAuth, userDB)
+        fireStore: FirebaseFirestore
+    ): UserProfileRepository = UserProfileRepositoryImpl(fireAuth, fireStore)
 
     @Provides
     @Singleton
     fun provideCommunityRepoImpl(
         fireAuth: FirebaseAuth,
-        communityRef: DatabaseReference
-    ): CommunityRepository = CommunityRepositoryImpl(fireAuth, communityRef)
+        fireStore: FirebaseFirestore
+    ): CommunityRepository = CommunityRepositoryImpl(fireAuth, fireStore)
 }

@@ -36,12 +36,15 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.projecteyebrow.Profile
 import com.example.projecteyebrow.R
 import com.example.projecteyebrow.view.util.States
 import com.example.projecteyebrow.viewModel.SignInViewModel
 
 @Composable
 fun SignInSection(
+    navController: NavController,
     toLogInPageClicked: () -> Unit,
     signUpViewModel: SignInViewModel = hiltViewModel()
 ) {
@@ -138,7 +141,7 @@ fun SignInSection(
                 )
             }
             is States.IsLoading -> CircularProgressIndicator()
-            is States.IsSuccess -> {  }
+            is States.IsSuccess -> { navController.navigate(Profile.route) }
             is States.IsFailed -> {  }
         }
 

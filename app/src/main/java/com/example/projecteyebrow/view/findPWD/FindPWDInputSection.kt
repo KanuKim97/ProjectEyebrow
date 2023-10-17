@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.projecteyebrow.R
-import com.example.projecteyebrow.LogIn
+import com.example.projecteyebrow.Profile
 import com.example.projecteyebrow.view.util.States
 import com.example.projecteyebrow.viewModel.FindPWDViewModel
 
@@ -76,7 +76,7 @@ fun FindPWDInputSection(
                     Toast.LENGTH_SHORT
                 ).show()
 
-                navController.navigate(LogIn.route)
+                navController.navigate(Profile.route)
             }
             is States.IsFailed -> {
                 Toast.makeText(
