@@ -33,8 +33,11 @@ jobs:
 
     - name: Gradlew 실행 권한 허용
       run: chmod +x gradlew
+
+    - name: GoogleServices JSON File 생성
+      env: 
+        GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+      run: echo $GOOGLE_SERVICES_JSON | base64 -di > ./app/google-services.json
       
-    - name: Gradle 빌드 (google-services.json)
-      run: |
-        echo "${{ secrets.GOOGLE_SERVICES_JSON }}" > ./app/google-services.json
-        ./gradlew build
+    - name: Gradle 빌드
+      run: ./gradlew build
