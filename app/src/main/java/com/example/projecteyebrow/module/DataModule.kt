@@ -1,6 +1,7 @@
 package com.example.projecteyebrow.module
 
 import com.example.data.repositoryImpl.CommunityRepositoryImpl
+import com.example.data.repositoryImpl.FireStorageRepositoryImpl
 import com.example.data.repositoryImpl.UserAuthRepositoryImpl
 import com.example.data.repositoryImpl.UserProfileRepositoryImpl
 import com.example.domain.repository.CommunityRepository
@@ -11,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,7 +32,7 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideFireStorageInstance(): FirebaseStorage = FirebaseStorage.getInstance()
+    fun provideFireStorageInstance(): FirebaseStorage = Firebase.storage
 
     @Provides
     @Singleton
@@ -50,4 +52,9 @@ object DataModule {
         fireAuth: FirebaseAuth,
         fireStore: FirebaseFirestore
     ): CommunityRepository = CommunityRepositoryImpl(fireAuth, fireStore)
+
+    @Provides
+    @Singleton
+    fun provideFireStorageImpl(fireStorage: FirebaseStorage): FireStorageRepositoryImpl =
+        FireStorageRepositoryImpl(fireStorage)
 }
