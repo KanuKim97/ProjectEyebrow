@@ -155,20 +155,6 @@ fun FindPWDBtn(
     )
 }
 
-@Composable
-fun LogInBtn(
-    modifier: Modifier,
-    toLogInBtnClick: () -> Unit
-) {
-    Button(
-        onClick = toLogInBtnClick,
-        modifier = modifier
-            .width(320.dp)
-            .background(Color.White),
-        shape = ShapeDefaults.Medium,
-        content = { Text(text = stringResource(id = R.string.Login_Btn)) }
-    )
-}
 
 @Composable
 fun SignInAccountBtn(

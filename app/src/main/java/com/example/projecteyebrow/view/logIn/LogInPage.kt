@@ -11,7 +11,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.projecteyebrow.FindPWD
 import com.example.projecteyebrow.SignIn
 
@@ -47,4 +49,10 @@ fun LogInPage(navController: NavController) {
             }
         }
     )
+}
+
+@Preview
+@Composable
+fun Preview() {
+    LogInPage(navController = rememberNavController())
 }

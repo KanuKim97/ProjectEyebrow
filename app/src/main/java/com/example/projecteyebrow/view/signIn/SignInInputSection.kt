@@ -96,7 +96,6 @@ fun SignInSection(
                 } else {
                     Icons.Outlined.VisibilityOff
                 }
-
                 IconButton(
                     onClick = { passwordVisible = !passwordVisible },
                     content = { Icon(imageVector = iconImage, contentDescription = "passwordToggle") }
