@@ -3,7 +3,7 @@ package com.example.data.repositoryImpl
 import com.example.data.localDataBase.dao.TempContentDao
 import com.example.data.util.mappingToListTempCommunityItem
 import com.example.data.util.mappingToTempCommunityTable
-import com.example.domain.entity.TemporaryCommunityItem
+import com.example.domain.model.TempContentModel
 import com.example.domain.repository.RoomDBRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -17,8 +17,8 @@ import javax.inject.Inject
 class RoomDBRepositoryImpl @Inject constructor(
     private val tempDao: TempContentDao
 ): RoomDBRepository {
-    override fun readAllTemporaryCommunityItem(): Flow<List<TemporaryCommunityItem>> = flow {
-        val result: List<TemporaryCommunityItem> =
+    override fun readAllTempContent(): Flow<List<TempContentModel>> = flow {
+        val result: List<TempContentModel> =
             mappingToListTempCommunityItem(tempDao.readAllTemporaryContent())
         emit(result)
     }.catch { exception ->
@@ -37,8 +37,8 @@ class RoomDBRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun saveTemporaryCommunityItem(
-        content: TemporaryCommunityItem
+    override fun saveTempContent(
+        content: TempContentModel
     ): Flow<Result<Unit>> = flow {
         tempDao.saveTemporaryContent(content = mappingToTempCommunityTable(content))
         emit(Result.success(Unit))
@@ -58,8 +58,8 @@ class RoomDBRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun updateTemporaryCommunityItem(
-        content: TemporaryCommunityItem
+    override fun updateTempContent(
+        content: TempContentModel
     ): Flow<Result<Unit>> = flow {
         tempDao.updateTemporaryContent(content = mappingToTempCommunityTable(content))
         emit(Result.success(Unit))
@@ -79,8 +79,8 @@ class RoomDBRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun deleteTemporaryCommunityItem(
-        content: TemporaryCommunityItem
+    override fun deleteTempContent(
+        content: TempContentModel
     ): Flow<Result<Unit>> = flow {
         tempDao.deleteTemporaryContent(content = mappingToTempCommunityTable(content))
         emit(Result.success(Unit))
