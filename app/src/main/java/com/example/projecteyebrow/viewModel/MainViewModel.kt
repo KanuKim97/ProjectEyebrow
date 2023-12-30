@@ -3,7 +3,7 @@ package com.example.projecteyebrow.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.usecase.auth.GetUserAuthStateUseCase
-import com.example.projecteyebrow.qualifier.IoDispatcher
+import com.example.projecteyebrow.module.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.cancel

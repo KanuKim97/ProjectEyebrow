@@ -13,7 +13,7 @@ import com.example.projecteyebrow.EyebrowNavHost
 fun EyeBrowMainActivity(navController: NavHostController) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        bottomBar = { ActivityBottomNavigationBar(navController = navController) }
+        bottomBar = { ActivityBottomNavBar(navController = navController) }
     ) { contentPadding ->
         Surface(
             modifier = Modifier

@@ -11,11 +11,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.projecteyebrow.FindPWD
 import com.example.projecteyebrow.SignIn
+import com.example.projecteyebrow.ui.preview.DevicePreview
 
 @Composable
 fun LogInPage(navController: NavController) {
@@ -39,10 +39,10 @@ fun LogInPage(navController: NavController) {
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                     content = {
-                        UserLogInSection(
+                        LogInSection(
                             navController = navController,
-                            toFindPWDBtnClick = { navController.navigate(FindPWD.route) },
-                            toSignInAccountBtnClick = { navController.navigate(SignIn.route) }
+                            toSignInBtnClick = { navController.navigate(SignIn.route) },
+                            toFindPWDBtnClick = { navController.navigate(FindPWD.route) }
                         )
                     }
                 )
@@ -51,8 +51,8 @@ fun LogInPage(navController: NavController) {
     )
 }
 
-@Preview
+@DevicePreview
 @Composable
-fun Preview() {
+fun PreviewLogInPage() {
     LogInPage(navController = rememberNavController())
 }

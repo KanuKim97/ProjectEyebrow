@@ -22,7 +22,7 @@ import com.example.projecteyebrow.Home
 import com.example.projecteyebrow.Profile
 
 @Composable
-fun ActivityBottomNavigationBar(
+fun ActivityBottomNavBar(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
