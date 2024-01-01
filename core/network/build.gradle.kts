@@ -18,23 +18,23 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation(Libraries.android_core)
     
-    implementation("com.google.dagger:hilt-android:2.49")
-    ksp("com.google.dagger:hilt-android-compiler:2.49")
+    implementation(Libraries.hilt_Android)
+    ksp(Libraries.hilt_Android_Compiler)
 
     /* -- FireBase -- */
-    val firebaseBom = platform("com.google.firebase:firebase-bom:32.3.1")
+    val firebaseBom = platform(Libraries.firebaseBoM)
     implementation(firebaseBom)
-    implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
-    implementation("com.firebaseui:firebase-ui-auth:8.0.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.5.0")
-    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
-    implementation("com.google.firebase:firebase-database:20.3.0")
-    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation(Libraries.firebase_Auth)
+    implementation(Libraries.firebase_UI_Auth)
+    implementation(Libraries.firebase_Analytics)
+    implementation(Libraries.firebase_Storage)
+    implementation(Libraries.firebase_Database)
+    implementation(Libraries.fireStore)
 
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation(Libraries.gms_play_service_Auth)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation(Libraries.jUnit)
+    androidTestImplementation(Libraries.androidX_Junit)
 }

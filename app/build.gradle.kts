@@ -39,8 +39,8 @@ android {
 dependencies {
     implementation (Libraries.android_core)
 
-    implementation (project(":core:domain"))
-    implementation (project(":core:data"))
+    implementation (project(Module.domain))
+    implementation (project(Module.data))
 
     /* -- Android Test Dependencies -- */
     testImplementation (Libraries.jUnit)

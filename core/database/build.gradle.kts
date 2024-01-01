@@ -18,15 +18,15 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation(Libraries.android_core)
 
-    implementation ("androidx.room:room-runtime:2.6.1")
-    ksp ("androidx.room:room-compiler:2.6.1")
-    implementation ("androidx.room:room-ktx:2.6.1")
+    implementation (Libraries.room_Runtime)
+    ksp (Libraries.room_Compiler)
+    implementation (Libraries.room_ktx)
 
-    implementation("com.google.dagger:hilt-android:2.49")
-    ksp("com.google.dagger:hilt-android-compiler:2.49")
+    implementation(Libraries.hilt_Android)
+    ksp(Libraries.hilt_Android_Compiler)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation(Libraries.jUnit)
+    androidTestImplementation(Libraries.androidX_Junit)
 }

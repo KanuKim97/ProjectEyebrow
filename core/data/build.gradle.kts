@@ -20,7 +20,7 @@ android {
 dependencies {
     implementation (Libraries.android_core)
 
-    implementation (project(":core:domain"))
+    implementation (project(Module.domain))
 
     implementation (Libraries.kotlin_coroutine)
 

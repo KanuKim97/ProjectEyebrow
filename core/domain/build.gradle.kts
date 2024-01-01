@@ -18,15 +18,15 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.core:core-ktx:1.12.0")
+    implementation (Libraries.android_core)
 
-    implementation ((project(":core:model")))
+    implementation ((project(Module.model)))
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation (Libraries.kotlin_coroutine)
 
-    implementation ("com.google.dagger:hilt-android:2.49")
-    ksp ("com.google.dagger:hilt-android-compiler:2.49")
+    implementation (Libraries.hilt_Android)
+    ksp (Libraries.hilt_Android_Compiler)
 
-    testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    testImplementation (Libraries.jUnit)
+    androidTestImplementation (Libraries.androidX_Junit)
 }
