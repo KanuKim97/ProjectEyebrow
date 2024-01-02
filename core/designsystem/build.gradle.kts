@@ -30,6 +30,7 @@ dependencies {
     implementation (Libraries.compose_UI_Preview)
     implementation (Libraries.compose_Material_Icon)
 
+    implementation(Libraries.LandScapist_Glide)
 
     testImplementation(Libraries.jUnit)
     androidTestImplementation(Libraries.androidX_Junit)
