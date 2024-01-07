@@ -1,8 +1,9 @@
 package com.example.data
 
-import org.junit.Test
-
-import org.junit.Assert.*
+import com.example.data.repositoryImpl.UserAuthRepositoryImpl
+import com.example.domain.repository.UserAuthRepository
+import com.google.firebase.auth.FirebaseAuth
+import org.junit.Before
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -10,8 +11,13 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    private lateinit var fireBaseAuth: FirebaseAuth
+    private lateinit var authRepo: UserAuthRepository
+
+    @Before
+    fun setUpInstance() {
+        fireBaseAuth = FirebaseAuth.getInstance()
+        authRepo = UserAuthRepositoryImpl(fireBaseAuth)
     }
+
 }

@@ -1,7 +1,7 @@
 package com.example.domain.usecase.fireDB.profile
 
-import com.example.domain.model.UserProfileModel
 import com.example.domain.repository.UserProfileRepository
+import com.example.model.UserProfileModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

@@ -20,6 +20,9 @@ android {
 dependencies {
     implementation(Libraries.android_core)
 
+    implementation(project(Module.designsystem))
+
+
     val composeBoM = platform(Libraries.compose_BoM)
 
     implementation(composeBoM)

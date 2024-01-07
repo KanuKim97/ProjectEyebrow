@@ -21,6 +21,9 @@ dependencies {
     implementation (Libraries.android_core)
 
     implementation (project(Module.domain))
+    implementation (project(Module.database))
+    implementation (project(Module.network))
+    implementation (project(Module.model))
 
     implementation (Libraries.kotlin_coroutine)
 
@@ -38,7 +41,7 @@ dependencies {
     implementation(Libraries.firebase_Analytics)
     implementation(Libraries.firebase_Storage)
     implementation(Libraries.firebase_Database)
-    implementation(Libraries.firebase_Storage)
+    implementation(Libraries.fireStore)
 
     implementation(Libraries.gms_play_service_Auth)
 

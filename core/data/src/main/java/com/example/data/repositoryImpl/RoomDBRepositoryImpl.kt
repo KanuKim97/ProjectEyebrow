@@ -1,10 +1,10 @@
 package com.example.data.repositoryImpl
 
-import com.example.data.localDataBase.dao.TempContentDao
 import com.example.data.util.mappingToListTempCommunityItem
 import com.example.data.util.mappingToTempCommunityTable
-import com.example.domain.model.TempContentModel
+import com.example.database.dao.TempContentDao
 import com.example.domain.repository.RoomDBRepository
+import com.example.model.TempContent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -17,8 +17,8 @@ import javax.inject.Inject
 class RoomDBRepositoryImpl @Inject constructor(
     private val tempDao: TempContentDao
 ): RoomDBRepository {
-    override fun readAllTempContent(): Flow<List<TempContentModel>> = flow {
-        val result: List<TempContentModel> =
+    override fun readAllTempContent(): Flow<List<TempContent>> = flow {
+        val result: List<TempContent> =
             mappingToListTempCommunityItem(tempDao.readAllTemporaryContent())
         emit(result)
     }.catch { exception ->
@@ -38,7 +38,7 @@ class RoomDBRepositoryImpl @Inject constructor(
     }
 
     override fun saveTempContent(
-        content: TempContentModel
+        content: TempContent
     ): Flow<Result<Unit>> = flow {
         tempDao.saveTemporaryContent(content = mappingToTempCommunityTable(content))
         emit(Result.success(Unit))
@@ -59,7 +59,7 @@ class RoomDBRepositoryImpl @Inject constructor(
     }
 
     override fun updateTempContent(
-        content: TempContentModel
+        content: TempContent
     ): Flow<Result<Unit>> = flow {
         tempDao.updateTemporaryContent(content = mappingToTempCommunityTable(content))
         emit(Result.success(Unit))
@@ -80,7 +80,7 @@ class RoomDBRepositoryImpl @Inject constructor(
     }
 
     override fun deleteTempContent(
-        content: TempContentModel
+        content: TempContent
     ): Flow<Result<Unit>> = flow {
         tempDao.deleteTemporaryContent(content = mappingToTempCommunityTable(content))
         emit(Result.success(Unit))

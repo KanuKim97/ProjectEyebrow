@@ -39,8 +39,10 @@ android {
 dependencies {
     implementation (Libraries.android_core)
 
-    implementation (project(Module.domain))
-    implementation (project(Module.data))
+    implementation(project(Module.domain))
+    implementation(project(Module.data))
+    implementation(project(Module.ui))
+    implementation(project(Module.designsystem))
 
     /* -- Android Test Dependencies -- */
     testImplementation (Libraries.jUnit)

@@ -21,7 +21,7 @@ import com.example.projecteyebrow.Collection
 import com.example.projecteyebrow.Community
 import com.example.projecteyebrow.Home
 import com.example.projecteyebrow.Profile
-import com.example.projecteyebrow.ui.preview.ComponentPreview
+import com.example.ui.ComponentPreview
 
 @Composable
 fun BottomNavBar(navController: NavController) {

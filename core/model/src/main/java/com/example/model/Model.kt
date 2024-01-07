@@ -21,7 +21,7 @@ data class CommunityModel(
     val uploadTimeStamp: String
 )
 
-data class TempContentModel(
+data class TempContent(
     var tempID: Int,
     var tempTitle: String? = null,
     var tempContent: String? = null,
