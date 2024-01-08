@@ -13,8 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.designsystem.theme.Typography
 import com.example.projecteyebrow.R
-import com.example.projecteyebrow.ui.theme.Typography
+import com.example.ui.ComponentPreview
 
 @Composable
 fun LogInRow(
@@ -23,22 +24,34 @@ fun LogInRow(
     onClickFindPWD: () -> Unit
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-        horizontalArrangement = Arrangement.SpaceAround,
+        horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = stringResource(id = R.string.CreateAccount_Btn),
-            modifier = Modifier.clickable(onClick = onClickSignIn),
+            modifier = modifier
+                .wrapContentHeight()
+                .clickable(onClick = onClickSignIn),
             style = Typography.labelLarge
         )
         VerticalDivider(modifier = Modifier.height(20.dp))
         Text(
             text = stringResource(id = R.string.FindPassword_Btn),
-            modifier = Modifier.clickable(onClick = onClickFindPWD),
+            modifier = modifier
+                .wrapContentHeight()
+                .clickable(onClick = onClickFindPWD),
             style = Typography.labelLarge
         )
+    }
+}
+
+@ComponentPreview
+@Composable
+fun PreviewLogInRow() {
+    LogInRow(modifier = Modifier, onClickSignIn = { /*TODO*/ }) {
+
     }
 }

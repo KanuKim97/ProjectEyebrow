@@ -2,10 +2,11 @@ package com.example.projecteyebrow.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.UserProfileModel
 import com.example.domain.usecase.auth.LogOutUseCase
 import com.example.domain.usecase.fireDB.profile.LoadUserProfileUseCase
-import com.example.projecteyebrow.qualifier.IoDispatcher
+import com.example.model.UserProfileModel
+import com.example.projecteyebrow.module.AppDispatcher
+import com.example.projecteyebrow.module.AppDispatcherValue
 import com.example.projecteyebrow.view.util.States
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,7 +23,7 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val logOutUserAccountUseCase: LogOutUseCase,
     private val loadUserProfileUseCase: LoadUserProfileUseCase,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @AppDispatcher(AppDispatcherValue.IO) private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _isLogOutState = MutableStateFlow<States>(States.Idle)
     val isLogOutState: StateFlow<States> = _isLogOutState.asStateFlow()

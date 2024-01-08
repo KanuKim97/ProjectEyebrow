@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
+import com.example.designsystem.theme.Shape
 import com.example.projecteyebrow.WriteContent
-import com.example.projecteyebrow.ui.theme.Shape
 
 @Composable
 fun CommunityContentPage(navController: NavController) {

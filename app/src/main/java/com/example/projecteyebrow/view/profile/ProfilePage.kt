@@ -23,7 +23,6 @@ import androidx.navigation.NavController
 import com.example.projecteyebrow.Profile
 import com.example.projecteyebrow.view.util.States
 import com.example.projecteyebrow.viewModel.ProfileViewModel
-import com.google.android.material.progressindicator.CircularProgressIndicator
 
 @Composable
 fun ProfilePage(
@@ -42,7 +41,7 @@ fun ProfilePage(
                 profileViewModel.userAccountLogOut()
                 when(userSession) {
                     is States.Idle -> {  }
-                    is States.IsLoading -> CircularProgressIndicator(localContext)
+                    is States.IsLoading -> {  }
                     is States.IsSuccess -> navController.navigate(Profile.route)
                     is States.IsFailed -> {
                         Toast.makeText(

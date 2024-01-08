@@ -1,7 +1,5 @@
 package com.example.projecteyebrow.module
 
-import com.example.projecteyebrow.qualifier.IoDispatcher
-import com.example.projecteyebrow.qualifier.MainDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,11 +11,11 @@ import kotlinx.coroutines.Dispatchers
 @Module
 @InstallIn(SingletonComponent::class)
 object DispatcherModule {
-    @IoDispatcher
     @Provides
+    @AppDispatcher(AppDispatcherValue.IO)
     fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
-    @MainDispatcher
     @Provides
+    @AppDispatcher(AppDispatcherValue.MAIN)
     fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 }
