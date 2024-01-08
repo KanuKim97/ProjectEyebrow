@@ -15,7 +15,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.projecteyebrow.FindPWD
 import com.example.projecteyebrow.SignIn
-import com.example.projecteyebrow.ui.preview.DevicePreview
+import com.example.ui.DevicePreview
 
 @Composable
 fun LogInPage(navController: NavController) {

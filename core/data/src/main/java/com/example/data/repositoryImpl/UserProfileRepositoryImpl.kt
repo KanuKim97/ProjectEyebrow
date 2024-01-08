@@ -1,6 +1,6 @@
 package com.example.data.repositoryImpl
 
-import com.example.domain.repository.UserProfileRepository
+import com.example.data.repository.UserProfileRepository
 import com.example.model.UserProfileModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class UserProfileRepositoryImpl @Inject constructor(
     private val fireAuth: FirebaseAuth,
-    private val fireStore: FirebaseFirestore
+    private val fireStore: FirebaseFirestore,
 ): UserProfileRepository {
     private val _userUID: String by lazy { fireAuth.currentUser?.uid.toString() }
 

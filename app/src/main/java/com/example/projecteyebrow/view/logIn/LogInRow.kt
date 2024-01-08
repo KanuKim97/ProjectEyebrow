@@ -13,9 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.designsystem.theme.Typography
 import com.example.projecteyebrow.R
-import com.example.projecteyebrow.ui.preview.ComponentPreview
-import com.example.projecteyebrow.ui.theme.Typography
+import com.example.ui.ComponentPreview
 
 @Composable
 fun LogInRow(

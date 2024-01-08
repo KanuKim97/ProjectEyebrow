@@ -3,7 +3,8 @@ package com.example.projecteyebrow.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.usecase.auth.GetUserAuthStateUseCase
-import com.example.projecteyebrow.module.IoDispatcher
+import com.example.projecteyebrow.module.AppDispatcher
+import com.example.projecteyebrow.module.AppDispatcherValue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.cancel
@@ -16,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getUserAuthStateUseCase: GetUserAuthStateUseCase,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @AppDispatcher(AppDispatcherValue.IO) private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _isAuthAlive = MutableStateFlow<Boolean?>(null)
     val isAuthAlive: Flow<Boolean> get() = _isAuthAlive.filterNotNull()

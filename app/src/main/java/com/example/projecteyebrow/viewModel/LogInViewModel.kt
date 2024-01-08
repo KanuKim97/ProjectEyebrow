@@ -3,7 +3,8 @@ package com.example.projecteyebrow.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.usecase.auth.LogInUseCase
-import com.example.projecteyebrow.module.IoDispatcher
+import com.example.projecteyebrow.module.AppDispatcher
+import com.example.projecteyebrow.module.AppDispatcherValue
 import com.example.projecteyebrow.view.util.States
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -19,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LogInViewModel @Inject constructor(
     private val signInUserAccountUseCase: LogInUseCase,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @AppDispatcher(AppDispatcherValue.IO) private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _logInState = MutableStateFlow<States>(States.Idle)
     val logInState: StateFlow<States> = _logInState.asStateFlow()

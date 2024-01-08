@@ -15,14 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.domain.model.TempContentModel
-import com.example.projecteyebrow.ui.theme.Shape
-import com.example.projecteyebrow.ui.theme.Typography
+import com.example.designsystem.theme.Shape
+import com.example.designsystem.theme.Typography
+import com.example.model.TempContent
 
 @Composable
 fun TempContentListItem(
     modifier: Modifier = Modifier,
-    tempContent: TempContentModel
+    tempContent: TempContent
 ) {
     Card(
         modifier = modifier

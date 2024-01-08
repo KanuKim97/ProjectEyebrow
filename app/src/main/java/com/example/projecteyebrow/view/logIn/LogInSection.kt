@@ -13,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -35,11 +36,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.designsystem.theme.Typography
 import com.example.projecteyebrow.Profile
-import com.example.projecteyebrow.ui.theme.Typography
 import com.example.projecteyebrow.view.util.States
 import com.example.projecteyebrow.viewModel.LogInViewModel
-import com.google.android.material.progressindicator.CircularProgressIndicator
 
 @Composable
 fun LogInSection(
@@ -62,7 +62,9 @@ fun LogInSection(
         OutlinedTextField(
             value = userEmailInput,
             onValueChange = { userEmailInput = it },
-            modifier = Modifier.width(320.dp).height(60.dp),
+            modifier = Modifier
+                .width(320.dp)
+                .height(60.dp),
             label = { Text(text = "이메일", style = Typography.labelLarge) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             singleLine = true,
@@ -72,7 +74,9 @@ fun LogInSection(
         OutlinedTextField(
             value = userPWDInput,
             onValueChange = { userPWDInput = it },
-            modifier = Modifier.width(320.dp).height(60.dp),
+            modifier = Modifier
+                .width(320.dp)
+                .height(60.dp),
             label = { Text(text = "비밀번호", style = Typography.labelLarge) },
             trailingIcon = {
                 val iconImage: ImageVector = if (passwordVisible) {
@@ -108,7 +112,7 @@ fun LogInSection(
                     logInViewModel.logInUserAccount(userEmailInput, userPWDInput)
                 }
             )
-            is States.IsLoading -> CircularProgressIndicator(localContext)
+            is States.IsLoading -> CircularProgressIndicator()
             is States.IsSuccess -> navController.navigate(Profile.route)
             is States.IsFailed -> {
                 Toast.makeText(

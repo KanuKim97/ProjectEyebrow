@@ -2,7 +2,7 @@ package com.example.data.repositoryImpl
 
 import android.net.Uri
 import android.util.Log
-import com.example.domain.repository.CommunityRepository
+import com.example.data.repository.CommunityRepository
 import com.example.model.ContentModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

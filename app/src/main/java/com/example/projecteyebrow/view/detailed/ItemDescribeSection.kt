@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.projecteyebrow.ui.theme.Shape
+import com.example.designsystem.theme.Shape
 
 @Composable
 fun ItemDescSection(

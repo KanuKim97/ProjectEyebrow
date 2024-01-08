@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.domain.model.ContentModel
-import com.example.projecteyebrow.ui.theme.Shape
-import com.example.projecteyebrow.ui.theme.Typography
+import com.example.designsystem.theme.Shape
+import com.example.designsystem.theme.Typography
+import com.example.model.ContentModel
 
 @Composable
 fun CommunityContentItem(

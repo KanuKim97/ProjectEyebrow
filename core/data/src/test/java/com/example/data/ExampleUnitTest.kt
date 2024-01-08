@@ -1,7 +1,7 @@
 package com.example.data
 
 import com.example.data.repositoryImpl.UserAuthRepositoryImpl
-import com.example.domain.repository.UserAuthRepository
+import com.example.data.repository.UserAuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import org.junit.Before
 

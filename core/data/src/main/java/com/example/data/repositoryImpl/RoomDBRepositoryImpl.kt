@@ -1,9 +1,9 @@
 package com.example.data.repositoryImpl
 
 import com.example.data.util.mappingToListTempCommunityItem
-import com.example.data.util.mappingToTempCommunityTable
+import com.example.data.util.mappingToTempContentModel
 import com.example.database.dao.TempContentDao
-import com.example.domain.repository.RoomDBRepository
+import com.example.data.repository.RoomDBRepository
 import com.example.model.TempContent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -40,7 +40,7 @@ class RoomDBRepositoryImpl @Inject constructor(
     override fun saveTempContent(
         content: TempContent
     ): Flow<Result<Unit>> = flow {
-        tempDao.saveTemporaryContent(content = mappingToTempCommunityTable(content))
+        tempDao.saveTemporaryContent(content = mappingToTempContentModel(content))
         emit(Result.success(Unit))
     }.catch { exception ->
         when (exception) {
@@ -61,7 +61,7 @@ class RoomDBRepositoryImpl @Inject constructor(
     override fun updateTempContent(
         content: TempContent
     ): Flow<Result<Unit>> = flow {
-        tempDao.updateTemporaryContent(content = mappingToTempCommunityTable(content))
+        tempDao.updateTemporaryContent(content = mappingToTempContentModel(content))
         emit(Result.success(Unit))
     }.catch { exception ->
         when (exception) {
@@ -82,7 +82,7 @@ class RoomDBRepositoryImpl @Inject constructor(
     override fun deleteTempContent(
         content: TempContent
     ): Flow<Result<Unit>> = flow {
-        tempDao.deleteTemporaryContent(content = mappingToTempCommunityTable(content))
+        tempDao.deleteTemporaryContent(content = mappingToTempContentModel(content))
         emit(Result.success(Unit))
     }.catch { exception ->
         when (exception) {

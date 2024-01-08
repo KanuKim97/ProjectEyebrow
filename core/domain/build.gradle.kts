@@ -20,8 +20,8 @@ android {
 dependencies {
     implementation (Libraries.android_core)
 
-    implementation (project(Module.model))
-    implementation(project(Module.database))
+    implementation(project(Module.data))
+    implementation(project(Module.model))
 
     implementation (Libraries.kotlin_coroutine)
 

@@ -1,7 +1,7 @@
 package com.example.domain.usecase.fireDB.community
 
 import android.net.Uri
-import com.example.domain.repository.CommunityRepository
+import com.example.data.repository.CommunityRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

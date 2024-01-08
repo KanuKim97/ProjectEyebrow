@@ -3,10 +3,11 @@ package com.example.projecteyebrow.viewModel
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.TempContentModel
 import com.example.domain.usecase.fireDB.community.UploadContentUseCase
 import com.example.domain.usecase.roomDB.SaveTempContentUseCase
-import com.example.projecteyebrow.module.IoDispatcher
+import com.example.model.TempContent
+import com.example.projecteyebrow.module.AppDispatcher
+import com.example.projecteyebrow.module.AppDispatcherValue
 import com.example.projecteyebrow.view.util.States
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -23,7 +24,7 @@ import javax.inject.Inject
 class WriteContentViewModel @Inject constructor(
     private val uploadCommunityContentUseCase: UploadContentUseCase,
     private val saveTempCommunityItemUseCase: SaveTempContentUseCase,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @AppDispatcher(AppDispatcherValue.IO) private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _isSaveSuccess = MutableStateFlow<States>(States.Idle)
     private val _isUploadSuccess = MutableStateFlow<States>(States.Idle)
@@ -37,11 +38,10 @@ class WriteContentViewModel @Inject constructor(
         tempImageList: List<Uri>
     ): Job = viewModelScope.launch(ioDispatcher) {
         saveTempCommunityItemUseCase(
-            TempContentModel(
+            TempContent(
                 tempID = 0,
                 tempTitle = tempTitle,
                 tempContent = tempContent,
-                tempImageUriList = tempImageList,
                 timeStamp = System.currentTimeMillis().toString()
             )
         ).collect {

@@ -43,6 +43,7 @@ dependencies {
     implementation(project(Module.data))
     implementation(project(Module.ui))
     implementation(project(Module.designsystem))
+    implementation(project(Module.model))
 
     /* -- Android Test Dependencies -- */
     testImplementation (Libraries.jUnit)

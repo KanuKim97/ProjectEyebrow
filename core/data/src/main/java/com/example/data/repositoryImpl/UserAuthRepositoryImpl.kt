@@ -1,6 +1,6 @@
 package com.example.data.repositoryImpl
 
-import com.example.domain.repository.UserAuthRepository
+import com.example.data.repository.UserAuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

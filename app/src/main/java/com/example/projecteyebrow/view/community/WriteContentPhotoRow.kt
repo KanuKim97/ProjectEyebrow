@@ -24,8 +24,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.example.projecteyebrow.ui.theme.Shape
-import com.example.projecteyebrow.ui.theme.Typography
+import com.example.designsystem.theme.Shape
+import com.example.designsystem.theme.Typography
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 

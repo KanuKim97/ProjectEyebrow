@@ -1,4 +1,4 @@
-package com.example.domain.repository
+package com.example.data.repository
 
 import android.net.Uri
 import com.example.model.ContentModel
